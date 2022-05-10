@@ -17,7 +17,7 @@
 
         <!-- Hide this element only on mobile -->
         <div class="dropdown align-items-center align-self-center text-center ps-2 d-none d-md-flex">
-         <i class="fa-solid fa-circle-user fa-2x " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
+         <i class="fa-solid fa-circle-user fa-2x" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
 
          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
            <li><a class="dropdown-item" href="#">Impostazioni account</a></li>
