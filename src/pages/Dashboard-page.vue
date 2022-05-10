@@ -113,7 +113,7 @@
           </div>
         </div>
           <div class="d-flex justify-content-between mt-3 mb-3">
-            <h2 class="align-self-center">La mia libreria:</h2>
+            <h2 class="align-self-center">La mia libreria</h2>
             <button class="btn btn-secondary ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="button">
               Aggiungi gioco
             </button>

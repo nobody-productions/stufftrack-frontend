@@ -13,32 +13,44 @@
                 <div class="row">
                   <img src="games/eldenring.png" style="width: 100%;">
                 </div>
-                  <!-- Bottone aggiungi -->
-                <div class="text-center my-2">
-                  <button type="button" class="btn btn-primary">Rimuovi</button>
-                </div>
-
               </div>
               <div class="col-sm-8">
                 <div class="row">
-                  Nome: Elden Ring
+                  <h1 class="mb-0">Elden Ring</h1>
+                  <div class="text-secondary">25 Febbraio 2022</div>
+                </div>
+                <div class="col">
+                  <i class="fa-solid fa-star" style="color: gold"></i>
+                  <i class="fa-solid fa-star" style="color: gold"></i>
+                  <i class="fa-solid fa-star" style="color: gold"></i>
+                  <i class="fa-solid fa-star" style="color: gray"></i>
+                  <i class="fa-solid fa-star" style="color: gray"></i>
                 </div>
                 <div class="row">
-                  Genere: RPG
-                </div>
-                <div class="row">
-                  Descrizione:
-                  <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Mauris euismod, nunc eget consectetur vehicula, nisi nunc
-                  interdum nisl, euismod euismod nunc nisl euismod nunc.
+                  <h3>Descrizione</h3>
+                  <p class="bg-light">
+                    Elden Ring is a fantasy, action and open world game with RPG elements such as stats, weapons and spells. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.
                   </p>
                 </div>
+                <div class="row">
+                  <h3>Piattaforme</h3>
+                  <div class="col">
+                    <i class="fa-brands fa-xbox fa-2x ps-1"></i>
+                    <i class="fa-brands fa-playstation fa-2x ps-1"></i>
+                    <i class="fa-brands fa-steam fa-2x ps-1"></i>
+                  </div>
+                </div>
+
 
               </div>
             </div>
 
           </div>
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-danger">Rimuovi</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </div>
@@ -49,6 +61,7 @@
 export default {
   name: "Modal-component"
 }
+
 </script>
 
 <style scoped>
