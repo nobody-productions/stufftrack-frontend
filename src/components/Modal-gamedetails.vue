@@ -1,9 +1,9 @@
 <template>
-  <div class="modal" tabindex="-1" id="exampleModal2" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal" tabindex="-1" :id="'game_detail_modal'+gioco.id" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Elden Ring</h5>
+          <h5 class="modal-title">{{ gioco.title }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" >
@@ -11,20 +11,20 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="row">
-                  <img src="games/eldenring.png" style="width: 100%;">
+                  <img v-bind:src="gioco.image" style="width: 100%;">
                 </div>
               </div>
               <div class="col-sm-8">
                 <div class="row">
-                  <h1 class="mb-0">Elden Ring</h1>
-                  <div class="text-secondary">25 Febbraio 2022</div>
+                  <h1 class="mb-0">{{ gioco.title }}</h1>
+                  <div class="text-secondary"> {{ gioco.release_date }}</div>
                 </div>
                 <div class="col">
-                  <i class="fa-solid fa-star" style="color: gold"></i>
-                  <i class="fa-solid fa-star" style="color: gold"></i>
-                  <i class="fa-solid fa-star" style="color: gold"></i>
-                  <i class="fa-solid fa-star" style="color: gray"></i>
-                  <i class="fa-solid fa-star" style="color: gray"></i>
+                  <i class="fa-solid fa-star" v-bind:style="game.stars[0]"></i>
+                  <i class="fa-solid fa-star" v-bind:style="game.stars[1]"></i>
+                  <i class="fa-solid fa-star" v-bind:style="game.stars[2]"></i>
+                  <i class="fa-solid fa-star" v-bind:style="game.stars[3]"></i>
+                  <i class="fa-solid fa-star" v-bind:style="game.stars[4]"></i>
                 </div>
                 <div class="row">
                   <h3>Descrizione</h3>
@@ -59,8 +59,34 @@
 
 <script>
 export default {
-  name: "Modal-component"
+  name: "Modal-component",
+
+  data() {
+    let res  = {
+      game: {
+        title: this.gioco.title,
+        release_date: this.gioco.release_date,
+        rank: this.gioco.rank,
+        image: this.gioco.image,
+      }
+    }
+
+    res.game.stars = ["color: gray", "color: gray", "color: gray", "color: gray", "color: gray"]
+    for (let i = 0; i < res.game.rank; i++) {
+      res.game.stars[i] = "color: gold"
+    }
+
+    return res;
+  },
+
+  props: {
+    gioco_id: Object,
+    gioco: Object
+  }
+
+
 }
+
 
 </script>
 

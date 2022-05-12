@@ -20,7 +20,7 @@
           </button>
         </div>
 
-        <h1 class="h2">Ciao, Carlo Cracco!</h1>
+        <h1 class="h2">Ciao, {{ username }}!</h1>
 
         <div class="text-secondary mt-3">Le mie statistiche:</div>
 
@@ -32,7 +32,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-muted mb-0">Ore di gioco totali</h5>
-                    <span class="h2 font-weight-bold mb-0">22:00</span>
+                    <span class="h2 font-weight-bold mb-0"> {{ ore_gioco }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -54,7 +54,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-muted mb-0">Giochi completati</h5>
-                    <span class="h2 font-weight-bold mb-0">35/70</span>
+                    <span class="h2 font-weight-bold mb-0"> {{ giochi_completati }}/{{ giochi_totali }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -74,8 +74,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Statistica a caso</h5>
-                    <span class="h2 font-weight-bold mb-0">365</span>
+                    <h5 class="card-title text-muted mb-0">Obiettivi completati</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ obiettivi_completati }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -121,6 +121,13 @@
 
           <div class="justify-content-center">
             <div class="row d-flex" style="gap: 20px">
+                  <div class="col-sm text-center" data-bs-toggle="modal" v-for="gioco in giochi" v-bind:key="gioco.id" :data-bs-target="'#game_detail_modal' + gioco.id" v-bind:data-bs-whatever="gioco.id">
+                    <img class="game" v-bind:src="gioco.image" alt="">
+                    <br>
+                    <label class="caption">{{ gioco.title }}</label>
+                  </div>
+
+              <!--
               <div class="col-sm text-center" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                 <img class="game" src="games/eldenring.png" alt="">
                 <br>
@@ -219,6 +226,8 @@
                 <br>
                 <label class="caption">Titolo del gioco</label>
               </div>
+              -->
+
 
 
             </div>
@@ -248,7 +257,7 @@
     </div>
   </div>
 
-  <ModalComponent></ModalComponent>
+  <ModalComponent v-for="gioco in giochi" v-bind:key="gioco.id" :titolo="giochi.title" :id="'game_detail_modal' + gioco.id" :gioco="gioco"></ModalComponent>
   <ModalAddgame></ModalAddgame>
 
 </template>
@@ -260,8 +269,129 @@ import ModalComponent from "@/components/Modal-gamedetails";
 import ModalAddgame from "@/components/Modal-addgame";
 export default {
   name: "Dashboard-page",
-  components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard}
-}
+  components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard},
+  setup() {
+    return {
+      title: "Dashboard",
+      subtitle: "Benvenuto",
+      games: [
+        {
+          title: "Horizon Zero Dawn",
+          image: "games/Horizon.png",
+          description: "Horizon Zero Dawn è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          platform: "PC",
+          release: "2019",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99",
+          id: 1
+        },
+        {
+          title: "Elden Ring",
+          image: "games/eldenring.png",
+          description: "Elden Ring è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          platform: "PC",
+          release: "2019",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99",
+          id: 2
+        }]
+     };
+  },
+  data() {
+    return {
+      username: "Joe Panitzler",
+      ore_gioco: "22:00",
+      giochi_completati: "35",
+      giochi_totali: "70",
+      obiettivi_completati: "35",
+      giochi: [
+        {
+          id: 1,
+          title: "Horizon Zero Dawn",
+          image: "games/Horizon.png",
+          description: "Horizon Zero Dawn è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          rank: "5",
+          platform: "PC",
+          release_date: "22/02/2019",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99"
+        },
+        {
+          id: 2,
+          title: "Elden Ring",
+          image: "games/eldenring.png",
+          description: "Elden Ring è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          rank: "5",
+          platform: "PC",
+          release_date: "23/04/2020",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99"
+        },
+        {
+          id: 3,
+          title: "Kirby and the Forgotten Land",
+          image: "games/kirby.png",
+          description: "Kirby and the Forgotten Land è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          rank: "2",
+          platform: "PC",
+          release_date: "24/04/2021",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99"
+        },
+        {
+          id: 4,
+          title: "The Last of Us",
+          image: "games/last.png",
+          description: "The Last of Us è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          rank: "3",
+          platform: "PC",
+          release_date: "25/05/2022",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99"
+        },
+        {
+          id: 5,
+          title: "GhostWire: Tokyo",
+          image: "games/ghostwire.png",
+          description: "GhostWire: Tokyo è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          rank: "4",
+          platform: "PC",
+          release_date: "26/05/2022",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99"
+        }
+        ]
+    }
+  },
+  props: {
+    titolo: Object,
+    gioco: Object
+  }
+};
+
+
+
 </script>
 
 <style scoped>
