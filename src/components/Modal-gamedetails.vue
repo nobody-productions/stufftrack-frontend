@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="row">
-                  <img v-bind:src="gioco.image" style="width: 100%;">
+                  <img v-bind:src="gioco.image" style="width: auto;">
                 </div>
               </div>
               <div class="col-sm-8">
