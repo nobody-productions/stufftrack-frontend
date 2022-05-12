@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" tabindex="-1" :id="'game_detail_modal'+gioco.id" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal" tabindex="-1" id="game_detail_modal" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,7 +29,7 @@
                 <div class="row">
                   <h3>Descrizione</h3>
                   <p class="bg-light">
-                    Elden Ring is a fantasy, action and open world game with RPG elements such as stats, weapons and spells. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.
+                    {{ gioco.description }}
                   </p>
                 </div>
                 <div class="row">

@@ -270,39 +270,6 @@ import ModalAddgame from "@/components/Modal-addgame";
 export default {
   name: "Dashboard-page",
   components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard},
-  setup() {
-    return {
-      title: "Dashboard",
-      subtitle: "Benvenuto",
-      games: [
-        {
-          title: "Horizon Zero Dawn",
-          image: "games/Horizon.png",
-          description: "Horizon Zero Dawn è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          platform: "PC",
-          release: "2019",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99",
-          id: 1
-        },
-        {
-          title: "Elden Ring",
-          image: "games/eldenring.png",
-          description: "Elden Ring è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          platform: "PC",
-          release: "2019",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99",
-          id: 2
-        }]
-     };
-  },
   data() {
     return {
       username: "Joe Panitzler",
@@ -376,6 +343,20 @@ export default {
           rank: "4",
           platform: "PC",
           release_date: "26/05/2022",
+          publisher: "Sony Interactive Entertainment",
+          developer: "Sony Interactive Entertainment",
+          rating: "M18+",
+          price: "€ 19,99"
+        },
+        {
+          id: 6,
+          title: "Super Smash Bros. Brawl",
+          image: "games/ssbb.png",
+          description: "Super Smash Bros. Brawl è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
+          genre: "RPG",
+          rank: "5",
+          platform: "PC",
+          release_date: "27/05/2022",
           publisher: "Sony Interactive Entertainment",
           developer: "Sony Interactive Entertainment",
           rating: "M18+",
