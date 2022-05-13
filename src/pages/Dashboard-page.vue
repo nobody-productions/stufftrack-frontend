@@ -120,11 +120,11 @@
           </div>
 
           <div class="justify-content-center">
-            <div class="row d-flex" style="gap: 20px">
-                  <div class="col-sm text-center" data-bs-toggle="modal" v-for="gioco in giochi" v-bind:key="gioco.id" :data-bs-target="'#game_detail_modal' + gioco.id" v-bind:data-bs-whatever="gioco.id">
+            <div class="row d-flex text-center" style="gap: 20px">
+                  <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="gioco in giochi" v-bind:key="gioco.id" :data-bs-target="'#game_detail_modal' + gioco.id" v-bind:data-bs-whatever="gioco.id">
                     <img class="game" v-bind:src="gioco.image" alt="">
                     <br>
-                    <label class="caption">{{ gioco.title }}</label>
+                    <div class="caption text-center">{{ gioco.title }}</div>
                   </div>
 
               <!--
