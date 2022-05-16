@@ -19,12 +19,14 @@
                   <h1 class="mb-0">{{ gioco.videogame.name }}</h1>
                   <div class="text-secondary"> {{ gioco.videogame.year }}</div>
                 </div>
-                <div class="col">
-                  <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 1? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 2? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 3? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 4? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 5? 'gold':'gray'}"></i>
+
+
+                <div class="col star_bar">
+                  <i class="fa-solid fa-star star1" @click="updaterating(1)" v-bind:style="{color: rank >= 1? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star2" @click="updaterating(2)" v-bind:style="{color: rank >= 2? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star3" @click="updaterating(3)" v-bind:style="{color: rank >= 3? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star4" @click="updaterating(4)" v-bind:style="{color: rank >= 4? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star5" @click="updaterating(5)" v-bind:style="{color: rank >= 5? 'gold':'gray'}"></i>
                 </div>
 
                   <h4>Ore di gioco</h4>
@@ -75,15 +77,22 @@
 <script>
 import axios from 'axios';
 
+
+
 export default {
+
   name: "Modal-component",
-
-
   props: {
     gioco_id: Object,
     gioco: Object
   },
 
+  data(){
+    let rank = 0;
+    return{
+      rank
+    }
+  },
   methods: {
     gamestatus: function() {
       let game_status = document.getElementById("game_status");
@@ -117,6 +126,57 @@ export default {
       axios.put("libraries/videogames/" + this.gioco.videogame.id, {
         status: status_value_text
       })
+    },
+
+    getrating: function () {
+        axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
+        console.log(response.data);
+        let int_rating = response.data.ranking;
+        // check that int_rating is a number
+        if (isNaN(int_rating)) {
+          int_rating = 0;
+        }
+
+        // divide int_rating by 2 and round it
+        let rating_value = Math.round(int_rating / 2);
+        console.log("Setto il valore di rating a " + rating_value + " per il videogame " + this.gioco.videogame.name);
+        // set rating value
+        console.log("star" + rating_value + this.gioco.videogame.id);
+        // document.getElementById('star' + rating_value + this.gioco.videogame.id).setAttribute('checked', 'checked');
+          this.rank = rating_value;
+      });
+
+      /*
+      let int_rating = data.data.ranking;
+      // divide int_rating by 2 and round it
+      let rating_value = Math.round(int_rating / 2);
+      // set rating value
+      document.getElementById("star" + rating_value + this.gioco.videogame.id).setAttribute('checked', 'checked');
+
+       */
+    },
+    updaterating: function (value){
+      if (value > 0){
+        console.log("Updating rating to " + value);
+        // check if rating is already set
+        axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
+          axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
+            ranking: value * 2
+          }).then(response => {
+            console.log(response.data);
+            this.getrating();
+          });
+        }).catch(() => {
+          axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
+            ranking: value * 2
+          }).then(response => {
+            console.log(response.data);
+            this.getrating();
+          });
+        })
+
+
+      }
     }
   },
 
@@ -124,6 +184,8 @@ export default {
   // call gamestatus function
 
   mounted() {
+
+    this.getrating();
     this.gamestatus();
   }
 }
@@ -135,5 +197,13 @@ export default {
 </script>
 
 <style scoped>
+
+.star_bar:hover > i:before {
+  color: gold;
+}
+
+.star_bar > i:hover ~ i:before {
+  color: gray;
+}
 
 </style>
