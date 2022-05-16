@@ -49,7 +49,7 @@
                   <!-- Stato del gioco -->
                   <hr>
                   <h4>Stato</h4>
-                  <select id="game_status" class="form-select">
+                  <select :id="'game_status' + gioco.videogame.id" class="form-select" @change="updatestatus">
                     <option :id="'dagiocare' + gioco.videogame.id" value="1">Da giocare</option>
                     <option :id="'incorso' + gioco.videogame.id" value="2">In corso</option>
                     <option :id="'finito' + gioco.videogame.id" value="3">Finito</option>
@@ -109,6 +109,15 @@ export default {
         hours: time_value
       })
     },
+
+    updatestatus: function () {
+      // get time from
+      let status = document.getElementById("game_status" + this.gioco.videogame.id);
+      let status_value_text = status.options[status.selectedIndex].text;
+      axios.put("libraries/videogames/" + this.gioco.videogame.id, {
+        status: status_value_text
+      })
+    }
   },
 
 
