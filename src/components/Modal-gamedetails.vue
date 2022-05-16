@@ -28,7 +28,7 @@
                 </div>
 
                   <h4>Ore di gioco</h4>
-                  <input type="number" v-bind:value="gioco.hours" class="form-control" style="width: 100px;">
+                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control" @change="updatetime" style="width: 100px;">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: "Modal-component",
@@ -98,7 +99,16 @@ export default {
       } else if (this.gioco.status === 'Abbandonato'){
         document.getElementById('abbandonato' + this.gioco.videogame.id).setAttribute('selected', 'selected');
       }
-    }
+    },
+
+    updatetime: function () {
+      // get time from
+      let time = document.getElementById("playtime" + this.gioco.videogame.id);
+      let time_value = time.value;
+      axios.put("libraries/videogames/" + this.gioco.videogame.id, {
+        hours: time_value
+      })
+    },
   },
 
 
