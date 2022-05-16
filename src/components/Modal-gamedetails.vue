@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ gioco.title }}</h5>
+          <h5 class="modal-title">{{ gioco.name }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -16,8 +16,8 @@
               </div>
               <div class="col-sm-8">
                 <div class="row">
-                  <h1 class="mb-0">{{ gioco.title }}</h1>
-                  <div class="text-secondary"> {{ gioco.release_date }}</div>
+                  <h1 class="mb-0">{{ gioco.name }}</h1>
+                  <div class="text-secondary"> {{ gioco.year }}</div>
                 </div>
                 <div class="col">
                   <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 1? 'gold':'gray'}"></i>
@@ -49,7 +49,7 @@
                   <!-- Stato del gioco -->
                   <hr>
                   <h4>Stato</h4>
-                  <select class="form-select">
+                  <select id="game_status" class="form-select">
                     <option value="1">Da giocare</option>
                     <option value="2">In corso</option>
                     <option value="3">Finito</option>
@@ -73,27 +73,17 @@
 </template>
 
 <script>
+
 export default {
   name: "Modal-component",
-
-  data() {
-    return {
-      game: {
-        title: this.gioco.title,
-        release_date: this.gioco.release_date,
-        rank: this.gioco.rank,
-        image: this.gioco.image,
-      }
-    };
-  },
 
   props: {
     gioco_id: Object,
     gioco: Object
   }
 
-
 }
+
 
 
 </script>

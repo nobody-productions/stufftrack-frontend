@@ -121,10 +121,10 @@
 
           <div class="justify-content-center">
             <div class="row d-flex text-center" style="gap: 20px">
-                  <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="gioco in giochi" v-bind:key="gioco.id" :data-bs-target="'#game_detail_modal' + gioco.id" v-bind:data-bs-whatever="gioco.id">
-                    <img class="game" v-bind:src="gioco.image" alt="">
+                  <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :data-bs-target="'#game_detail_modal' + gioco.videogame.id" v-bind:data-bs-whatever="gioco.videogame.id">
+                    <img class="game" v-bind:src="gioco.videogame.image" alt="">
                     <br>
-                    <div class="caption text-center">{{ gioco.title }}</div>
+                    <div class="caption text-center">{{ gioco.videogame.name }}</div>
                   </div>
 
               <!--
@@ -257,7 +257,7 @@
     </div>
   </div>
 
-  <ModalComponent v-for="gioco in giochi" v-bind:key="gioco.id" :titolo="giochi.title" :id="'game_detail_modal' + gioco.id" :gioco="gioco"></ModalComponent>
+  <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :titolo="giochi.title" :id="'game_detail_modal' + gioco.videogame.id" :gioco="gioco.videogame"></ModalComponent>
   <ModalAddgame></ModalAddgame>
 
 </template>
@@ -270,6 +270,7 @@ import ModalAddgame from "@/components/Modal-addgame";
 import axios from "axios";
 import {onMounted} from "vue";
 import router from "@/router";
+import {ref} from "vue";
 
 
 export default {
@@ -277,7 +278,6 @@ export default {
   components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard},
   data() {
     return {
-      username: "Joe Panitzler",
       ore_gioco: "22:00",
       giochi_completati: "35",
       giochi_totali: "70",
@@ -370,11 +370,27 @@ export default {
         ]
     }
   },
+
   setup() {
+    const username = ref("");
+    const videogames = ref([]);
     onMounted(async () => {
      const {data} = await axios.get('profile').catch(() => router.push('/login'))
      console.log(data);
+     console.log(data.nickname)
+     // Da qui in poi eseguo il parsing dei dati ottenuti dal backend
+      username.value = data.nickname;
+
+      axios.get('libraries/videogames').then(function (response){
+        console.log(response.data.data)
+        videogames.value = response.data.data;
+      })
+
     })
+    return {
+      username,
+      videogames
+    }
   },
   props: {
     titolo: Object,
