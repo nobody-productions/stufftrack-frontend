@@ -10,8 +10,8 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-sm-4">
-                <div class="row">
-                  <img v-bind:src="gioco.videogame.image" style="width: auto;" alt="">
+                <div class="row text-center d-block">
+                  <img  v-bind:src="gioco.videogame.image" style="width: auto;" alt="">
                 </div>
               </div>
               <div class="col-sm-8">
