@@ -6,7 +6,7 @@
           <h5 class="modal-title">{{ gioco.title }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" >
+        <div class="modal-body">
           <div class="container-fluid">
             <div class="row">
               <div class="col-sm-4">
@@ -26,14 +26,18 @@
                   <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 4? 'gold':'gray'}"></i>
                   <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 5? 'gold':'gray'}"></i>
                 </div>
-                <div class="row">
-                  <h3>Descrizione</h3>
+
+                  <h4>Ore di gioco</h4>
+                  <input type="number" class="form-control" style="width: 100px;">
+
+                <div class="row mt-3">
+                  <h4>Descrizione</h4>
                   <p class="bg-light">
                     {{ gioco.description }}
                   </p>
                 </div>
-                <div class="row">
-                  <h3>Piattaforme</h3>
+                <div class="row mt-3">
+                  <h4>Piattaforme</h4>
                   <div class="col">
                     <!-- TODO piattaforme in text-secondary e quella su cui l'utente ha giocato in nero -->
                     <i class="fa-brands fa-xbox fa-2x ps-1"></i>
@@ -41,8 +45,18 @@
                     <i class="fa-brands fa-steam fa-2x ps-1"></i>
                   </div>
                 </div>
-
-
+                <div class="row mt-3">
+                  <!-- Stato del gioco -->
+                  <hr>
+                  <h4>Stato</h4>
+                  <select class="form-select">
+                    <option value="1">Da giocare</option>
+                    <option value="2">In corso</option>
+                    <option value="3">Finito</option>
+                    <option value="4">Completato</option>
+                    <option value="5">Abbandonato</option>
+                  </select>
+                  </div>
               </div>
             </div>
 

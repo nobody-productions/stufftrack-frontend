@@ -26,10 +26,12 @@
     </div>
   </nav>
 </template>
+
 <script>
 export default {
   name: "Sidebar-component"
 }
+
 </script>
 
 <style scoped>
