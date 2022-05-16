@@ -21,7 +21,7 @@
 
          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
            <li><a class="dropdown-item" href="#">Impostazioni account</a></li>
-           <li><a class="dropdown-item" href="#">Log out</a></li>
+           <li><button class="dropdown-item" @click="logout">Log out</button></li>
          </ul>
 
        </div>
@@ -46,9 +46,21 @@
 </template>
 
 <script>
+import axios from 'axios';
+import {useRouter} from "vue-router";
+
 
 export default {
-  name: "Nav-dashboard"
+  name: "Nav-dashboard",
+  setup() {
+    let router = useRouter();
+    return {
+      logout: function() {
+        axios.post('/logout/');
+        router.push('/login');
+      }
+    }
+  }
 }
 
 </script>
