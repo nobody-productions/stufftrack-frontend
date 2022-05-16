@@ -49,15 +49,15 @@ export default {
     });
 
     const router = useRouter();
-
-
     const submit = async() => {
       await axios.post('login/', {
         email: form.email,
         password: form.password,
+      }).then(async () => await router.push("/")).catch( async () => {
+        alert("Credenziali errate");
       });
       // dopo il login vai alla pagina principale
-      await router.push("/");
+
 
     };
 
