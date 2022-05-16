@@ -28,7 +28,7 @@
                 </div>
 
                   <h4>Ore di gioco</h4>
-                  <input type="number" class="form-control" style="width: 100px;">
+                  <input type="number" v-bind:value="gioco.hours" class="form-control" style="width: 100px;">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
