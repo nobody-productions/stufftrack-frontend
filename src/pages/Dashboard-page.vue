@@ -267,6 +267,11 @@ import NavDashboard from "@/components/Nav-dashboard";
 import SidebarComponent from "@/components/Sidebar-component";
 import ModalComponent from "@/components/Modal-gamedetails";
 import ModalAddgame from "@/components/Modal-addgame";
+import axios from "axios";
+import {onMounted} from "vue";
+import router from "@/router";
+
+
 export default {
   name: "Dashboard-page",
   components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard},
@@ -364,6 +369,12 @@ export default {
         }
         ]
     }
+  },
+  setup() {
+    onMounted(async () => {
+     const {data} = await axios.get('profile').catch(() => router.push('/login'))
+     console.log(data);
+    })
   },
   props: {
     titolo: Object,
