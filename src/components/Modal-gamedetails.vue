@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ gioco.name }}</h5>
+          <h5 class="modal-title">{{ gioco.videogame.name }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -11,13 +11,13 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="row">
-                  <img v-bind:src="gioco.image" style="width: auto;" alt="">
+                  <img v-bind:src="gioco.videogame.image" style="width: auto;" alt="">
                 </div>
               </div>
               <div class="col-sm-8">
                 <div class="row">
-                  <h1 class="mb-0">{{ gioco.name }}</h1>
-                  <div class="text-secondary"> {{ gioco.year }}</div>
+                  <h1 class="mb-0">{{ gioco.videogame.name }}</h1>
+                  <div class="text-secondary"> {{ gioco.videogame.year }}</div>
                 </div>
                 <div class="col">
                   <i class="fa-solid fa-star" v-bind:style="{color: gioco.rank >= 1? 'gold':'gray'}"></i>
@@ -33,7 +33,7 @@
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
                   <p class="bg-light">
-                    {{ gioco.description }}
+                    {{ gioco.videogame.description }}
                   </p>
                 </div>
                 <div class="row mt-3">
@@ -50,11 +50,11 @@
                   <hr>
                   <h4>Stato</h4>
                   <select id="game_status" class="form-select">
-                    <option value="1">Da giocare</option>
-                    <option value="2">In corso</option>
-                    <option value="3">Finito</option>
-                    <option value="4">Completato</option>
-                    <option value="5">Abbandonato</option>
+                    <option :id="'dagiocare' + gioco.videogame.id" value="1">Da giocare</option>
+                    <option :id="'incorso' + gioco.videogame.id" value="2">In corso</option>
+                    <option :id="'finito' + gioco.videogame.id" value="3">Finito</option>
+                    <option :id="'completato' + gioco.videogame.id" value="4">Completato</option>
+                    <option :id="'abbandonato' + gioco.videogame.id" value="5">Abbandonato</option>
                   </select>
                   </div>
               </div>
@@ -77,12 +77,39 @@
 export default {
   name: "Modal-component",
 
+
   props: {
     gioco_id: Object,
     gioco: Object
-  }
+  },
 
+  methods: {
+    gamestatus: function() {
+      let game_status = document.getElementById("game_status");
+      console.log(this.gioco.status + " " + this.gioco.videogame.name);
+      if (this.gioco.status === 'Da giocare'){
+        document.getElementById('dagiocare' + this.gioco.videogame.id).setAttribute('selected', 'selected');
+      } else if (this.gioco.status === 'In corso'){
+        document.getElementById('incorso' + this.gioco.videogame.id).setAttribute('selected', 'selected');
+      } else if (this.gioco.status === 'Finito'){
+        document.getElementById('finito' + this.gioco.videogame.id).setAttribute('selected', 'selected');
+      } else if (this.gioco.status === 'Completato'){
+        document.getElementById('completato' + this.gioco.videogame.id).setAttribute('selected', 'selected');
+      } else if (this.gioco.status === 'Abbandonato'){
+        document.getElementById('abbandonato' + this.gioco.videogame.id).setAttribute('selected', 'selected');
+      }
+    }
+  },
+
+
+  // call gamestatus function
+
+  mounted() {
+    this.gamestatus();
+  }
 }
+
+
 
 
 

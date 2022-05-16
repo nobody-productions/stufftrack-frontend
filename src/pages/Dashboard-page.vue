@@ -257,7 +257,7 @@
     </div>
   </div>
 
-  <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :titolo="giochi.title" :id="'game_detail_modal' + gioco.videogame.id" :gioco="gioco.videogame"></ModalComponent>
+  <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :titolo="giochi.title" :id="'game_detail_modal' + gioco.videogame.id" :gioco="gioco"></ModalComponent>
   <ModalAddgame></ModalAddgame>
 
 </template>
