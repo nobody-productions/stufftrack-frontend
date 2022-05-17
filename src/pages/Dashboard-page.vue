@@ -5,7 +5,7 @@
       <!-- La barra laterale-->
       <sidebar-component></sidebar-component>
       <!-- Breadcrumb di navigazione-->
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4 border-start border-top" style="background-color: #f8fcfe;">
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4 border-start border-top" style="background-color: #f8fcfe; height: 100vh">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -54,7 +54,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-muted mb-0">Giochi completati</h5>
-                    <span class="h2 font-weight-bold mb-0"> {{ giochi_completati }}/{{ giochi_totali }}</span>
+                    <span class="h2 font-weight-bold mb-0" :key="giochi_completati"> {{ giochi_completati }}/{{ giochi_totali }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -121,115 +121,11 @@
 
           <div class="justify-content-center">
             <div class="row d-flex text-center" style="gap: 20px">
-                  <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :data-bs-target="'#game_detail_modal' + gioco.videogame.id" v-bind:data-bs-whatever="gioco.videogame.id">
+                  <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="gioco in videogames" v-bind:key="gioco" :data-bs-target="'#game_detail_modal' + gioco.videogame.id" v-bind:data-bs-whatever="gioco.videogame.id">
                     <img class="game" v-bind:src="gioco.videogame.image" alt="">
                     <br>
                     <div class="caption text-center">{{ gioco.videogame.name }}</div>
                   </div>
-
-              <!--
-              <div class="col-sm text-center" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-
-              <div class="col-sm text-center">
-                <img class="game" src="games/eldenring.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              <div class="col-sm text-center">
-                <img class="game" src="games/Horizon.png" alt="">
-                <br>
-                <label class="caption">Titolo del gioco</label>
-              </div>
-              -->
-
-
-
             </div>
           </div>
       </main>
@@ -292,6 +188,11 @@ export default {
   data() {
     const username = ref("");
     let videogames = ref([]);
+    let giochi_totali = ref("");
+    let giochi_completati = ref("");
+    let obiettivi_completati = 0;
+    let ore_gioco = ref("");
+
     onMounted(async () => {
      const {data} = await axios.get('profile').catch(() => router.push('/login'))
      console.log(data);
@@ -299,24 +200,71 @@ export default {
      // Da qui in poi eseguo il parsing dei dati ottenuti dal backend
       username.value = data.nickname;
 
+     giochi_completati.value = 0;
+     ore_gioco.value = 0;
+
       axios.get('libraries/videogames').then(function (response){
         console.log(response.data.data)
         videogames.value = response.data.data;
+        giochi_totali.value = response.data.meta.total;
+
+        for (let game of videogames.value) {
+          // calcolo le statistiche
+          if (game.status === "Completato") {
+            giochi_completati.value = giochi_completati.value + 1;
+          }
+          ore_gioco.value = ore_gioco.value + game.hours;
+        }
+
+
       })
 
     })
     return {
       username,
       videogames,
-      ore_gioco: "22:00",
-      giochi_completati: "35",
-      giochi_totali: "70",
+      ore_gioco,
+      giochi_completati,
+      giochi_totali,
       obiettivi_completati: "35",
     }
   },
   props: {
     titolo: Object,
     gioco: Object
+  },
+
+  methods:{
+    updatecompleted: function (game_id, status){
+      for (let game of this.videogames) {
+        if (game.videogame.id === game_id) {
+          game.status = status;
+          break;
+        }
+      }
+      this.updatestats();
+    },
+
+    updatehours: function (game_id, hours){
+      for (let game of this.videogames) {
+        if (game.videogame.id === game_id) {
+          game.hours = hours;
+          break;
+        }
+      }
+      this.updatestats();
+    },
+
+    updatestats: function (){
+      this.giochi_completati = 0;
+      this.ore_gioco = 0;
+      for (let game of this.videogames) {
+        if (game.status === "Completato") {
+          this.giochi_completati = this.giochi_completati + 1;
+        }
+        this.ore_gioco = this.ore_gioco + game.hours;
+      }
+    },
   }
 
 };

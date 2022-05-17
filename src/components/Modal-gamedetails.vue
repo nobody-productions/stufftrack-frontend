@@ -16,7 +16,7 @@
   [x] Comprato e non comprato tra i giochi nella modale
   [ ] Statistiche
   [ ] Integrazione con i libri
-  [ ] Modifica ore di gioco con pulsante
+  [?] Modifica ore di gioco con pulsante
   [ ] Parte admin
 
   -->
@@ -52,7 +52,7 @@
                 </div>
 
                   <h4>Ore di gioco</h4>
-                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control" @change="updatetime" style="width: 100px;">
+                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control" @change="updatetime" min="0" style="width: 100px;">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
@@ -149,15 +149,23 @@ export default {
       let time_value = time.value;
       axios.put("libraries/videogames/" + this.gioco.videogame.id, {
         hours: time_value
-      })
+      }).then(() => {
+        this.$parent.updatehours(this.gioco.videogame.id, parseInt(time_value));
+          }
+      )
     },
 
     updatestatus: function () {
       // get time from
+
+
+
       let status = document.getElementById("game_status" + this.gioco.videogame.id);
       let status_value_text = status.options[status.selectedIndex].text;
       axios.put("libraries/videogames/" + this.gioco.videogame.id, {
         status: status_value_text
+      }).then(() => {
+        this.$parent.updatecompleted(this.gioco.videogame.id, status_value_text);
       })
     },
 
@@ -247,12 +255,7 @@ export default {
     getbought: function (){
       axios.get("/libraries/videogames/" + this.gioco.videogame.id).then(response => {
         let bought = response.data.bought;
-        if (bought === true){
-          document.getElementById('bought' + this.gioco.videogame.id).checked = true;
-        }
-        else {
-          document.getElementById('bought' + this.gioco.videogame.id).checked = false;
-        }
+        document.getElementById('bought' + this.gioco.videogame.id).checked = bought === true;
       });
     },
 
