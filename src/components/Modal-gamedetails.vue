@@ -128,7 +128,6 @@ export default {
   },
   methods: {
     gamestatus: function() {
-      let game_status = document.getElementById("game_status");
       console.log(this.gioco.status + " " + this.gioco.videogame.name);
       if (this.gioco.status === 'Da giocare'){
         document.getElementById('dagiocare' + this.gioco.videogame.id).setAttribute('selected', 'selected');
@@ -148,7 +147,8 @@ export default {
       let time = document.getElementById("playtime" + this.gioco.videogame.id);
       let time_value = time.value;
       axios.put("libraries/videogames/" + this.gioco.videogame.id, {
-        hours: time_value
+        hours: time_value,
+        platform: this.gioco.platform
       }).then(() => {
         this.$parent.updatehours(this.gioco.videogame.id, parseInt(time_value));
           }
@@ -163,7 +163,8 @@ export default {
       let status = document.getElementById("game_status" + this.gioco.videogame.id);
       let status_value_text = status.options[status.selectedIndex].text;
       axios.put("libraries/videogames/" + this.gioco.videogame.id, {
-        status: status_value_text
+        status: status_value_text,
+        platform: this.gioco.platform
       }).then(() => {
         this.$parent.updatecompleted(this.gioco.videogame.id, status_value_text);
       })

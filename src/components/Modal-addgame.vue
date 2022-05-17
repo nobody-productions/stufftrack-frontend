@@ -70,8 +70,7 @@ export default {
 
       let game_id = document.getElementsByName('game_id')[0].value;
 
-      axios.post("/libraries/videogames/",{
-        videogame: game_id,
+      axios.post("/libraries/videogames/" + game_id,{
         bought: document.getElementById('gb').checked,
         // rating: document.getElementsByName('rating')[0].value * 2,
         // comment: document.getElementsByName('comment')[0].value,
