@@ -65,18 +65,28 @@ export default {
     },
     addGame() {
 
+      let game_id = document.getElementsByName('game_id')[0].value;
+
       axios.post("/libraries/videogames/",{
-        videogame: document.getElementsByName('game_id')[0].value,
-        rating: document.getElementsByName('rating')[0].value * 2,
-        comment: document.getElementsByName('comment')[0].value,
+        videogame: game_id,
+        // rating: document.getElementsByName('rating')[0].value * 2,
+        // comment: document.getElementsByName('comment')[0].value,
         platform: 4
 
-      }).then(response => {
-        // reload "/"
-        window.location.reload();
+      }).then(() => {
+        axios.post("/libraries/videogames/" + game_id + "/rating", {
+          ranking: document.getElementsByName('rating')[0].value * 2,
+          comment: document.getElementsByName('comment')[0].value,
+        }).then(response => {
+          window.location.reload();
+        }).catch(error => {
+          console.log(error);
+        });
       }).catch(error => {
         console.log(error);
-      })
+      });
+
+
     }
   },
   mounted() {
