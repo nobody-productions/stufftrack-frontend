@@ -15,8 +15,8 @@
                 <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>
               </select>
 
-              <input type="checkbox" id="gameBought">
-              <label for="gameBought">Già acquistato</label>
+                <input type="checkbox" id="gb" >
+                <label for="gb">Già acquistato</label>
               <br>
               <label for="exampleInputEmail1">Valutazione</label>
               <select class="form-control" name="rating">
@@ -72,7 +72,7 @@ export default {
 
       axios.post("/libraries/videogames/",{
         videogame: game_id,
-        bought: document.getElementById('gameBought').checked,
+        bought: document.getElementById('gb').checked,
         // rating: document.getElementsByName('rating')[0].value * 2,
         // comment: document.getElementsByName('comment')[0].value,
         platform: 4

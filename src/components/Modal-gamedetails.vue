@@ -7,6 +7,7 @@
   [ ] Aggiungi gioco tra quelli non esistenti con piattaforma e genere (?)
   [x] Commento del rating
   [x] Registrazione
+  [x] Avviso quando si cancella un gioco con richiesta di conferma da parte dell'utente
   [ ] Remake
   [ ] Landing page
   [ ] Aggiornare il router con la landing page
@@ -73,7 +74,7 @@
                   <hr>
                   <div class="col pb-2">
                     <input class="me-2" type="checkbox" v-bind:id="'bought' + gioco.videogame.id" @change="updatebought">
-                    <label for="bought">Gioco acquistato</label>
+                    <label :for="'bought' + gioco.videogame.id">Gioco acquistato</label>
                   </div>
                   <h4>Stato</h4>
                   <select :id="'game_status' + gioco.videogame.id" class="form-select" @change="updatestatus">
@@ -257,12 +258,14 @@ export default {
 
 
     deleteGame() {
+      if (confirm('Sei sicuro di voler rimuovere il gioco ' + this.gioco.videogame.name + ' dalla tua libreria?')) {
         axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
           console.log(response.data);
           // refresh home page
           window.location.href = "/";
 
         });
+      }
     },
 
   },
