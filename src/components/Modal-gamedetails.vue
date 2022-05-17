@@ -1,4 +1,25 @@
 <template>
+
+  <!--
+  TODO cose da aggiungere lato frontend:
+
+  [ ] Aggiungi gioco tra quelli esistenti con piattaforma su cui gioca l'utente
+  [ ] Aggiungi gioco tra quelli non esistenti con piattaforma e genere (?)
+  [ ] Commento del rating
+  [ ] Registrazione
+  [ ] Remake
+  [ ] Landing page
+  [ ] Aggiornare il router con la landing page
+  [ ] Togliere logo controller
+  [ ] Togliere avviso di prova
+  [ ] Comprato e non comprato tra i giochi nella modale
+  [ ] Statistiche
+  [ ] Integrazione con i libri
+  [ ] Modifica ore di gioco con pulsante
+  [ ] Parte admin
+
+  -->
+
   <div class="modal" tabindex="-1" id="game_detail_modal" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -66,8 +87,27 @@
         </div>
         <div class="modal-footer">
 
-            <button type="button" class="btn btn-danger">Rimuovi</button>
+            <button type="button" class="btn btn-danger" @click="deleteGame">Rimuovi</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Conferma Eliminazione</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -177,7 +217,16 @@ export default {
 
 
       }
-    }
+    },
+    deleteGame() {
+        axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
+          console.log(response.data);
+          // refresh home page
+          window.location.href = "/";
+
+        });
+    },
+
   },
 
 

@@ -257,7 +257,7 @@
     </div>
   </div>
 
-  <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :titolo="giochi.title" :id="'game_detail_modal' + gioco.videogame.id" :gioco="gioco"></ModalComponent>
+  <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :titolo="gioco.name" :id="'game_detail_modal' + gioco.videogame.id" :gioco="gioco"></ModalComponent>
   <ModalAddgame></ModalAddgame>
 
 </template>
@@ -276,104 +276,22 @@ import {ref} from "vue";
 export default {
   name: "Dashboard-page",
   components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard},
+
+  /*
   data() {
     return {
       ore_gioco: "22:00",
       giochi_completati: "35",
       giochi_totali: "70",
       obiettivi_completati: "35",
-      giochi: [
-        {
-          id: 1,
-          title: "Horizon Zero Dawn",
-          image: "games/Horizon.png",
-          description: "Horizon Zero Dawn è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          rank: "5",
-          platform: "PC",
-          release_date: "22/02/2019",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99"
-        },
-        {
-          id: 2,
-          title: "Elden Ring",
-          image: "games/eldenring.png",
-          description: "Elden Ring è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          rank: "5",
-          platform: "PC",
-          release_date: "23/04/2020",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99"
-        },
-        {
-          id: 3,
-          title: "Kirby and the Forgotten Land",
-          image: "games/kirby.png",
-          description: "Kirby and the Forgotten Land è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          rank: "2",
-          platform: "PC",
-          release_date: "24/04/2021",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99"
-        },
-        {
-          id: 4,
-          title: "The Last of Us",
-          image: "games/last.png",
-          description: "The Last of Us è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          rank: "3",
-          platform: "PC",
-          release_date: "25/05/2022",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99"
-        },
-        {
-          id: 5,
-          title: "GhostWire: Tokyo",
-          image: "games/ghostwire.png",
-          description: "GhostWire: Tokyo è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          rank: "4",
-          platform: "PC",
-          release_date: "26/05/2022",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99"
-        },
-        {
-          id: 6,
-          title: "Super Smash Bros. Brawl",
-          image: "games/ssbb.png",
-          description: "Super Smash Bros. Brawl è un gioco di postapocalitànico di storia e azione di alta qualità che si basa sull'universo di Zero Dawn, una nuova generazione di gioco di postapocalitànico.",
-          genre: "RPG",
-          rank: "5",
-          platform: "PC",
-          release_date: "27/05/2022",
-          publisher: "Sony Interactive Entertainment",
-          developer: "Sony Interactive Entertainment",
-          rating: "M18+",
-          price: "€ 19,99"
-        }
-        ]
     }
   },
 
-  setup() {
+   */
+
+  data() {
     const username = ref("");
-    const videogames = ref([]);
+    let videogames = ref([]);
     onMounted(async () => {
      const {data} = await axios.get('profile').catch(() => router.push('/login'))
      console.log(data);
@@ -389,13 +307,18 @@ export default {
     })
     return {
       username,
-      videogames
+      videogames,
+      ore_gioco: "22:00",
+      giochi_completati: "35",
+      giochi_totali: "70",
+      obiettivi_completati: "35",
     }
   },
   props: {
     titolo: Object,
     gioco: Object
   }
+
 };
 
 

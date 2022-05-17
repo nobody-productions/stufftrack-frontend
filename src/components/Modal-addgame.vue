@@ -9,34 +9,29 @@
         <div class="modal-body" >
           <div class="container-fluid">
           <!-- Form -->
-            <form action="{{ route('games.store') }}" method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" name="name">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Description</label>
-                <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description" name="description"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Image</label>
-                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter image" name="image">
-              </div>
+            <form class="pb-2">
+              <label for="exampleInputEmail1">Game</label>
+              <select class="form-control" name="game_id">
+                <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>
+              </select>
 
+              <label for="exampleInputEmail1">Valutazione</label>
+              <select class="form-control" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
 
-              <div class="form-group">
-                <label for="exampleInputEmail1">Release date</label>
-                <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter release date" name="release_date">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Price</label>
-                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter price" name="price">
-              </div>
-              <!-- Button -->
-              <br>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <label for="exampleInputEmail1">Commento</label>
+              <textarea class="form-control" name="comment" rows="3"></textarea>
             </form>
 
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addGame">Aggiungi</button>
           </div>
         </div>
 
@@ -46,8 +41,47 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: "Modal-addgame"
+  name: "Modal-addgame",
+
+  data() {
+    let games = [];
+    return {
+      games: games
+    }
+  },
+
+  methods: {
+    getgameslist() {
+      axios.get('/videogames')
+      .then(response => {
+        this.games = response.data.data;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+    addGame() {
+
+      axios.post("/libraries/videogames/",{
+        videogame: document.getElementsByName('game_id')[0].value,
+        rating: document.getElementsByName('rating')[0].value * 2,
+        comment: document.getElementsByName('comment')[0].value,
+        platform: 4
+
+      }).then(response => {
+        // reload "/"
+        window.location.reload();
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  },
+  mounted() {
+    this.getgameslist();
+  }
 }
 </script>
 
