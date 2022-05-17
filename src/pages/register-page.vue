@@ -33,6 +33,8 @@
 
 <script>
 import {ref} from 'vue';
+import axios from 'axios';
+import router from "@/router";
 
 export default {
   name: "register-page",
@@ -44,6 +46,17 @@ export default {
 
     const submit = () => {
       console.log(username.value, email.value, password.value, passwordConfirm.value);
+      axios.post("/register", {
+        nickname: username.value,
+        email: email.value,
+        password: password.value,
+        password_confirm: passwordConfirm.value
+      }).then(function (response) {
+        console.log(response);
+        router.push("/login");
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
 
     return {
