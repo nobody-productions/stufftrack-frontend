@@ -262,8 +262,10 @@ export default {
         axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
           console.log(response.data);
           // refresh home page
-          window.location.href = "/";
-
+          axios.delete("/libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
+            console.log(response.data);
+            window.location.href = "/";
+          });
         });
       }
     },
