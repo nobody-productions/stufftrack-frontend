@@ -3,15 +3,15 @@
   <!--
   TODO cose da aggiungere lato frontend:
 
-  [ ] Aggiungi gioco tra quelli esistenti con piattaforma su cui gioca l'utente
+  [x] Aggiungi gioco tra quelli esistenti con piattaforma su cui gioca l'utente
   [ ] Aggiungi gioco tra quelli non esistenti con piattaforma e genere (?)
-  [ ] Commento del rating
-  [ ] Registrazione
+  [x] Commento del rating
+  [x] Registrazione
   [ ] Remake
   [ ] Landing page
   [ ] Aggiornare il router con la landing page
   [ ] Togliere logo controller
-  [ ] Togliere avviso di prova
+  [x] Togliere avviso di prova
   [ ] Comprato e non comprato tra i giochi nella modale
   [ ] Statistiche
   [ ] Integrazione con i libri
@@ -80,6 +80,10 @@
                     <option :id="'abbandonato' + gioco.videogame.id" value="5">Abbandonato</option>
                   </select>
                   </div>
+                <div class="row mt-3">
+                  <h4>Note</h4>
+                  <textarea class="form-control" v-bind:id="'note' + gioco.videogame.id" v-model="this.comment" rows="3" @change="updatecomment"></textarea>
+                </div>
               </div>
             </div>
 
@@ -111,8 +115,10 @@ export default {
 
   data(){
     let rank = 0;
+    let comment = "";
     return{
-      rank
+      rank,
+      comment
     }
   },
   methods: {
@@ -154,6 +160,7 @@ export default {
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
         console.log(response.data);
         let int_rating = response.data.ranking;
+        let comment = response.data.comment;
         // check that int_rating is a number
         if (isNaN(int_rating)) {
           int_rating = 0;
@@ -166,6 +173,13 @@ export default {
         console.log("star" + rating_value + this.gioco.videogame.id);
         // document.getElementById('star' + rating_value + this.gioco.videogame.id).setAttribute('checked', 'checked');
           this.rank = rating_value;
+          // if comment is not undefined
+          if (comment !== undefined) {
+            this.comment = comment;
+          }
+          else {
+            this.comment = "";
+          }
       });
 
       /*
@@ -183,7 +197,7 @@ export default {
         // check if rating is already set
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
           axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
-            ranking: value * 2
+            ranking: value * 2,
           }).then(response => {
             console.log(response.data);
             this.getrating();
@@ -200,6 +214,25 @@ export default {
 
       }
     },
+    updatecomment: function(){
+      axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
+        axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
+          comment: this.comment
+        }).then(response => {
+          console.log(response.data);
+          this.getrating();
+        });
+      }).catch(() => {
+        axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
+          comment: this.comment
+        }).then(response => {
+          console.log(response.data);
+          this.getrating();
+        });
+      })
+
+    },
+
     deleteGame() {
         axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
           console.log(response.data);

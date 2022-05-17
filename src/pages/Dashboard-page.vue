@@ -13,7 +13,7 @@
           </ol>
         </nav>
         <!-- Alert di prova-->
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show visually-hidden" role="alert">
           <strong>Avviso di prova:</strong> prova a premere sul primo gioco in alto a sinistra
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 
