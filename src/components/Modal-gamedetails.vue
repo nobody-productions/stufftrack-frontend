@@ -12,7 +12,7 @@
   [ ] Aggiornare il router con la landing page
   [ ] Togliere logo controller
   [x] Togliere avviso di prova
-  [ ] Comprato e non comprato tra i giochi nella modale
+  [x] Comprato e non comprato tra i giochi nella modale
   [ ] Statistiche
   [ ] Integrazione con i libri
   [ ] Modifica ore di gioco con pulsante
@@ -71,6 +71,10 @@
                 <div class="row mt-3">
                   <!-- Stato del gioco -->
                   <hr>
+                  <div class="col pb-2">
+                    <input class="me-2" type="checkbox" v-bind:id="'bought' + gioco.videogame.id" @change="updatebought">
+                    <label for="bought">Gioco acquistato</label>
+                  </div>
                   <h4>Stato</h4>
                   <select :id="'game_status' + gioco.videogame.id" class="form-select" @change="updatestatus">
                     <option :id="'dagiocare' + gioco.videogame.id" value="1">Da giocare</option>
@@ -233,6 +237,25 @@ export default {
 
     },
 
+    updatebought: function (){
+      axios.put("/libraries/videogames/" + this.gioco.videogame.id, {
+          bought: document.getElementById('bought' + this.gioco.videogame.id).checked
+      })
+    },
+
+    getbought: function (){
+      axios.get("/libraries/videogames/" + this.gioco.videogame.id).then(response => {
+        let bought = response.data.bought;
+        if (bought === true){
+          document.getElementById('bought' + this.gioco.videogame.id).checked = true;
+        }
+        else {
+          document.getElementById('bought' + this.gioco.videogame.id).checked = false;
+        }
+      });
+    },
+
+
     deleteGame() {
         axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
           console.log(response.data);
@@ -251,6 +274,7 @@ export default {
 
     this.getrating();
     this.gamestatus();
+    this.getbought();
   }
 }
 
