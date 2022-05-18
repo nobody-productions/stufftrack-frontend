@@ -81,7 +81,7 @@ export default {
           ranking: document.getElementsByName('rating')[0].value * 2,
           comment: document.getElementsByName('comment')[0].value,
         }).then(response => {
-          window.location.reload();
+          window.location.href = "/";
         }).catch(error => {
           console.log(error);
         });

@@ -235,6 +235,15 @@ export default {
   },
 
   methods:{
+    updatestats: function () {
+      axios.get('/libraries/videogames/charts/completed').then(response=>{
+        this.giochi_completati = response.data[0].count;
+        axios.get('libraries/videogames/charts/total-hours').then(response=>{
+          this.ore_gioco = response.data.total;
+        })
+      })
+
+    },
     updatecompleted: function (game_id, status){
       for (let game of this.videogames) {
         if (game.videogame.id === game_id) {
@@ -242,6 +251,7 @@ export default {
           break;
         }
       }
+      // this.updatestats();
       this.updatestats();
     },
 
@@ -252,19 +262,10 @@ export default {
           break;
         }
       }
+      // this.updatestats();
       this.updatestats();
     },
 
-    updatestats: function (){
-      this.giochi_completati = 0;
-      this.ore_gioco = 0;
-      for (let game of this.videogames) {
-        if (game.status === "Completato") {
-          this.giochi_completati = this.giochi_completati + 1;
-        }
-        this.ore_gioco = this.ore_gioco + game.hours;
-      }
-    },
   }
 
 };
