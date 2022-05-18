@@ -37,16 +37,6 @@
                                 <div class="box-shadow mx-auto"
                                     style="width: 80%; height: 100px; border-radius: 21px 21px 0 0;"></div>
                             </div>
-
-
-
-
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -55,14 +45,17 @@
             </div>
         </div>
     </div>
+    <footerVue></footerVue>
 </template>
 
 <script>
     import navLandingVue from "../components/nav-landing.vue";
+    import footerVue from "../components/footer-bar.vue";
     export default {
         name: "homepage-page",
         components: {
-            navLandingVue
+            navLandingVue,
+            footerVue,
         },
     };
 </script>
