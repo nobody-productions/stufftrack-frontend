@@ -65,6 +65,12 @@ export default {
       form,
       submit,
     };
+  },
+  mounted() {
+    // check if the user is already logged in
+    axios.get('/profile').then(()=>{
+      router.push("/")
+    });
   }
 }
 </script>
