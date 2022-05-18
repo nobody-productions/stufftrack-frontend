@@ -181,12 +181,12 @@ export default {
         }
 
         // divide int_rating by 2 and round it
-        let rating_value = Math.round(int_rating / 2);
-        console.log("Setto il valore di rating a " + rating_value + " per il videogame " + this.gioco.videogame.name);
+        // let rating_value = Math.round(int_rating / 2);
+        console.log("Setto il valore di rating a " + int_rating + " per il videogame " + this.gioco.videogame.name);
         // set rating value
-        console.log("star" + rating_value + this.gioco.videogame.id);
+        console.log("star" + int_rating + this.gioco.videogame.id);
         // document.getElementById('star' + rating_value + this.gioco.videogame.id).setAttribute('checked', 'checked');
-          this.rank = rating_value;
+          this.rank = int_rating;
           // if comment is not undefined
           if (comment !== undefined) {
             this.comment = comment;
@@ -211,14 +211,14 @@ export default {
         // check if rating is already set
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
           axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
-            ranking: value * 2,
+            ranking: value,
           }).then(response => {
             console.log(response.data);
             this.getrating();
           });
         }).catch(() => {
           axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
-            ranking: value * 2
+            ranking: value
           }).then(response => {
             console.log(response.data);
             this.getrating();
@@ -269,6 +269,8 @@ export default {
           axios.delete("/libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
             console.log(response.data);
             window.location.href = "/";
+          }).catch(error => {
+            console.log(error);
           });
         });
       }
