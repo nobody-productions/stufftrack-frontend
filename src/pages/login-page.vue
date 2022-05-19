@@ -69,7 +69,7 @@ export default {
   mounted() {
     // check if the user is already logged in
     axios.get('/profile').then(()=>{
-      router.push("/")
+      router.push("/dashboard");
     });
   }
 }

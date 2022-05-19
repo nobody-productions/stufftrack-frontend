@@ -1,5 +1,4 @@
 <template>
-    <Nav-dashboard></Nav-dashboard>
     <div class="container-fluid">
         <!-- La barra superiore -->
         <div class="row">
@@ -51,16 +50,27 @@
 <script>
     import navLandingVue from "../components/nav-landing.vue";
     import footerVue from "../components/footer-bar.vue";
+    import axios from "axios";
+    import router from "@/router";
     export default {
         name: "homepage-page",
         components: {
             navLandingVue,
             footerVue,
         },
+        mounted() {
+          // se sono già loggato mi riporta alla dashboard
+          axios.get('/profile').then(()=>{
+            router.push("/dashboard");
+          });
+        },
     };
 </script>
 
 <style scoped>
+    .container-fluid {
+      background-color: #f8fcfe;
+    }
     .invert {
         display: inline-block;
         flex-wrap: wrap;
