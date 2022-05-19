@@ -78,7 +78,7 @@ export default {
 
       }).then(() => {
         axios.post("/libraries/videogames/" + game_id + "/rating", {
-          ranking: document.getElementsByName('rating')[0].value * 2,
+          ranking: document.getElementsByName('rating')[0].value,
           comment: document.getElementsByName('comment')[0].value,
         }).then(response => {
           window.location.href = "/";
