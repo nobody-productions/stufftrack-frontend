@@ -2,7 +2,7 @@
     <nav class="navbar navbar-light bg-light p-3">
         <div class="col-12 col-md-4 col-lg-2 align-self-center align-items-center">
             <a class="navbar-brand align-self-center text-center" href="#">
-                <i class="fa-solid fa-book"></i>
+                <i class="fa-solid fa-link"></i>
                 StuffTrack
 
             </a>
