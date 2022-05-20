@@ -81,7 +81,8 @@ export default {
           ranking: document.getElementsByName('rating')[0].value,
           comment: document.getElementsByName('comment')[0].value,
         }).then(response => {
-          window.location.href = "/";
+          // window.location.href = "/";
+          this.$parent.updatevideogames();
         }).catch(error => {
           console.log(error);
         });

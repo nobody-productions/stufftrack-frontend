@@ -9,7 +9,7 @@
   [x] Registrazione
   [x] Avviso quando si cancella un gioco con richiesta di conferma da parte dell'utente
   [ ] Remake
-  [ ] Landing page
+  [prima versione] Landing page
   [ ] Aggiornare il router con la landing page
   [ ] Togliere logo controller
   [x] Togliere avviso di prova
@@ -26,7 +26,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">{{ gioco.videogame.name }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" id="dismiss" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
@@ -150,6 +150,7 @@ export default {
         hours: time_value,
         platform: this.gioco.platform
       }).then(() => {
+        console.log("ID: " + this.gioco.videogame.id + " - " + this.gioco.videogame.name + " - " + time_value + " - " + this.gioco.platform);
         this.$parent.updatehours(this.gioco.videogame.id, parseInt(time_value));
           }
       )
@@ -249,7 +250,8 @@ export default {
 
     updatebought: function (){
       axios.put("/libraries/videogames/" + this.gioco.videogame.id, {
-          bought: document.getElementById('bought' + this.gioco.videogame.id).checked
+          bought: document.getElementById('bought' + this.gioco.videogame.id).checked,
+          platform: this.gioco.videogame.platform
       })
     },
 
@@ -266,13 +268,21 @@ export default {
         axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
           console.log(response.data);
           // refresh home page
-          axios.delete("/libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
-            console.log(response.data);
-            window.location.href = "/";
+          //axios.delete("/libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
+            //console.log(response.data);
+            // window.location.href = "/";
+            // close this modal
+
+            document.getElementById('game_detail_modal' + this.gioco.videogame.id).hidden = true;
+            document.getElementsByClassName('modal-backdrop')[0].remove()
+
+
+            this.$parent.updatevideogames();
+            this.$parent.updatestats();
           }).catch(error => {
             console.log(error);
-          });
         });
+        //});
       }
     },
 

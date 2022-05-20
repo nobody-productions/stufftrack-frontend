@@ -134,24 +134,6 @@
 
   </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Ogni gioco dovrebbe aprire una schermata modale come questa, appositamente formattata. Posso generarle tramite Vue.js
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.videogame.id" :titolo="gioco.name" :id="'game_detail_modal' + gioco.videogame.id" :gioco="gioco"></ModalComponent>
   <ModalAddgame></ModalAddgame>
@@ -265,6 +247,13 @@ export default {
       // this.updatestats();
       this.updatestats();
     },
+
+    updatevideogames: function (){
+      axios.get('libraries/videogames').then(response=>{
+        this.videogames = response.data.data;
+        this.giochi_totali = response.data.meta.total;
+      })
+    }
 
   }
 
