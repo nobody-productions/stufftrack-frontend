@@ -40,10 +40,12 @@
 
                   </div>
                 </div>
+                <!--
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 2.48%</span>
                   <span class="text-nowrap"> Dall'ultimo anno</span>
                 </p>
+                -->
               </div>
             </div>
 
@@ -54,7 +56,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-muted mb-0">Giochi completati</h5>
-                    <span class="h2 font-weight-bold mb-0" :key="giochi_completati"> {{ giochi_completati }}/{{ giochi_totali }}</span>
+                    <span class="h2 font-weight-bold mb-0" :key="giochi_completati"> {{ giochi_completati }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -62,10 +64,12 @@
 
                   </div>
                 </div>
+                <!--
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>2</span>
                   <span class="text-wrap"> Completati nell'ultimo mese</span>
                 </p>
+                -->
               </div>
             </div>
           </div>
@@ -74,8 +78,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Obiettivi completati</h5>
-                    <span class="h2 font-weight-bold mb-0">{{ obiettivi_completati }}</span>
+                    <h5 class="card-title text-muted mb-0">Giochi totali</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ giochi_totali }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -83,10 +87,12 @@
 
                   </div>
                 </div>
+                <!--
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 35%</span>
                   <span class="text-nowrap"> In più nell'ultimo mese</span>
                 </p>
+                -->
               </div>
             </div>
           </div>
@@ -95,8 +101,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Statistica a caso2</h5>
-                    <span class="h2 font-weight-bold mb-0">14/30</span>
+                    <h5 class="card-title text-muted mb-0">Giochi acquistati</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ giochi_acquistati }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -104,10 +110,12 @@
 
                   </div>
                 </div>
+                <!--
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 35%</span>
                   <span class="text-nowrap"> In più nell'ultimo mese</span>
                 </p>
+                -->
               </div>
             </div>
           </div>
@@ -172,7 +180,7 @@ export default {
     let videogames = ref([]);
     let giochi_totali = ref("");
     let giochi_completati = ref("");
-    let obiettivi_completati = 0;
+    let giochi_acquistati = ref("");
     let ore_gioco = ref("");
 
     onMounted(async () => {
@@ -183,6 +191,7 @@ export default {
       username.value = data.nickname;
 
      giochi_completati.value = 0;
+     giochi_acquistati.value = 0;
      ore_gioco.value = 0;
 
       axios.get('libraries/videogames').then(function (response){
@@ -190,6 +199,7 @@ export default {
         videogames.value = response.data.data;
         giochi_totali.value = response.data.meta.total;
 
+        /*
         for (let game of videogames.value) {
           // calcolo le statistiche
           if (game.status === "Completato") {
@@ -198,6 +208,12 @@ export default {
           ore_gioco.value = ore_gioco.value + game.hours;
         }
 
+         */
+
+        // Aggiorno le stats
+        axios.get("libraries/videogames/charts/total-bought").then(response=> {
+          giochi_acquistati.value = response.data[0].count;
+        });
 
       })
 
@@ -208,7 +224,7 @@ export default {
       ore_gioco,
       giochi_completati,
       giochi_totali,
-      obiettivi_completati: "35",
+      giochi_acquistati
     }
   },
   props: {
@@ -220,6 +236,7 @@ export default {
     updatestats: function () {
       this.updatetotalhours()
       this.updatecompletedgames()
+      this.updateboughtgames()
     },
     updatetotalhours: function () {
       axios.get('libraries/videogames/charts/total-hours').then(response=>{
@@ -231,6 +248,11 @@ export default {
       axios.get('/libraries/videogames/charts/completed').then(response=>{
         this.giochi_completati = response.data[0].count;
 
+      })
+    },
+    updateboughtgames: function () {
+      axios.get('/libraries/videogames/charts/total-bought').then(response=>{
+        this.giochi_acquistati = response.data[0].count;
       })
     },
     updatecompleted: function (game_id, status){

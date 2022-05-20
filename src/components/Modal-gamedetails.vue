@@ -263,7 +263,9 @@ export default {
     updatebought: function (){
       axios.put("/libraries/videogames/" + this.gioco.videogame.id, {
           bought: document.getElementById('bought' + this.gioco.videogame.id).checked,
-          platform: this.gioco.videogame.platform
+          platform: this.gioco.platform
+      }).then(()=>{
+        this.$parent.updateboughtgames();
       })
     },
 
