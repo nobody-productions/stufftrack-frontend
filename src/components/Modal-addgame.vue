@@ -66,6 +66,7 @@ export default {
         console.log(error);
       })
     },
+
     addGame() {
 
       let game_id = document.getElementsByName('game_id')[0].value;
@@ -77,15 +78,34 @@ export default {
         platform: 4
 
       }).then(() => {
-        axios.post("/libraries/videogames/" + game_id + "/rating", {
-          ranking: document.getElementsByName('rating')[0].value,
-          comment: document.getElementsByName('comment')[0].value,
-        }).then(response => {
-          // window.location.href = "/";
-          this.$parent.updatevideogames();
-        }).catch(error => {
-          console.log(error);
-        });
+
+        let comment = document.getElementsByName('comment')[0].value;
+
+        if (comment !== ""){
+          axios.post("/libraries/videogames/" + game_id + "/rating", {
+            ranking: document.getElementsByName('rating')[0].value,
+            comment: document.getElementsByName('comment')[0].value
+          }).then(response => {
+            // window.location.href = "/";
+            this.$parent.updatevideogames();
+          }).catch(error => {
+            console.log(error);
+          });
+        }
+        else {
+          axios.post("/libraries/videogames/" + game_id + "/rating", {
+            ranking: document.getElementsByName('rating')[0].value
+          }).then(response => {
+            // window.location.href = "/";
+            this.$parent.updatevideogames();
+          }).catch(error => {
+            console.log(error);
+          });
+        }
+
+
+
+
       }).catch(error => {
         console.log(error);
       });

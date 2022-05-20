@@ -10,7 +10,7 @@
   [x] Avviso quando si cancella un gioco con richiesta di conferma da parte dell'utente
   [ ] Remake
   [prima versione] Landing page
-  [ ] Aggiornare il router con la landing page
+  [x] Aggiornare il router con la landing page
   [ ] Togliere logo controller
   [x] Togliere avviso di prova
   [x] Comprato e non comprato tra i giochi nella modale
@@ -87,6 +87,10 @@
                   </select>
                   </div>
                 <div class="row mt-3">
+                  <h4>Data completamento</h4>
+                  <input type="datetime-local" :disabled="date_time_disabled"  >
+                </div>
+                <div class="row mt-3">
                   <h4>Note</h4>
                   <textarea class="form-control" v-bind:id="'note' + gioco.videogame.id" v-model="this.comment" rows="3" @change="updatecomment"></textarea>
                 </div>
@@ -120,16 +124,21 @@ export default {
   },
 
   data(){
+
+    let date_time_disabled = true;
+
     let rank = 0;
     let comment = "";
     return{
       rank,
-      comment
+      comment,
+      date_time_disabled
     }
   },
   methods: {
     gamestatus: function() {
       console.log(this.gioco.status + " " + this.gioco.videogame.name);
+
       if (this.gioco.status === 'Da giocare'){
         document.getElementById('dagiocare' + this.gioco.videogame.id).setAttribute('selected', 'selected');
       } else if (this.gioco.status === 'In corso'){
@@ -141,6 +150,8 @@ export default {
       } else if (this.gioco.status === 'Abbandonato'){
         document.getElementById('abbandonato' + this.gioco.videogame.id).setAttribute('selected', 'selected');
       }
+
+      this.date_time_disabled = !(this.gioco.status === "Completato");
     },
 
     updatetime: function () {
@@ -159,15 +170,15 @@ export default {
 
     updatestatus: function () {
       // get time from
-
-
-
       let status = document.getElementById("game_status" + this.gioco.videogame.id);
       let status_value_text = status.options[status.selectedIndex].text;
       axios.put("libraries/videogames/" + this.gioco.videogame.id, {
         status: status_value_text,
         platform: this.gioco.platform
       }).then(() => {
+
+        this.date_time_disabled = !(status_value_text === "Completato");
+
         this.$parent.updatecompleted(this.gioco.videogame.id, status_value_text);
       })
     },
@@ -296,6 +307,7 @@ export default {
 
     this.getrating();
     this.gamestatus();
+
     this.getbought();
   }
 }
