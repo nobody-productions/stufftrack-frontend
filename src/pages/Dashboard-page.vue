@@ -218,13 +218,20 @@ export default {
 
   methods:{
     updatestats: function () {
+      this.updatetotalhours()
+      this.updatecompletedgames()
+    },
+    updatetotalhours: function () {
+      axios.get('libraries/videogames/charts/total-hours').then(response=>{
+        let total = response.data.total;
+        this.ore_gioco = (response.data.total === null? 0 : total);
+      })
+    },
+    updatecompletedgames: function () {
       axios.get('/libraries/videogames/charts/completed').then(response=>{
         this.giochi_completati = response.data[0].count;
-        axios.get('libraries/videogames/charts/total-hours').then(response=>{
-          this.ore_gioco = response.data.total;
-        })
-      })
 
+      })
     },
     updatecompleted: function (game_id, status){
       for (let game of this.videogames) {

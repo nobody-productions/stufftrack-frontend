@@ -15,6 +15,7 @@
   [x] Togliere avviso di prova
   [x] Comprato e non comprato tra i giochi nella modale
   [ ] Statistiche
+  [ ] Statistiche degli ultimi 30 giorni (con le query nel DB si può fare credo)
   [ ] Integrazione con i libri
   [?] Modifica ore di gioco con pulsante
   [ ] Parte admin
