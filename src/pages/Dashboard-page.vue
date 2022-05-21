@@ -5,7 +5,7 @@
       <!-- La barra laterale-->
       <sidebar-component></sidebar-component>
       <!-- Breadcrumb di navigazione-->
-      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4 border-start border-top" style="background-color: #f8fcfe; height: 100vh">
+      <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4 border-start border-top" style="background-color: #f8fcfe;">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -19,6 +19,8 @@
 
           </button>
         </div>
+
+        <div id="liveAlertPlaceholder"></div>
 
         <h1 class="h2">Ciao, {{ username }}!</h1>
 
@@ -262,6 +264,26 @@ export default {
         this.giochi_totali = response.data.meta.total;
         this.updatestats();
       })
+    },
+
+    showmessage: async function (message, type) {
+      const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+      const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+          `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+          `   <div>${message}</div>`,
+          '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+          '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)
+      }
+
+      alert(message, type)
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      alertPlaceholder.innerHTML = ''
     }
 
   },

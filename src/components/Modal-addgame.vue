@@ -96,6 +96,7 @@ export default {
           }).then(response => {
             // window.location.href = "/";
             this.$parent.updatevideogames();
+            this.$parent.showmessage();
           }).catch(error => {
             console.log(error);
           });
@@ -105,6 +106,7 @@ export default {
             ranking: document.getElementsByName('rating')[0].value
           }).then(response => {
             // window.location.href = "/";
+            this.$parent.showmessage("Gioco aggiunto con successo!", "success");
             this.$parent.updatevideogames();
           }).catch(error => {
             console.log(error);

@@ -93,7 +93,7 @@
         <div class="modal-footer">
 
             <button type="button" class="btn btn-danger" @click="deleteGame">Rimuovi</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            <button type="button" :id="'closemodal'+gioco.videogame.id" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </div>
@@ -275,10 +275,12 @@ export default {
             // window.location.href = "/";
             // close this modal
 
-            document.getElementById('game_detail_modal' + this.gioco.videogame.id).hidden = true;
-            document.getElementsByClassName('modal-backdrop')[0].remove()
+            // document.getElementById('game_detail_modal' + this.gioco.videogame.id).remove();
+            // document.getElementsByClassName('modal-backdrop')[0].remove()
 
-
+         // document.getElementById('game_detail_modal' + this.gioco.videogame.id)
+            document.getElementById('closemodal'+this.gioco.videogame.id).click();
+            this.$parent.showmessage("Gioco rimosso con successo!", "danger");
             this.$parent.updatevideogames();
             this.$parent.updatestats();
           }).catch(error => {
