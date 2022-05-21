@@ -11,12 +11,20 @@
           <!-- Form -->
             <form class="pb-2">
               <label for="exampleInputEmail1">Game</label>
-              <select class="form-control" name="game_id">
+              <select class="form-control" name="game_id" @change="getgameplatforms">
+                <!-- empty default option -->
+                <option value="">Seleziona un gioco:</option>
                 <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>
               </select>
 
-                <input type="checkbox" id="gb" >
-                <label for="gb">Già acquistato</label>
+              <label for="exampleInputEmail1">Piattaforma</label>
+              <select class="form-control" name="platform_id">
+                <!-- empty default option -->
+                <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }}</option>
+              </select>
+
+              <input type="checkbox" id="gb" >
+              <label for="gb">Già acquistato</label>
               <br>
               <label for="exampleInputEmail1">Valutazione</label>
               <select class="form-control" name="rating">
@@ -45,26 +53,29 @@
 
 <script>
 import axios from 'axios';
+import {ref} from "vue";
 
 export default {
   name: "Modal-addgame",
 
   data() {
     let games = [];
+    let platforms = ref([]);
     return {
-      games: games
+      games: games,
+      platforms
     }
   },
 
   methods: {
     getgameslist() {
       axios.get('/videogames')
-      .then(response => {
-        this.games = response.data.data;
-      })
-      .catch(error => {
-        console.log(error);
-      })
+          .then(response => {
+            this.games = response.data.data;
+          })
+          .catch(error => {
+            console.log(error);
+          })
     },
 
     addGame() {
@@ -73,10 +84,7 @@ export default {
 
       axios.post("/libraries/videogames/" + game_id,{
         bought: document.getElementById('gb').checked,
-        // rating: document.getElementsByName('rating')[0].value * 2,
-        // comment: document.getElementsByName('comment')[0].value,
-        platform: 4
-
+        platform: parseInt(document.getElementsByName('platform_id')[0].value),
       }).then(() => {
 
         let comment = document.getElementsByName('comment')[0].value;
@@ -110,6 +118,19 @@ export default {
         console.log(error);
       });
 
+
+    },
+    getgameplatforms: function (){
+
+      let game_id = document.getElementsByName('game_id')[0].value;
+      axios.get('/videogames/' + game_id)
+          .then(response => {
+            console.log(response.data[0].platforms);
+            this.platforms = response.data[0].platforms;
+          })
+          .catch(error => {
+            console.log(error);
+          })
 
     }
   },
