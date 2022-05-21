@@ -21,13 +21,20 @@
                   <div class="text-secondary"> <b>Anno: </b>{{ this.gioco.videogame.year }} </div>
                   <div class="text-secondary"> <b>Sviluppatori: </b><span class="me-1" v-for="developer in this.gioco.videogame.developers" :key="developer.id">{{ developer.name }} </span></div>
                   <div class="text-secondary"> <b>Genere: </b><span class="me-1" v-for="genre in this.gioco.videogame.genres" :key="genre.id">{{ genre.name }} </span></div>
+                  <div class="text-secondary"> <b>Gioco originale: </b>
+                      <span v-if="this.remake.original">
+                        <span class="me-1">{{ vg }}</span>
+                      </span>
+                      <span v-else>-</span>
+                  </div>
+
                   <div class="text-secondary"> <b>Remake: </b>
-                    <span v-if="this.gioco.videogame.videogames.length > 0">
-                      <span class="me-1" v-for="remake in this.gioco.videogame.videogames" :key="remake.id">{{ remake.name }}</span>
+                    <span v-if="this.remake.remake">
+                      <span class="me-1">{{ vg }}</span>
                     </span>
                     <span v-else>-</span>
                   </div>
-                
+                  
                 </div>
 
                 <div class="col star_bar">
@@ -98,8 +105,7 @@
 
 <script>
 import axios from 'axios';
-
-
+import { ref } from 'vue';
 
 export default {
 
@@ -113,10 +119,14 @@ export default {
 
     let rank = 0;
     let comment = "";
+    let remake =   "";
+    let vg = "";
     return{
       rank,
       comment,
       date_time_disabled,
+      remake,
+      vg
     }
   },
   methods: {
@@ -274,6 +284,27 @@ export default {
         });
       }
     },
+
+    getRemake() {
+        // TODO: funziona, ma in console stampa 404. Forse c'é un altro modo per fare la stessa cosa?
+        axios.get("videogames/" + this.gioco.videogame.id + "/remake").then(response => {
+          this.remake = response.data[0];
+          let vg_id = this.remake.remake ? this.remake.remake : this.remake.original; 
+
+          axios.get("videogames/" + vg_id).then(response => {
+            this.vg = response.data[0].name;
+          }).catch(error => {
+            if(error.response && error.response.status === 404) {
+              console.log("No vg found");
+            }
+          });  
+        }).catch(error => {
+          if(error.response && error.response.status === 404) {
+            console.log("No remake found");
+          }
+        });
+    },
+  
 },
 
 
@@ -283,9 +314,10 @@ export default {
 
     this.getrating();
     this.gamestatus();
-
     this.getbought();
+    this.getRemake();
   }
+  
 }
 
 
