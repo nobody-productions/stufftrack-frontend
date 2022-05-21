@@ -187,32 +187,14 @@ export default {
      const {data} = await axios.get('profile').catch(() => router.push('/login'))
 
      // Da qui in poi eseguo il parsing dei dati ottenuti dal backend
+      //
+      //
       username.value = data.nickname;
 
      giochi_completati.value = 0;
      giochi_acquistati.value = 0;
      ore_gioco.value = 0;
 
-      axios.get('libraries/videogames').then(function (response){
-        videogames.value = response.data.data;
-        giochi_totali.value = response.data.meta.total;
-        /*
-        for (let game of videogames.value) {
-          // calcolo le statistiche
-          if (game.status === "Completato") {
-            giochi_completati.value = giochi_completati.value + 1;
-          }
-          ore_gioco.value = ore_gioco.value + game.hours;
-        }
-
-         */
-
-        // Aggiorno le stats
-        axios.get("libraries/videogames/charts/total-bought").then(response=> {
-          giochi_acquistati.value = response.data[0].count;
-        });
-
-      })
 
     })
     return {
@@ -281,7 +263,11 @@ export default {
       })
     }
 
-  }
+  },
+  mounted() {
+    this.updatevideogames();
+    this.updatestats();
+  },
 
 };
 
