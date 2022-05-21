@@ -55,13 +55,11 @@
                   </p>
                 </div>
                 <div class="row mt-3">
-                  <h4>Piattaforme</h4>
-                  <div class="col">
-                    <!-- TODO piattaforme in text-secondary e quella su cui l'utente ha giocato in nero -->
-                    <i class="fa-brands fa-xbox fa-2x ps-1"></i>
-                    <i class="fa-brands fa-playstation fa-2x ps-1"></i>
-                    <i class="fa-brands fa-steam fa-2x ps-1"></i>
-                  </div>
+                  <h4>Piattaforma</h4>
+                  <select class="form-control" name="platform_id" :id="'platform_id' + gioco.videogame.id">
+                    <!-- empty default option -->
+                    <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }} -> {{ platform.id }}</option>
+                  </select>
                 </div>
                 <div class="row mt-3">
                   <!-- Stato del gioco -->
@@ -119,14 +117,18 @@ export default {
 
     let rank = 0;
     let comment = "";
-    let remake =   "";
+    let remake = "";
     let vg = "";
+    let platforms = ref([]);
+
+
     return{
       rank,
       comment,
       date_time_disabled,
       remake,
-      vg
+      vg,
+      platforms
     }
   },
   methods: {
@@ -304,6 +306,21 @@ export default {
           }
         });
     },
+
+    getgameplatforms: function (){
+      axios.get('/videogames/' + this.gioco.videogame.id)
+          .then(async response => {
+            // console.log(response.data[0].platforms);
+            this.platforms = response.data[0].platforms;
+            // console.log('platform_id' + this.gioco.videogame.id)
+            await new Promise(r => setTimeout(r, 2000));
+            document.getElementById("platform_id" + this.gioco.videogame.id).value = 20
+          })
+          .catch(error => {
+            console.log(error);
+          })
+
+    }
   
 },
 
@@ -316,6 +333,7 @@ export default {
     this.gamestatus();
     this.getbought();
     this.getRemake();
+    this.getgameplatforms();
   }
   
 }

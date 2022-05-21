@@ -18,7 +18,7 @@
               </select>
 
               <label for="exampleInputEmail1">Piattaforma</label>
-              <select class="form-control" name="platform_id">
+              <select class="form-control" name="platform_id" id="platform_id">
                 <!-- empty default option -->
                 <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }}</option>
               </select>
@@ -84,7 +84,7 @@ export default {
 
       axios.post("/libraries/videogames/" + game_id,{
         bought: document.getElementById('gb').checked,
-        platform: parseInt(document.getElementsByName('platform_id')[0].value),
+        platform: parseInt(document.getElementById('platform_id').value),
       }).then(() => {
 
         let comment = document.getElementsByName('comment')[0].value;
