@@ -17,10 +17,10 @@
               <div class="col-sm-8">
                 <div class="row">
                   <h1 class="mb-0">{{ gioco.videogame.name }}</h1>
-                  <div class="text-secondary"> <b>Piattaforme: </b><span v-for="platform in this.gioco.videogame.platforms" :key="platform.id">{{ platform.name }}</span></div>
+                  <div class="text-secondary"> <b>Piattaforme: </b><span class="me-1" v-for="platform in this.gioco.videogame.platforms" :key="platform.id">{{ platform.name }} </span></div>
                   <div class="text-secondary"> <b>Anno: </b>{{ this.gioco.videogame.year }} </div>
-                  <div class="text-secondary"> <b>Sviluppatori: </b><span v-for="developer in this.gioco.videogame.developers" :key="developer.id">{{ developer.name }} </span></div>
-                  <div class="text-secondary"> <b>Genere: </b><span v-for="genre in this.gioco.videogame.genres" :key="genre.id">{{ genre.name }} </span></div>
+                  <div class="text-secondary"> <b>Sviluppatori: </b><span class="me-1" v-for="developer in this.gioco.videogame.developers" :key="developer.id">{{ developer.name }} </span></div>
+                  <div class="text-secondary"> <b>Genere: </b><span class="me-1" v-for="genre in this.gioco.videogame.genres" :key="genre.id">{{ genre.name }} </span></div>
                 </div>
 
                 <div class="col star_bar">
