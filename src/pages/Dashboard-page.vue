@@ -185,8 +185,7 @@ export default {
 
     onMounted(async () => {
      const {data} = await axios.get('profile').catch(() => router.push('/login'))
-     console.log(data);
-     console.log(data.nickname)
+
      // Da qui in poi eseguo il parsing dei dati ottenuti dal backend
       username.value = data.nickname;
 
@@ -195,10 +194,8 @@ export default {
      ore_gioco.value = 0;
 
       axios.get('libraries/videogames').then(function (response){
-        console.log(response.data.data)
         videogames.value = response.data.data;
         giochi_totali.value = response.data.meta.total;
-
         /*
         for (let game of videogames.value) {
           // calcolo le statistiche

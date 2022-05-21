@@ -1,27 +1,4 @@
 <template>
-
-  <!--
-  TODO cose da aggiungere lato frontend:
-
-  [x] Aggiungi gioco tra quelli esistenti con piattaforma su cui gioca l'utente
-  [ ] Aggiungi gioco tra quelli non esistenti con piattaforma e genere (?)
-  [x] Commento del rating
-  [x] Registrazione
-  [x] Avviso quando si cancella un gioco con richiesta di conferma da parte dell'utente
-  [ ] Remake
-  [prima versione] Landing page
-  [x] Aggiornare il router con la landing page
-  [ ] Togliere logo controller
-  [x] Togliere avviso di prova
-  [x] Comprato e non comprato tra i giochi nella modale
-  [ ] Statistiche
-  [ ] Statistiche degli ultimi 30 giorni (con le query nel DB si può fare credo)
-  [ ] Integrazione con i libri
-  [?] Modifica ore di gioco con pulsante
-  [ ] Parte admin
-
-  -->
-
   <div class="modal" tabindex="-1" id="game_detail_modal" aria-labelledby="exampleModalLabel2" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -40,9 +17,11 @@
               <div class="col-sm-8">
                 <div class="row">
                   <h1 class="mb-0">{{ gioco.videogame.name }}</h1>
-                  <div class="text-secondary"> {{ gioco.videogame.year }}</div>
+                  <div class="text-secondary"> <b>Piattaforme: </b><span v-for="platform in this.gioco.videogame.platforms" :key="platform.id">{{ platform.name }}</span></div>
+                  <div class="text-secondary"> <b>Anno: </b>{{ this.gioco.videogame.year }} </div>
+                  <div class="text-secondary"> <b>Sviluppatori: </b><span v-for="developer in this.gioco.videogame.developers" :key="developer.id">{{ developer.name }} </span></div>
+                  <div class="text-secondary"> <b>Genere: </b><span v-for="genre in this.gioco.videogame.genres" :key="genre.id">{{ genre.name }} </span></div>
                 </div>
-
 
                 <div class="col star_bar">
                   <i class="fa-solid fa-star star1" @click="updaterating(1)" v-bind:style="{color: rank >= 1? 'gold':'gray'}"></i>
@@ -119,12 +98,10 @@ export default {
 
   name: "Modal-component",
   props: {
-    gioco_id: Object,
-    gioco: Object
+    gioco: Object,
   },
 
   data(){
-
     let date_time_disabled = true;
 
     let rank = 0;
@@ -132,12 +109,11 @@ export default {
     return{
       rank,
       comment,
-      date_time_disabled
+      date_time_disabled,
     }
   },
   methods: {
     gamestatus: function() {
-      console.log(this.gioco.status + " " + this.gioco.videogame.name);
 
       if (this.gioco.status === 'Da giocare'){
         document.getElementById('dagiocare' + this.gioco.videogame.id).setAttribute('selected', 'selected');
@@ -162,7 +138,6 @@ export default {
         hours: time_value,
         platform: this.gioco.platform
       }).then(() => {
-        console.log("ID: " + this.gioco.videogame.id + " - " + this.gioco.videogame.name + " - " + time_value + " - " + this.gioco.platform);
         this.$parent.updatehours(this.gioco.videogame.id, parseInt(time_value));
           }
       )
@@ -185,7 +160,6 @@ export default {
 
     getrating: function () {
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
-        console.log(response.data);
         let int_rating = response.data.ranking;
         let comment = response.data.comment;
         // check that int_rating is a number
@@ -220,7 +194,6 @@ export default {
     },
     updaterating: function (value){
       if (value > 0){
-        console.log("Updating rating to " + value);
         // check if rating is already set
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
           axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
@@ -233,7 +206,6 @@ export default {
           axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
             ranking: value
           }).then(response => {
-            console.log(response.data);
             this.getrating();
           });
         })
@@ -253,11 +225,9 @@ export default {
         axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
           comment: this.comment
         }).then(response => {
-          console.log(response.data);
           this.getrating();
         });
       })
-
     },
 
     updatebought: function (){
@@ -280,7 +250,6 @@ export default {
     deleteGame() {
       if (confirm('Sei sicuro di voler rimuovere il gioco ' + this.gioco.videogame.name + ' dalla tua libreria?')) {
         axios.delete("libraries/videogames/" + this.gioco.videogame.id).then(response => {
-          console.log(response.data);
           // refresh home page
           //axios.delete("/libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
             //console.log(response.data);
@@ -296,11 +265,9 @@ export default {
           }).catch(error => {
             console.log(error);
         });
-        //});
       }
     },
-
-  },
+},
 
 
   // call gamestatus function
