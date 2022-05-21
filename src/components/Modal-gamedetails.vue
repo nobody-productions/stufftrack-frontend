@@ -81,7 +81,7 @@
                   </div>
                 <div class="row mt-3">
                   <h4>Data completamento</h4>
-                  <input type="datetime-local" :disabled="date_time_disabled"  >
+                  <input type="date" :disabled="date_time_disabled"  >
                 </div>
                 <div class="row mt-3">
                   <h4>Note</h4>
