@@ -260,13 +260,13 @@ export default {
       axios.get('libraries/videogames').then(response=>{
         this.videogames = response.data.data;
         this.giochi_totali = response.data.meta.total;
+        this.updatestats();
       })
     }
 
   },
   mounted() {
     this.updatevideogames();
-    this.updatestats();
   },
 
 };
