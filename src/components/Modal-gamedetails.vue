@@ -21,6 +21,13 @@
                   <div class="text-secondary"> <b>Anno: </b>{{ this.gioco.videogame.year }} </div>
                   <div class="text-secondary"> <b>Sviluppatori: </b><span class="me-1" v-for="developer in this.gioco.videogame.developers" :key="developer.id">{{ developer.name }} </span></div>
                   <div class="text-secondary"> <b>Genere: </b><span class="me-1" v-for="genre in this.gioco.videogame.genres" :key="genre.id">{{ genre.name }} </span></div>
+                  <div class="text-secondary"> <b>Remake: </b>
+                    <span v-if="this.gioco.videogame.videogames.length > 0">
+                      <span class="me-1" v-for="remake in this.gioco.videogame.videogames" :key="remake.id">{{ remake.name }}</span>
+                    </span>
+                    <span v-else>-</span>
+                  </div>
+                
                 </div>
 
                 <div class="col star_bar">
