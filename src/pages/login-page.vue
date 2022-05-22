@@ -80,7 +80,7 @@ export default {
        await axios.post('login/', {
          email: this.form.email,
          password: this.form.password,
-       }).then(async () => await router.push("/")).catch(async error => {
+       }).then(async () => await router.push("/videogames")).catch(async error => {
          if (error.message === "Network Error") {
            await this.showmessage('Network Error', 'danger', 5000)
          }
@@ -92,7 +92,7 @@ export default {
   mounted() {
     // check if the user is already logged in
     axios.get('/profile').then(()=>{
-      router.push("/dashboard");
+      router.push("/videogames");
     });
   }
 }

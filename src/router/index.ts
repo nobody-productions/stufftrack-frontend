@@ -11,8 +11,8 @@ const routes: Array<RouteRecordRaw> = [
     component: HomePage
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
+    path: '/videogames',
+    name: 'videogames',
     component: DashboardPage
   },
   {
