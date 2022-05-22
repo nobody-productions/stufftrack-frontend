@@ -20,7 +20,7 @@
          <i class="fa-solid fa-circle-user fa-2x" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
 
          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
-           <li><a class="dropdown-item" href="#">Impostazioni account</a></li>
+           <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profile-modal">Il mio profilo</a></li>
            <li><button class="dropdown-item" @click="logout">Log out</button></li>
          </ul>
 

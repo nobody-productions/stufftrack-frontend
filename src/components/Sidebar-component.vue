@@ -25,7 +25,6 @@
         </li>
         -->
 
-        <hr class="my-0">
 
         <li class="nav-item">
           <a class="nav-link" href="#" style="color: black;">
