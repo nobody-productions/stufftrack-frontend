@@ -317,7 +317,7 @@ export default {
             // console.log('platform_id' + this.gioco.videogame.id)
             // TODO fixare per rimuovere questa sleep
             await new Promise(r => setTimeout(r, 1000));
-            document.getElementById("platform_id" + this.gioco.videogame.id).value = 20
+            document.getElementById("platform_id" + this.gioco.videogame.id).value = this.gioco.platform
           })
           .catch(error => {
             console.log(error);
