@@ -19,7 +19,7 @@
                 <div class="mb-3"></div><input v-model="email" class="form-control" type="email" name="email" placeholder="Email">
                 <div class="mb-3"></div><input v-model="password" class="form-control" type="password" name="password" placeholder="Password">
                 <div class="mb-3"></div><input v-model="passwordConfirm" class="form-control" type="password" name="password" placeholder="Conferma password" style="margin-bottom: 6px;">
-                <div class="mb-3"></div><button class="btn btn-dark d-block w-100" type="submit">Registrati</button>
+                <div class="mb-3"></div><button class="btn btn-primary d-block w-100" type="submit">Registrati</button>
                 <div class="mb-3 mt-3"></div><a class="text-center" href="/login">Hai già un account? Accedi</a>
               </form>
           </div>
@@ -49,7 +49,8 @@ export default {
         nickname: username.value,
         email: email.value,
         password: password.value,
-        password_confirm: passwordConfirm.value
+        password_confirm: passwordConfirm.value,
+        propic: "/profilepictures/default.png"
       }).then(function (response) {
         console.log(response);
         router.push("/login");

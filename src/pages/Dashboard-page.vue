@@ -123,7 +123,21 @@
           </div>
         </div>
           <div class="d-flex justify-content-between mt-3 mb-3">
-            <h2 class="align-self-center">La mia libreria</h2>
+
+            <!--
+            Dropdown per la scelta dell'ordinamento
+            -->
+            <div class="dropdown">
+              <h2 class="align-self-center">La mia libreria</h2>
+              <span class=" dropdown-toggle text-secondary" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Ordina per <b>{{ ordinamento }}</b>
+              </span>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" @click="sortvideogames('name')">Nome</a>
+                <a class="dropdown-item" @click="sortvideogames('created_at')">Data di aggiunta</a>
+              </div>
+            </div>
+
             <button class="btn btn-secondary ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="button">
               Aggiungi gioco
             </button>
@@ -184,6 +198,7 @@ export default {
     let giochi_completati = ref("");
     let giochi_acquistati = ref("");
     let ore_gioco = ref("");
+    let ordinamento = ref("");
 
     onMounted(async () => {
      const {data} = await axios.get('profile').catch(() => router.push('/login'))
@@ -205,7 +220,8 @@ export default {
       ore_gioco,
       giochi_completati,
       giochi_totali,
-      giochi_acquistati
+      giochi_acquistati,
+      ordinamento
     }
   },
   props: {
@@ -261,6 +277,10 @@ export default {
     updatevideogames: function (){
       axios.get('libraries/videogames').then(response=>{
         this.videogames = response.data.data;
+        // sort this.videogames by name
+        this.sortvideogames("name")
+        // sort by created_at
+        // this.videogames.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
         this.giochi_totali = response.data.meta.total;
         this.updatestats();
       })
@@ -284,7 +304,17 @@ export default {
       alert(message, type)
       await new Promise(resolve => setTimeout(resolve, 2000))
       alertPlaceholder.innerHTML = ''
-    }
+    },
+
+    sortvideogames: function (sort) {
+      if (sort === 'name') {
+        this.videogames.sort((a, b) => (a.videogame.name > b.videogame.name) ? 1 : -1);
+        this.ordinamento = "nome";
+      } else if (sort === 'created_at') {
+        this.videogames.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
+        this.ordinamento = "data";
+      }
+    },
 
   },
   mounted() {
