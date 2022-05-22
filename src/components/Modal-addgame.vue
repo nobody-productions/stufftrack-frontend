@@ -11,7 +11,7 @@
           <!-- Form -->
             <form class="pb-2">
               <label for="exampleInputEmail1">Game</label>
-              <select class="form-control" name="game_id" @change="getgameplatforms">
+              <select class="form-control" id="game_select" name="game_id" @change="getgameplatforms">
                 <!-- empty default option -->
                 <option value="">Seleziona un gioco:</option>
                 <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>

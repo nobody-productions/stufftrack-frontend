@@ -13,7 +13,7 @@
     <div class="col-12 col-md-4 col-lg-2 align-self-center align-items-center">
       <div class="input-group">
         <div class="input-group-append"><button class="btn rounded-pill" type="button" style="padding-left: 0;"><i class="fa fa-search text-secondary"></i></button></div>
-        <input class="form-control form-control-dark rounded-pill" type="text" placeholder="Search" aria-label="Search">
+        <a class="form-control form-control-dark rounded-pill" type="text" placeholder="Search" aria-label="Search" data-bs-target="#search-modal" data-bs-toggle="modal"></a>
 
         <!-- Hide this element only on mobile -->
         <div class="dropdown align-items-center align-self-center text-center ps-2  d-md-flex">
@@ -42,16 +42,21 @@
     -->
   </nav>
 
+  <searchModal></searchModal>
 
 </template>
 
 <script>
 import axios from 'axios';
 import {useRouter} from "vue-router";
+import searchModal from "@/components/search-modal";
 
 
 export default {
   name: "Nav-dashboard",
+  components: {
+    searchModal
+  },
   setup() {
     let router = useRouter();
     return {

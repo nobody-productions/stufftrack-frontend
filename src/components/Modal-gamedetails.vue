@@ -57,7 +57,7 @@
                 <div class="row mt-3">
                   <h4>Piattaforma</h4>
                   <select class="form-control" name="platform_id" :id="'platform_id' + gioco.videogame.id" @change="updateGamePlatform">
-                    <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }} -> {{ platform.id }}</option>
+                    <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }}</option>
                   </select>
                 </div>
                 <div class="row mt-3">

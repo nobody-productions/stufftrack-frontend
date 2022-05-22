@@ -50,7 +50,6 @@ export default {
         email: email.value,
         password: password.value,
         password_confirm: passwordConfirm.value,
-        propic: "/profilepictures/default.png"
       }).then(function (response) {
         console.log(response);
         router.push("/login");
