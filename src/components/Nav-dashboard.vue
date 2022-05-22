@@ -13,7 +13,7 @@
     <div class="col-12 col-md-4 col-lg-2 align-self-center align-items-center">
       <div class="input-group">
         <div class="input-group-append"><button class="btn rounded-pill" type="button" style="padding-left: 0;"><i class="fa fa-search text-secondary"></i></button></div>
-        <a class="form-control form-control-dark rounded-pill" type="text" placeholder="Search" aria-label="Search" data-bs-target="#search-modal" data-bs-toggle="modal"></a>
+        <span id="search-bar" class="form-control form-control-dark rounded-pill text-secondary" type="text"  aria-label="Search" data-bs-target="#search-modal" data-bs-toggle="modal">Cerca...</span>
 
         <!-- Hide this element only on mobile -->
         <div class="dropdown align-items-center align-self-center text-center ps-2  d-md-flex">
