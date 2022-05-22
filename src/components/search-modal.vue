@@ -65,7 +65,6 @@ export default {
 
     selectGame: function() {
       this.selectedVideogame = document.getElementById("vg-list").value;
-      console.log("Select game: " + this.selectedVideogame);
       this.validGame();
     },
 
