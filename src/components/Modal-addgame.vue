@@ -10,7 +10,7 @@
           <div class="container-fluid">
           <!-- Form -->
             <form class="pb-2">
-              <label for="exampleInputEmail1">Game</label>
+              <label for="exampleInputEmail1">Gioco</label>
               <select class="form-control" id="game_select" name="game_id" @change="getgameplatforms">
                 <!-- empty default option -->
                 <option value="">Seleziona un gioco:</option>
