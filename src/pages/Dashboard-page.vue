@@ -311,7 +311,7 @@ export default {
         this.videogames.sort((a, b) => (a.videogame.name > b.videogame.name) ? 1 : -1);
         this.ordinamento = "nome";
       } else if (sort === 'created_at') {
-        this.videogames.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
+        this.videogames.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1);
         this.ordinamento = "data";
       }
     },
