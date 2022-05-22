@@ -60,9 +60,7 @@
         },
         mounted() {
           // se sono già loggato mi riporta alla dashboard
-          axios.get('/profile').then(()=>{
-            router.push("/dashboard");
-          });
+
         },
     };
 </script>
