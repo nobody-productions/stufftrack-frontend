@@ -119,6 +119,12 @@ export default {
 
       }).catch(error => {
         console.log(error);
+        if (error.response.status === 400) {
+          this.$parent.showmessage("Errore: gioco già presente nella libreria", "warning");
+        }
+        else {
+          this.$parent.showmessage("Errore: gioco non aggiunto, codice errore: " + error.response.status, "danger");
+        }
       });
 
 
