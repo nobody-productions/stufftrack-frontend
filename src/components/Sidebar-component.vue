@@ -3,14 +3,14 @@
     <div class="position-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active invert" aria-current="page" href="#" style="color: black;">
+          <a id="side-videogiochi" class="nav-link active" aria-current="page" href="/videogames" style="color: black;">
             <i class="fa-solid fa-gamepad" style="height: 20px; width: 20px;"></i>
             <span class="mx-2">Videogiochi</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" style="color: black;">
+          <a id="side-libri" class="nav-link active" aria-current="page" href="/books" style="color: black;">
             <i class="fa-solid fa-book" style="height: 20px; width: 20px;"></i>
             <span class="mx-2">Libri</span>
           </a>
@@ -43,7 +43,22 @@ import profileModal from '@/components/profile-modal'
 
 export default {
   name: "Sidebar-component",
-  components: { profileModal }
+  components: { profileModal },
+  props: {
+    selected: {
+      type: String,
+      default: "Videogiochi"
+    }
+  },
+
+  mounted() {
+    console.log("Selected: " + this.selected)
+    if (this.selected === "Videogiochi") {
+      document.getElementById("side-videogiochi").classList.add("invert");
+    } else if (this.selected === "Libri") {
+      document.getElementById("side-libri").classList.add("invert");
+    }
+  }
 }
 
 </script>
