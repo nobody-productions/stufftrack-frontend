@@ -324,6 +324,12 @@ export default {
 };
 
 
+document.onkeyup = function(e) {
+
+  if (e.ctrlKey  && e.which === 75) {
+    document.getElementById("search-bar").click();
+  }
+};
 
 </script>
 
