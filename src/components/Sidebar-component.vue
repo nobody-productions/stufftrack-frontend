@@ -3,18 +3,29 @@
     <div class="position-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#" style="color: black;">
-            <i class="fa-solid fa-home" style="height: 20px; width: 20px;"></i>
-            <span class="mx-2">Dashboard</span>
+          <a class="nav-link active invert" aria-current="page" href="#" style="color: black;">
+            <i class="fa-solid fa-gamepad" style="height: 20px; width: 20px;"></i>
+            <span class="mx-2">Videogiochi</span>
           </a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" style="color: black;">
+            <i class="fa-solid fa-book" style="height: 20px; width: 20px;"></i>
+            <span class="mx-2">Libri</span>
+          </a>
+        </li>
+
+        <!--
         <li class="nav-item">
           <a class="nav-link" href="#" style="color: black;">
             <i class="fa-solid fa-gear" style="height: 20px; width: 20px;"></i>
             <span class="mx-2">Impostazioni</span>
           </a>
         </li>
+        -->
+
+        <hr class="my-0">
 
         <li class="nav-item">
           <a class="nav-link" href="#" style="color: black;">
@@ -39,5 +50,11 @@ export default {
 </script>
 
 <style scoped>
-
+.invert {
+  border-radius: 10px;
+  display: inline-block;
+  flex-wrap: wrap;
+  background-color: white;
+  filter: invert(90%);
+}
 </style>
