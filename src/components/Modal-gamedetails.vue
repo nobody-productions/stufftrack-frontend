@@ -280,7 +280,7 @@ export default {
 
          // document.getElementById('game_detail_modal' + this.gioco.videogame.id)
             document.getElementById('closemodal'+this.gioco.videogame.id).click();
-            this.$parent.showmessage("Gioco rimosso con successo!", "danger");
+            this.$parent.showmessage("Gioco rimosso con successo!", "success");
             this.$parent.updatevideogames();
             this.$parent.updatestats();
           }).catch(error => {
