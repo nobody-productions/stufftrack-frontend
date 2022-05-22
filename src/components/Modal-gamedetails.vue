@@ -56,7 +56,7 @@
                 </div>
                 <div class="row mt-3">
                   <h4>Piattaforma</h4>
-                  <select class="form-control" name="platform_id" :id="'platform_id' + gioco.videogame.id">
+                  <select class="form-control" name="platform_id" :id="'platform_id' + gioco.videogame.id" @change="updateGamePlatform">
                     <!-- empty default option -->
                     <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }} -> {{ platform.id }}</option>
                   </select>
@@ -323,7 +323,16 @@ export default {
             console.log(error);
           })
 
-    }
+    },
+
+    updateGamePlatform: function (){
+      axios.put('/libraries/videogames/' + this.gioco.videogame.id, {
+        platform: document.getElementById('platform_id' + this.gioco.videogame.id).value
+      }).then(()=>{
+        this.$parent.updatevideogames();
+        this.$parent.updatestats();
+      })
+    },
   
 },
 
