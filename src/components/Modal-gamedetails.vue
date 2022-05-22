@@ -78,7 +78,7 @@
                   </div>
                 <div class="row mt-3">
                   <h4>Data completamento</h4>
-                  <input type="date" :disabled="date_time_disabled"  >
+                  <input type="date" :id="'dataCompletamento' + gioco.videogame.id" :disabled="date_time_disabled" @change="updateDateCompleted" >
                 </div>
                 <div class="row mt-3">
                   <h4>Note</h4>
@@ -264,6 +264,24 @@ export default {
       });
     },
 
+    // data di completamento dell'utente
+    updateDateCompleted: function () {
+      axios.put("/libraries/videogames/" + this.gioco.videogame.id, {
+          finished: new Date(document.getElementById('dataCompletamento' + this.gioco.videogame.id).value).toUTCString(),
+          platform: this.gioco.platform
+      })
+    },
+
+    getDateCompleted: function () {
+      axios.get("/libraries/videogames/" + this.gioco.videogame.id).then(response => {
+        let finished = response.data.finished;
+        // remove from finished, everything after T (because of postgre giving back a date with T in the middle)
+        let finished_date = finished.substring(0, finished.indexOf('T'));
+        
+        // set value of getelementbyid datacompletamento 4
+        document.getElementById('dataCompletamento' + this.gioco.videogame.id).value = finished_date;
+      });
+    },
 
     deleteGame() {
       if (confirm('Sei sicuro di voler rimuovere il gioco ' + this.gioco.videogame.name + ' dalla tua libreria?')) {
@@ -345,6 +363,7 @@ export default {
     this.getbought();
     this.getRemake();
     this.getgameplatforms();
+    this.getDateCompleted();
   }
   
 }
