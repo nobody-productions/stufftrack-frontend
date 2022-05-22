@@ -9,7 +9,7 @@
         <div class="modal-body">
           <!-- Contenuto della finestra -->
           <div class="container-fluid">
-            <img :src="user.propic" class="rounded-circle border text-center mx-auto d-block" alt="profile png" style="width: 30%; height: 30%">
+            <img src="/profilepictures/default.png" class="rounded-circle border text-center mx-auto d-block" alt="profile png" style="width: 30%; height: 30%">
             <div class="row justify-content-center">
     <div class="col-auto">
           <table class="table table-responsive">
