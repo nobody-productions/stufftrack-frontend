@@ -42,8 +42,8 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addGame">Aggiungi</button>
+            <button id="dismiss-modal-addgame" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+            <button id="add-game-button" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addGame">Aggiungi</button>
           </div>
         </div>
 
@@ -96,8 +96,8 @@ export default {
             comment: document.getElementsByName('comment')[0].value
           }).then(response => {
             // window.location.href = "/";
+            this.$parent.showmessage("Gioco aggiunto con successo!", "success");
             this.$parent.updatevideogames();
-            this.$parent.showmessage();
           }).catch(error => {
             console.log(error);
           });
@@ -111,12 +111,9 @@ export default {
             this.$parent.updatevideogames();
           }).catch(error => {
             console.log(error);
+
           });
         }
-
-
-
-
       }).catch(error => {
         console.log(error);
         if (error.response.status === 400) {
@@ -130,12 +127,17 @@ export default {
 
     },
     getgameplatforms: function (){
-
       let game_id = document.getElementsByName('game_id')[0].value;
+      if (game_id === ""){
+        document.getElementById("add-game-button").disabled = true;
+        this.platforms = [];
+        return
+      }
       axios.get('/videogames/' + game_id)
           .then(response => {
             console.log(response.data[0].platforms);
             this.platforms = response.data[0].platforms;
+            document.getElementById("add-game-button").disabled = false;
           })
           .catch(error => {
             console.log(error);
@@ -145,8 +147,11 @@ export default {
   },
   mounted() {
     this.getgameslist();
+    document.getElementById("add-game-button").disabled = true;
   }
 }
+
+
 </script>
 
 <style scoped>
