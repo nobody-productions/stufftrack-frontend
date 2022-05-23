@@ -26,8 +26,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Ore di gioco totali</h5>
-                    <span class="h2 font-weight-bold mb-0"> {{ ore_gioco }}</span>
+                    <h5 class="card-title text-muted mb-0">Ore di lettura totali</h5>
+                    <span class="h2 font-weight-bold mb-0"> {{ ore_libro }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -50,8 +50,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Giochi completati</h5>
-                    <span class="h2 font-weight-bold mb-0" :key="giochi_completati"> {{ giochi_completati }}</span>
+                    <h5 class="card-title text-muted mb-0">Libri completati</h5>
+                    <span class="h2 font-weight-bold mb-0" :key="libri_completati"> {{ libri_completati }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -63,7 +63,7 @@
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>2</span>
                   <span class="text-wrap"> Completati nell'ultimo mese</span>
-                </p>
+                </p>se
                 -->
               </div>
             </div>
@@ -73,8 +73,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Giochi totali</h5>
-                    <span class="h2 font-weight-bold mb-0">{{ giochi_totali }}</span>
+                    <h5 class="card-title text-muted mb-0">Libri totali</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ libri_totali }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -96,8 +96,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-muted mb-0">Giochi acquistati</h5>
-                    <span class="h2 font-weight-bold mb-0">{{ giochi_acquistati }}</span>
+                    <h5 class="card-title text-muted mb-0">Libri acquistati</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ libri_acquistati }}</span>
                   </div>
                   <div class="col-auto">
 
@@ -126,22 +126,22 @@
                 Ordina per <b>{{ ordinamento }}</b>
               </span>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" @click="sortvideogames('name')">Nome</a>
-              <a class="dropdown-item" @click="sortvideogames('created_at')">Data di aggiunta</a>
+              <a class="dropdown-item" @click="sortbooks('name')">Nome</a>
+              <a class="dropdown-item" @click="sortbooks('created_at')">Data di aggiunta</a>
             </div>
           </div>
 
-          <button class="btn btn-secondary ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="button">
-            Aggiungi gioco
+          <button class="btn btn-secondary ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#Modal-addbook" type="button">
+            Aggiungi libro
           </button>
         </div>
 
         <div class="justify-content-center">
           <div class="row d-flex text-center" style="gap: 20px">
-            <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="gioco in videogames" v-bind:key="gioco" :data-bs-target="'#game_detail_modal' + gioco.book.id" v-bind:data-bs-whatever="gioco.book.id">
-              <img class="game" v-bind:src="gioco.book.image" alt="">
+            <div class="col-sm flex-grow-0" data-bs-toggle="modal" v-for="libro in books" v-bind:key="libro" :data-bs-target="'#book_detail_modal' + libro.book.id" v-bind:data-bs-whatever="libro.book.id">
+              <img class="book" v-bind:src="libro.book.image" alt="">
               <br>
-              <div class="caption text-center">{{ gioco.book.name }}</div>
+              <div class="caption text-center">{{ libro.book.name }}</div>
             </div>
           </div>
         </div>
@@ -152,16 +152,16 @@
   </div>
 
 
-  <ModalComponent v-for="gioco in videogames" v-bind:key="gioco.book.id" :titolo="gioco.name" :id="'game_detail_modal' + gioco.book.id" :gioco="gioco"></ModalComponent>
-  <ModalAddgame></ModalAddgame>
+  <ModalComponent v-for="libro in books" v-bind:key="libro.book.id" :titolo="libro.name" :id="'book_detail_modal' + libro.book.id" :libro="libro"></ModalComponent>
+  <ModalAddbook></ModalAddbook>
 
 </template>
 
 <script>
 import NavDashboard from "@/components/Nav-dashboard";
 import SidebarComponent from "@/components/Sidebar-component";
-import ModalComponent from "@/components/Modal-gamedetails";
-import ModalAddgame from "@/components/Modal-addgame";
+import ModalComponent from "@/components/Modal-bookdetails";
+import ModalAddbook from "@/components/Modal-addbook";
 import axios from "axios";
 import {onMounted} from "vue";
 import router from "@/router";
@@ -170,14 +170,14 @@ import {ref} from "vue";
 
 export default {
   name: "Books-page",
-  components: {ModalAddgame, ModalComponent, SidebarComponent, NavDashboard},
+  components: {ModalAddbook, ModalComponent, SidebarComponent, NavDashboard},
 
   /*
   data() {
     return {
-      ore_gioco: "22:00",
-      giochi_completati: "35",
-      giochi_totali: "70",
+      ore_libro: "22:00",
+      libri_completati: "35",
+      libri_totali: "70",
       obiettivi_completati: "35",
     }
   },
@@ -186,11 +186,11 @@ export default {
 
   data() {
     const username = ref("");
-    let videogames = ref([]);
-    let giochi_totali = ref("");
-    let giochi_completati = ref("");
-    let giochi_acquistati = ref("");
-    let ore_gioco = ref("");
+    let books = ref([]);
+    let libri_totali = ref("");
+    let libri_completati = ref("");
+    let libri_acquistati = ref("");
+    let ore_libro = ref("");
     let ordinamento = ref("");
 
     onMounted(async () => {
@@ -201,54 +201,54 @@ export default {
       //
       username.value = data.nickname;
 
-      giochi_completati.value = 0;
-      giochi_acquistati.value = 0;
-      ore_gioco.value = 0;
+      libri_completati.value = 0;
+      libri_acquistati.value = 0;
+      ore_libro.value = 0;
 
 
     })
     return {
       username,
-      videogames,
-      ore_gioco,
-      giochi_completati,
-      giochi_totali,
-      giochi_acquistati,
+      books,
+      ore_libro,
+      libri_completati,
+      libri_totali,
+      libri_acquistati,
       ordinamento
     }
   },
   props: {
     titolo: Object,
-    gioco: Object
+    libro: Object
   },
 
   methods:{
     updatestats: function () {
       this.updatetotalhours()
-      this.updatecompletedgames()
-      this.updateboughtgames()
+      this.updatecompletedbooks()
+      this.updateboughtbooks()
     },
     updatetotalhours: function () {
-      axios.get('libraries/book/charts/total-hours').then(response=>{
+      axios.get('libraries/books/charts/total-hours').then(response=>{
         let total = response.data.total;
-        this.ore_gioco = (response.data.total === null? 0 : total);
+        this.ore_libro = (response.data.total === null? 0 : total);
       })
     },
-    updatecompletedgames: function () {
+    updatecompletedbooks: function () {
       axios.get('/libraries/books/charts/completed').then(response=>{
-        this.giochi_completati = response.data[0].count;
+        this.libri_completati = response.data[0].count;
 
       })
     },
-    updateboughtgames: function () {
+    updateboughtbooks: function () {
       axios.get('/libraries/books/charts/total-bought').then(response=>{
-        this.giochi_acquistati = response.data[0].count;
+        this.libri_acquistati = response.data[0].count;
       })
     },
-    updatecompleted: function (game_id, status){
-      for (let game of this.videogames) {
-        if (game.videogame.id === game_id) {
-          game.status = status;
+    updatecompleted: function (book_id, status){
+      for (let book of this.books) {
+        if (book.book.id === book_id) {
+          book.status = status;
           break;
         }
       }
@@ -256,10 +256,10 @@ export default {
       this.updatestats();
     },
 
-    updatehours: function (game_id, hours){
-      for (let game of this.videogames) {
-        if (game.videogame.id === game_id) {
-          game.hours = hours;
+    updatehours: function (book_id, hours){
+      for (let book of this.books) {
+        if (book.book.id === book_id) {
+          book.hours = hours;
           break;
         }
       }
@@ -267,14 +267,16 @@ export default {
       this.updatestats();
     },
 
-    updatevideogames: function (){
+    updatebooks: function (){
       axios.get('libraries/books').then(response=>{
-        this.videogames = response.data.data;
-        // sort this.videogames by name
-        this.sortvideogames("name")
+        
+        this.books = response.data.data;
+        console.log(this.books)
+        // sort this.books by name
+        this.sortbooks("name")
         // sort by created_at
-        // this.videogames.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
-        this.giochi_totali = response.data.meta.total;
+        // this.books.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
+        this.libri_totali = response.data.meta.total;
         this.updatestats();
       })
     },
@@ -299,19 +301,19 @@ export default {
       alertPlaceholder.innerHTML = ''
     },
 
-    sortvideogames: function (sort) {
+    sortbooks: function (sort) {
       if (sort === 'name') {
-        this.videogames.sort((a, b) => (a.videogame.name > b.videogame.name) ? 1 : -1);
+        this.books.sort((a, b) => (a.book.name > b.book.name) ? 1 : -1);
         this.ordinamento = "nome";
       } else if (sort === 'created_at') {
-        this.videogames.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1);
+        this.books.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1);
         this.ordinamento = "data";
       }
     },
 
   },
   mounted() {
-    this.updatevideogames();
+    this.updatebooks();
   },
 
 };
@@ -330,7 +332,7 @@ document.onkeyup = function(e) {
 . {
   background-color: #f8fcfe;
 }
-.game{
+.book{
   width: 174px;
   height: 262px;
   min-width: 190px;
@@ -340,7 +342,7 @@ document.onkeyup = function(e) {
 }
 
 
-.game:hover{
+.book:hover{
   transition: transform .3s;
   -ms-transform: scale(1.1);
   -webkit-transform: scale(1.1);
