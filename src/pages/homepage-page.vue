@@ -269,6 +269,8 @@ export default {
 .card {
     border-radius: 20px;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  min-height: 100%;
+
 }
 
 .card>* {
