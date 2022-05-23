@@ -32,7 +32,7 @@
                       <td>{{ user.bio }}</td>
                     </tr>
                     <tr>
-                      <td>Role</td>
+                      <td>Ruolo</td>
                       <td>{{ role_name }}</td>
                     </tr>
                   </tbody>
