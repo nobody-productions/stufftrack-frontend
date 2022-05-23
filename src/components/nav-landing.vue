@@ -14,15 +14,36 @@
             <a v-if="! isLoggedIn" href="/register" class="btn btn-outline-secondary btn-outline" style="margin-left: 10px"
                 role="button">Registrati</a>
             <a v-if="! isLoggedIn" href="/login" class="btn-dark btn" style="margin-left: 10px" role="button">Accedi</a>
-            <a v-if="isLoggedIn" href="/videogames" class="btn-dark btn" style="margin-left: 10px" role="button">Vai alla dashboard</a>
+            <a v-if="isLoggedIn" href="/videogames" class="btn-outline-dark btn" style="margin-left: 10px" role="button">Vai alla dashboard</a>
+
+          <div v-if="isLoggedIn" class="dropdown align-items-center align-self-center text-center ps-2  d-md-flex">
+            <i class="fa-solid fa-circle-user fa-2x" id="dropdownMenuButton" data-bs-toggle="dropdown"
+               aria-expanded="false"></i>
+
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profile-modal">Il mio profilo</a></li>
+              <li><button class="dropdown-item" @click="logout">Log out</button></li>
+            </ul>
+
+          </div>
+
         </div>
+
+
     </nav>
+
+    <profileModal></profileModal>
 </template>
 
 <script>
 import axios from 'axios';
+import profileModal from "@/components/profile-modal";
+
     export default {
         name: "Nav-landing",
+        components: {
+            profileModal
+        },
       data(){
           let isLoggedIn = false;
           return {
@@ -35,6 +56,16 @@ import axios from 'axios';
           }).catch(()=>{
               this.isLoggedIn = false;
           })
+      },
+      methods: {
+          logout: function () {
+              axios.post('/logout/')
+                  .then(() => {
+                      // refresh the page
+                      this.isLoggedIn = false;
+                  })
+
+          }
       }
     }
 </script>
