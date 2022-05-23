@@ -42,10 +42,10 @@
 
 
 
-            <!-- Bottoni -->
-            <div class="modal-footer border-none">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
-            </div>
+          <!-- Bottoni -->
+          <div class="modal-footer border-none">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Chiudi</button>
+
           </div>
         </div>
       </div>
