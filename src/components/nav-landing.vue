@@ -1,15 +1,12 @@
 <template>
     <nav class="navbar navbar-light bg-light p-3">
-        <div class="col-12 col-md-4 col-lg-2 align-self-center align-items-center">
+        <div class=" col-md-4 col-lg-2 align-self-center align-items-center">
             <a class="navbar-brand align-self-center text-center" href="#">
                 <i class="fa-solid fa-link"></i>
                 StuffTrack
 
             </a>
-            <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
         </div>
 
         <!-- Hide this element only on mobile -->
