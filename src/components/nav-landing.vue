@@ -9,8 +9,7 @@
 
         </div>
 
-        <!-- Hide this element only on mobile -->
-        <div class="dropdown align-items-center align-self-center text-center ps-2  d-md-flex">
+        <div class=" align-items-center align-self-center text-center ps-2  d-flex">
             <a v-if="! isLoggedIn" href="/register" class="btn btn-outline-secondary btn-outline" style="margin-left: 10px"
                 role="button">Registrati</a>
             <a v-if="! isLoggedIn" href="/login" class="btn-dark btn" style="margin-left: 10px" role="button">Accedi</a>
