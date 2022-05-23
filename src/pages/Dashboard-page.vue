@@ -138,7 +138,7 @@
               </div>
             </div>
 
-            <button class="btn btn-secondary ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="button">
+            <button class="btn btn-dark ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal3" type="button">
               Aggiungi gioco
             </button>
           </div>
