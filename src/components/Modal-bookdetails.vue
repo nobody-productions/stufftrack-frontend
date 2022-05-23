@@ -62,7 +62,7 @@
                   </select>
                   </div>
                 <div class="row mt-3">
-                  <h4>Data completamento</h4>
+                  <h4>In data</h4>
                   <input type="date" :id="'dataCompletamento' + libro.book.id" :disabled="date_time_disabled" @change="updateDateCompleted" >
                 </div>
                 <div class="row mt-3">
