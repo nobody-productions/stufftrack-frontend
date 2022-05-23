@@ -3,6 +3,7 @@ import DashboardPage from '@/pages/Dashboard-page.vue'
 import LoginPage from '@/pages/login-page.vue'
 import HomePage from '@/pages/homepage-page.vue'
 import RegisterPage from '@/pages/register-page.vue'
+import BooksPage from '@/pages/Books-page.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/videogames',
     name: 'videogames',
     component: DashboardPage
+  },
+  {
+    path: '/books',
+    name: 'books',
+    component: BooksPage
   },
   {
     path: '/login',
