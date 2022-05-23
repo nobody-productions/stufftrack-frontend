@@ -11,16 +11,31 @@
 
         <!-- Hide this element only on mobile -->
         <div class="dropdown align-items-center align-self-center text-center ps-2  d-md-flex">
-            <a href="/register" class="btn btn-outline-secondary btn-outline" style="margin-left: 10px"
+            <a v-if="! isLoggedIn" href="/register" class="btn btn-outline-secondary btn-outline" style="margin-left: 10px"
                 role="button">Registrati</a>
-            <a href="/login" class="btn-dark btn" style="margin-left: 10px" role="button">Accedi</a>
+            <a v-if="! isLoggedIn" href="/login" class="btn-dark btn" style="margin-left: 10px" role="button">Accedi</a>
+            <a v-if="isLoggedIn" href="/videogames" class="btn-dark btn" style="margin-left: 10px" role="button">Vai alla dashboard</a>
         </div>
     </nav>
 </template>
 
 <script>
+import axios from 'axios';
     export default {
         name: "Nav-landing",
+      data(){
+          let isLoggedIn = false;
+          return {
+              isLoggedIn
+          }
+      },
+      mounted() {
+          axios.get("/profile").then(()=>{
+              this.isLoggedIn = true;
+          }).catch(()=>{
+              this.isLoggedIn = false;
+          })
+      }
     }
 </script>
 
