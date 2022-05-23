@@ -77,7 +77,7 @@
         <div class="modal-footer">
 
             <button type="button" class="btn btn-danger" @click="deleteBook">Rimuovi</button>
-            <button type="button" :id="'closemodal'+libro.book.id" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            <button type="button" :id="'closemodal'+libro.book.id" class="btn btn-secondary-outline" data-bs-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </div>

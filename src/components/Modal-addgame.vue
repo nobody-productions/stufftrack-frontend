@@ -42,8 +42,8 @@
 
           </div>
           <div class="modal-footer">
-            <button id="dismiss-modal-addgame" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-            <button id="add-game-button" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="addGame">Aggiungi</button>
+            <button id="dismiss-modal-addgame" type="button" class="btn btn-secondary-outline" data-bs-dismiss="modal">Annulla</button>
+            <button id="add-game-button" type="button" class="btn btn-dark" data-bs-dismiss="modal" @click="addGame">Aggiungi</button>
           </div>
         </div>
 
