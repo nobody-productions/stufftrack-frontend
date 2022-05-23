@@ -25,7 +25,7 @@
         <span v-else-if="vgSearch" id="search-bar" class="form-control form-control-dark rounded-pill text-secondary" type="text"
           aria-label="Search" data-bs-target="#search-modal" data-bs-toggle="modal">Cerca...</span>
 
-        <!-- Hide this element only on mobile -->
+
         <div class="dropdown align-items-center align-self-center text-center ps-2  d-md-flex">
           <i class="fa-solid fa-circle-user fa-2x" id="dropdownMenuButton" data-bs-toggle="dropdown"
             aria-expanded="false"></i>
