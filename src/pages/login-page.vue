@@ -18,7 +18,7 @@
               <form @submit.prevent="submit" class="text-center form-signin">
                 <div class="mb-3"><input v-model="form.email" class="form-control" type="email" name="email" placeholder="Email"></div>
                 <div class="mb-3"><input v-model="form.password" class="form-control" type="password" name="password" placeholder="Password"></div>
-                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
+                <div class="mb-3"><button class="btn btn-dark d-block w-100" type="submit">Login</button></div>
 
                 <div class="mb-3"></div><a href="/register" @click="register" >Non hai un account? Registrati</a>
               </form>

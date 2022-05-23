@@ -92,7 +92,7 @@
         <div class="modal-footer">
 
             <button type="button" class="btn btn-danger" @click="deleteGame">Rimuovi</button>
-            <button type="button" :id="'closemodal'+gioco.videogame.id" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            <button type="button" :id="'closemodal'+gioco.videogame.id" class="btn btn-secondary-outline" data-bs-dismiss="modal">Chiudi</button>
         </div>
       </div>
     </div>
@@ -275,11 +275,16 @@ export default {
     getDateCompleted: function () {
       axios.get("/libraries/videogames/" + this.gioco.videogame.id).then(response => {
         let finished = response.data.finished;
-        // remove from finished, everything after T (because of postgre giving back a date with T in the middle)
-        let finished_date = finished.substring(0, finished.indexOf('T'));
-        
-        // set value of getelementbyid datacompletamento 4
-        document.getElementById('dataCompletamento' + this.gioco.videogame.id).value = finished_date;
+
+        if(finished !== null){
+          document.getElementById('dataCompletamento' + this.libro.book.id).value = finished;
+          // remove from finished, everything after T (because of postgre giving back a date with T in the middle)
+          let finished_date = finished.substring(0, finished.indexOf('T'));
+          
+          // set value of getelementbyid datacompletamento 4
+          document.getElementById('dataCompletamento' + this.gioco.videogame.id).value = finished_date;
+        }
+
       });
     },
 
