@@ -128,7 +128,7 @@ export default {
         document.getElementById('abbandonato' + this.libro.book.id).setAttribute('selected', 'selected');
       }
 
-      this.date_time_disabled = !(this.libro.status === "Completato");
+      this.date_time_disabled = !(this.libro.status === "Completato" || this.libro.status === "Abbandonato");
     },
 
     updatetime: function () {

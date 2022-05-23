@@ -145,7 +145,7 @@ export default {
         document.getElementById('abbandonato' + this.gioco.videogame.id).setAttribute('selected', 'selected');
       }
 
-      this.date_time_disabled = !(this.gioco.status === "Completato");
+      this.date_time_disabled = !(this.gioco.status === "Completato" || this.gioco.status === "Finito" || this.gioco.status === "Abbandonato");
     },
 
     updatetime: function () {
@@ -277,7 +277,7 @@ export default {
         let finished = response.data.finished;
 
         if(finished !== null){
-          document.getElementById('dataCompletamento' + this.libro.book.id).value = finished;
+          document.getElementById('dataCompletamento' + this.gioco.videogame.id).value = finished;
           // remove from finished, everything after T (because of postgre giving back a date with T in the middle)
           let finished_date = finished.substring(0, finished.indexOf('T'));
           
