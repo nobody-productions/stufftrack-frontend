@@ -50,6 +50,7 @@ export default {
         email: email.value,
         password: password.value,
         password_confirm: passwordConfirm.value,
+        id: 2
       }).then(function (response) {
         console.log(response);
         router.push("/login");
