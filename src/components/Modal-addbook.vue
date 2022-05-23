@@ -10,7 +10,7 @@
           <div class="container-fluid">
           <!-- Form -->
             <form class="pb-2">
-              <label for="exampleInputEmail1">libro</label>
+              <label for="exampleInputEmail1">Libro</label>
               <select class="form-control" id="book_select" name="book_id" @change="getbookplatforms">
                 <!-- empty default option -->
                 <option value="">Seleziona un libro:</option>
