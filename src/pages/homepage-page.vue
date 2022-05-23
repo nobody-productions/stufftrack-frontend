@@ -73,29 +73,29 @@
                     <div class="col-md-6 gx-5 mb-4">
                         <h4><strong>Perché scegliere Stufftrack?</strong></h4>
                         <p class="text-muted">
-                            Stufftrack é il servizio che ti consente di tracciare i tuoi interessi utilizzando un'unica
+                            Stufftrack è il servizio che ti consente di tracciare i tuoi interessi utilizzando un'unica
                             app.
-                            Dai sfogo alle tue passioni: libri, videgiochi, film, fumetti, giochi di tavolo...(*) tutti
+                            Dai sfogo alle tue passioni: libri, videogiochi, film, fumetti, giochi di tavolo...(*) tutti
                             i tuoi interessi sono tracciati in modo semplice e veloce in un unico posto.
                         </p>
-                        <p class="text-muted">Dimentica le altre app: basterá fare il login qui per avere sempre con te
+                        <p class="text-muted">Dimentica le altre app: basterà fare il login qui per avere sempre con te
                             la tua libreria!</p>
 
                         <p class="text-muted">
                             Ecco cosa ti offriamo:
                         <ul>
                             <li><strong>Tracciamento dei tuoi interessi</strong><span class="text-muted">: per avere tra
-                                    le mani, ovunque sei, ció che ami.</span></li>
+                                    le mani, ovunque sei, ciò che ami.</span></li>
                             <li><strong>Calcolo delle statistiche</strong><span class="text-muted"> a tutti piacciono le
-                                    statistiche. Sarai in grado di visualizzare il tempo totale speso in videgiochi o
+                                    statistiche. Sarai in grado di visualizzare il tempo totale speso in videogiochi o
                                     quanti libri hai portato a termine. Forte no?</span></li>
-                            <li><strong>Possibilitá di aggiungere i tuoi titoli</strong><span class="text-muted">: non
-                                    trovi ció che cerchi? Potrai aggiungere tutti i film che sono appena usciti al
+                            <li><strong>Possibilità di aggiungere i tuoi titoli</strong><span class="text-muted">: non
+                                    trovi ciò che cerchi? Potrai aggiungere tutti i film che sono appena usciti al
                                     cinema o il libro del tuo scrittore preferito. (**)</span></li>
-                            <li><strong>Piattaforma social</strong><span class="text-muted">: rimani aggiornato su ció
+                            <li><strong>Piattaforma social</strong><span class="text-muted">: rimani aggiornato su ciò
                                     che stanno facendo i tuoi amici! Che abbiano appena comprato un nuovo gioco da
                                     tavolo, o visto l'ultimo film di Sonic, sarai sempre in grado di sapere cosa stanno
-                                    combinando in questo ultimo periodo! (**)</span></li>
+                                    combinando in quest'ultimo periodo! (**)</span></li>
                         </ul>
                         </p>
                         <p class="text-muted"><small>(*) alcune integrazioni sono in lavorazione, e saranno presto
