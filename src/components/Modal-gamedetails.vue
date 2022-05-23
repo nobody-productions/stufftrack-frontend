@@ -170,7 +170,7 @@ export default {
         platform: this.gioco.platform
       }).then(() => {
 
-        this.date_time_disabled = !(status_value_text === "Completato");
+        this.date_time_disabled = !(status_value_text === "Completato" || status_value_text === "Finito" || status_value_text === "Abbandonato");
 
         this.$parent.updatecompleted(this.gioco.videogame.id, status_value_text);
       })

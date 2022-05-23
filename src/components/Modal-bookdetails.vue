@@ -153,7 +153,7 @@ export default {
         platform: this.libro.platform
       }).then(() => {
 
-        this.date_time_disabled = !(status_value_text === "Completato");
+        this.date_time_disabled = !(status_value_text === "Completato" || status_value_text === "Abbandonato");
 
         this.$parent.updatecompleted(this.libro.book.id, status_value_text);
       })
