@@ -240,33 +240,22 @@ export default {
     methods: {
         inviaMessaggio() {
             axios.post("/send-email", {
-                nome: this.getNome(),
-                cognome: this.getCognome(),
-                email: this.getEmail(),
-                messaggio: this.getMessaggio(),
+                name:  document.getElementById("nomeFormContatto").value,
+                surname: document.getElementById("cognomeFormContatto").value,
+                email: document.getElementById("emailFormContatto").value,
+                message: document.getElementById("messaggioFormContatto").value,
             }).then(() => {
-                this.nome = "";
-                this.cognome = "";
-                this.email = "";
-                this.messaggio = "";
-                alert("Errore nell'invio del messaggio");
+                document.getElementById("nomeFormContatto").value = "";
+                document.getElementById("cognomeFormContatto").value = "";
+                document.getElementById("emailFormContatto").value = "";
+                document.getElementById("messaggioFormContatto").value = "";
+                
+                alert("Messaggio inviato con successo!");
             }).catch(() => {
                 alert("Errore nell'invio del messaggio");
             });
-        },
-        getNome() {
-            this.nome = document.getElementById("nomeFormContatto").value;
-        },
-        getCognome() {
-            this.cognome = document.getElementById("cognomeFormContatto").value;
-        },
-        getEmail() {
-            this.email = document.getElementById("emailFormContatto").value;
-        },
-        getMessaggio() {
-            this.messaggio = document.getElementById("messaggioFormContatto").value;
-        },
-    },
+        }
+    }
 };
 </script>
 
