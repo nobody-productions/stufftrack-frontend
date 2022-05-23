@@ -131,7 +131,7 @@
             </div>
           </div>
 
-          <button class="btn btn-secondary-outline ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#Modal-addbook" type="button">
+          <button class="btn btn-dark ml-auto justify-content-end align-self-center" data-bs-toggle="modal" data-bs-target="#Modal-addbook" type="button">
             Aggiungi libro
           </button>
         </div>
