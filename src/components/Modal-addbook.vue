@@ -1,20 +1,20 @@
 <template>
-  <div class="modal" tabindex="-1" id="exampleModal3" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal" tabindex="-1" id="Modal-addbook" aria-labelledby="Modal-addbook" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Aggiungi un gioco</h5>
+          <h5 class="modal-title">Aggiungi un libro</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" >
           <div class="container-fluid">
           <!-- Form -->
             <form class="pb-2">
-              <label for="exampleInputEmail1">Gioco</label>
-              <select class="form-control" id="game_select" name="game_id" @change="getgameplatforms">
+              <label for="exampleInputEmail1">libro</label>
+              <select class="form-control" id="book_select" name="book_id" @change="getbookplatforms">
                 <!-- empty default option -->
-                <option value="">Seleziona un gioco:</option>
-                <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>
+                <option value="">Seleziona un libro:</option>
+                <option v-for="book in books" :value="book.id" :key="book.id">{{ book.name }}</option>
               </select>
 
               <label for="exampleInputEmail1">Piattaforma</label>
@@ -42,8 +42,8 @@
 
           </div>
           <div class="modal-footer">
-            <button id="dismiss-modal-addgame" type="button" class="btn btn-secondary-outline" data-bs-dismiss="modal">Annulla</button>
-            <button id="add-game-button" type="button" class="btn btn-dark" data-bs-dismiss="modal" @click="addGame">Aggiungi</button>
+            <button id="dismiss-modal-addbook" type="button" class="btn btn-secondary-outline" data-bs-dismiss="modal">Annulla</button>
+            <button id="add-book-button" type="button" class="btn btn-dark" data-bs-dismiss="modal" @click="addbook">Aggiungi</button>
           </div>
         </div>
 
@@ -57,33 +57,33 @@ import axios from 'axios';
 import {ref} from "vue";
 
 export default {
-  name: "Modal-addgame",
+  name: "Modal-addbook",
 
   data() {
-    let games = [];
+    let books = [];
     let platforms = ref([]);
     return {
-      games: games,
+      books: books,
       platforms
     }
   },
 
   methods: {
-    getgameslist() {
-      axios.get('/videogames')
+    getbookslist() {
+      axios.get('/books')
           .then(response => {
-            this.games = response.data.data;
+            this.books = response.data.data;
           })
           .catch(error => {
             console.log(error);
           })
     },
 
-    addGame() {
+    addbook() {
 
-      let game_id = document.getElementsByName('game_id')[0].value;
+      let book_id = document.getElementsByName('book_id')[0].value;
 
-      axios.post("/libraries/videogames/" + game_id,{
+      axios.post("/libraries/books/" + book_id,{
         bought: document.getElementById('gb').checked,
         platform: parseInt(document.getElementById('platform_id').value),
       }).then(() => {
@@ -91,24 +91,24 @@ export default {
         let comment = document.getElementsByName('comment')[0].value;
 
         if (comment !== ""){
-          axios.post("/libraries/videogames/" + game_id + "/rating", {
+          axios.post("/libraries/books/" + book_id + "/rating", {
             ranking: document.getElementsByName('rating')[0].value,
             comment: document.getElementsByName('comment')[0].value
           }).then(response => {
             // window.location.href = "/";
-            this.$parent.showmessage("Gioco aggiunto con successo!", "success");
-            this.$parent.updatevideogames();
+            this.$parent.showmessage("Libro aggiunto con successo!", "success");
+            this.$parent.updatebooks();
           }).catch(error => {
             console.log(error);
           });
         }
         else {
-          axios.post("/libraries/videogames/" + game_id + "/rating", {
+          axios.post("/libraries/books/" + book_id + "/rating", {
             ranking: document.getElementsByName('rating')[0].value
           }).then(response => {
             // window.location.href = "/";
-            this.$parent.showmessage("Gioco aggiunto con successo!", "success");
-            this.$parent.updatevideogames();
+            this.$parent.showmessage("Libro aggiunto con successo!", "success");
+            this.$parent.updatebooks();
           }).catch(error => {
             console.log(error);
 
@@ -117,27 +117,27 @@ export default {
       }).catch(error => {
         console.log(error);
         if (error.response.status === 400) {
-          this.$parent.showmessage("Errore: gioco già presente nella libreria", "warning");
+          this.$parent.showmessage("Errore: libro già presente nella libreria", "warning");
         }
         else {
-          this.$parent.showmessage("Errore: gioco non aggiunto, codice errore: " + error.response.status, "danger");
+          this.$parent.showmessage("Errore: libro non aggiunto, codice errore: " + error.response.status, "danger");
         }
       });
 
 
     },
-    getgameplatforms: function (){
-      let game_id = document.getElementsByName('game_id')[0].value;
-      if (game_id === ""){
-        document.getElementById("add-game-button").disabled = true;
+    getbookplatforms: function (){
+      let book_id = document.getElementsByName('book_id')[0].value;
+      if (book_id === ""){
+        document.getElementById("add-book-button").disabled = true;
         this.platforms = [];
         return
       }
-      axios.get('/videogames/' + game_id)
+      axios.get('/books/' + book_id)
           .then(response => {
             console.log(response.data[0].platforms);
             this.platforms = response.data[0].platforms;
-            document.getElementById("add-game-button").disabled = false;
+            document.getElementById("add-book-button").disabled = false;
           })
           .catch(error => {
             console.log(error);
@@ -146,8 +146,8 @@ export default {
     }
   },
   mounted() {
-    this.getgameslist();
-    document.getElementById("add-game-button").disabled = true;
+    this.getbookslist();
+    document.getElementById("add-book-button").disabled = true;
   }
 }
 
