@@ -9,44 +9,45 @@
         <div class="modal-body">
           <!-- Contenuto della finestra -->
           <div class="container-fluid">
-            <img src="/profilepictures/default.png" class="rounded-circle border text-center mx-auto d-block" alt="profile png" style="width: 30%; height: 30%">
+            <img src="/profilepictures/default.png" class="rounded-circle border text-center mx-auto d-block"
+              alt="profile png" style="width: 30%; height: 30%">
             <div class="row justify-content-center">
-    <div class="col-auto">
-          <table class="table table-responsive">
-            <tbody>
-              <tr>
-                <td>ID</td>
-                <td>{{user.id}}</td>
-              </tr>
-              <tr>
-                <td>Nickname</td>
-                <td>{{user.nickname}}</td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td>{{user.email}}</td>
-              </tr>
-              <tr>
-                <td>Bio</td>
-                <td>{{user.bio}}</td>
-              </tr>
-              <tr>
-                <td>Role</td>
-                <td>{{role_name}}</td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
-  </div>
+              <div class="col-auto">
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td>ID</td>
+                      <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                      <td>Nickname</td>
+                      <td>{{ user.nickname }}</td>
+                    </tr>
+                    <tr>
+                      <td>Email</td>
+                      <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                      <td>Bio</td>
+                      <td>{{ user.bio }}</td>
+                    </tr>
+                    <tr>
+                      <td>Role</td>
+                      <td>{{ role_name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
-          
-          
+
+
           <!-- Bottoni -->
           <div class="modal-footer border-none">
             <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Chiudi</button>
+
           </div>
         </div>
-</div>
       </div>
     </div>
   </div>
@@ -54,7 +55,7 @@
 
 <script>
 import axios from 'axios';
-import {ref} from "vue";
+import { ref } from "vue";
 
 
 export default {
@@ -85,7 +86,7 @@ export default {
   // mounted chiama la funzione quando il componente viene montato
   mounted() {
     this.getUser();
-    
+
   }
 }
 
@@ -94,13 +95,11 @@ export default {
 </script>
 
 <style scoped>
-
 .modal-header {
-    border-bottom: 0 none;
+  border-bottom: 0 none;
 }
 
 .modal-footer {
-    border-top: 0 none;
+  border-top: 0 none;
 }
-
 </style>
