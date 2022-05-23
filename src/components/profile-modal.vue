@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                       <td>Email</td>
-                      <td>{{ user.email }}</td>
+                      <td>{{ user.email }} <!-- - <a href="/">Cambia email</a>--></td>
                     </tr>
                     <tr>
                       <td>Bio</td>
@@ -34,6 +34,10 @@
                     <tr>
                       <td>Ruolo</td>
                       <td>{{ role_name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Password</td>
+                      <td><a href="/">Cambia password</a></td>
                     </tr>
                   </tbody>
                 </table>
