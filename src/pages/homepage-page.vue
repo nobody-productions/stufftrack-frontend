@@ -71,9 +71,9 @@
                     </div>
 
                     <div class="col-md-6 gx-5 mb-4">
-                        <h4><strong>Perché scegliere Stufftrack?</strong></h4>
+                        <h4><strong>Perché scegliere StuffTrack?</strong></h4>
                         <p class="text-muted">
-                            Stufftrack è il servizio che ti consente di tracciare i tuoi interessi utilizzando un'unica
+                            StuffTrack è il servizio che ti consente di tracciare i tuoi interessi utilizzando un'unica
                             app.
                             Dai sfogo alle tue passioni: libri, videogiochi, film, fumetti, giochi di tavolo...(*) tutti
                             i tuoi interessi sono tracciati in modo semplice e veloce in un unico posto.
