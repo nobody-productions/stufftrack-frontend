@@ -131,7 +131,7 @@
                                     Quando non bighellono, tra un coffee break e un altro, scrivo dell'ottimo codice
                                     servito con birra e spaghetti.
                                     Mi piacciono i videogiochi ma odio Toad di Mario Kart. Firma anche tu la petizione
-                                    per eliminarlo dal gioco: <a href=change.org/eliminiamo-toad-da-mario-kart/
+                                    per eliminarlo dal gioco: <a href=https://change.org/eliminiamo-toad-da-mario-kart/
                                         target="_blank">change.org</a>.
                                 </p>
                             </div>
@@ -148,9 +148,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">Lorenzo Antonelli</h5>
                                 <p class="card-text">
-                                    Mi piace testare i giochi su diversi dispositivi Android, i Mediatek fanno schifo!
-                                    Sono un fotografo (non di professione) e nonostante non mi piaccia particolarmente,
-                                    faccio frontend fighissimi in poche ore.
+                                    Mi piace testare i giochi su diversi dispositivi Android, i Mediatek non mi piacciono!
+                                    Sono un fotografo (non di professione). Tra una foto e l'altra cerco di creare interfacce semplice e pulite per ciò che mi piace.
                                 </p>
                             </div>
                         </div>
