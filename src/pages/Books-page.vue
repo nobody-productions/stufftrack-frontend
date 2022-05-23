@@ -322,7 +322,12 @@ export default {
 document.onkeyup = function(e) {
 
   if (e.ctrlKey  && e.which === 75) {
-    document.getElementById("Modal-searchbooks").click();
+    if(document.getElementById("Modal-searchbooks") !== null) {
+      document.getElementById("Modal-searchbooks").click();
+    }
+    else {
+      document.getElementById("search-bar").click();
+    }
   }
 };
 
