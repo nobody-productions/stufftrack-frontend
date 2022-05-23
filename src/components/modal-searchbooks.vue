@@ -60,7 +60,6 @@ export default {
     getAllBooks: function() {
       axios.get('books').then(response => {
         this.books = response.data.data;
-***REMOVED***
       });
     },
 
@@ -68,7 +67,6 @@ export default {
       console.log(document.getElementById("bk-list").value)
       this.selectedbook = document.getElementById("bk-list").value;
       this.validBook();
-***REMOVED***
     },
 
     validBook: function() {
