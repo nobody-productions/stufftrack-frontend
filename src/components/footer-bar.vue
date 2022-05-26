@@ -17,7 +17,4 @@
 </script>
 
 <style scoped>
-    /* import boostrap css */
-    @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
-    @import url('https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css');
 </style>
