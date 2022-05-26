@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="row text-center d-block">
-                  <img  v-bind:src="libro.book.image" style="width: auto;" alt="">
+                  <img class="book_cover" v-bind:src="libro.book.image" alt="">
                 </div>
               </div>
               <div class="col-sm-8">
@@ -352,4 +352,7 @@ export default {
   color: gray;
 }
 
+.book_cover{
+  width: auto;
+}
 </style>
