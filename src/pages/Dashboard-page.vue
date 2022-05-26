@@ -12,13 +12,6 @@
             <li class="breadcrumb-item active" aria-current="page">Videogiochi</li>
           </ol>
         </nav>
-        <!-- Alert di prova-->
-        <div class="alert alert-success alert-dismissible fade show visually-hidden" role="alert">
-          <strong>Avviso di prova:</strong> prova a premere sul primo gioco in alto a sinistra
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-
-          </button>
-        </div>
 
         <div id="liveAlertPlaceholder"></div>
 
@@ -26,7 +19,6 @@
 
         <div class="text-secondary mt-3">Le mie statistiche:</div>
 
-        <!-- Make this class collapsible -->
         <div class="row my-4">
           <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
             <div class="d-flex card card-stats mb-4 mb-xl-0 card-statistics">
