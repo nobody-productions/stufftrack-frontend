@@ -19,7 +19,6 @@
 
               <label for="exampleInputEmail1">Piattaforma</label>
               <select class="form-control" name="platform_id" id="platform_id">
-                <!-- empty default option -->
                 <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }}</option>
               </select>
 
@@ -94,7 +93,7 @@ export default {
           axios.post("/libraries/books/" + book_id + "/rating", {
             ranking: document.getElementsByName('rating')[0].value,
             comment: document.getElementsByName('comment')[0].value
-          }).then(response => {
+          }).then(() => {
             // window.location.href = "/";
             this.$parent.showmessage("Libro aggiunto con successo!", "success");
             this.$parent.updatebooks();
@@ -105,7 +104,7 @@ export default {
         else {
           axios.post("/libraries/books/" + book_id + "/rating", {
             ranking: document.getElementsByName('rating')[0].value
-          }).then(response => {
+          }).then(() => {
             // window.location.href = "/";
             this.$parent.showmessage("Libro aggiunto con successo!", "success");
             this.$parent.updatebooks();
