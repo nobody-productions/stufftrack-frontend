@@ -31,7 +31,7 @@
 
         </div>
         <div class="modal-footer" v-if="isValid">
-          <button  type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal3" @click="selezionaAggiungi">Aggiungi gioco</button>
+          <button  type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#Modal-addgame" @click="selezionaAggiungi">Aggiungi gioco</button>
       </div>
       </div>
     </div>

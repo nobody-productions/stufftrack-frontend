@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" tabindex="-1" id="exampleModal3" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal" tabindex="-1" id="Modal-addgame" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -10,14 +10,13 @@
           <div class="container-fluid">
           <!-- Form -->
             <form class="pb-2">
-              <label for="exampleInputEmail1">Gioco</label>
+              <label for="game_select">Gioco</label>
               <select class="form-control" id="game_select" name="game_id" @change="getgameplatforms">
-                <!-- empty default option -->
                 <option value="">Seleziona un gioco:</option>
                 <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>
               </select>
 
-              <label for="exampleInputEmail1">Piattaforma</label>
+              <label for="platform_id">Piattaforma</label>
               <select class="form-control" name="platform_id" id="platform_id">
                 <!-- empty default option -->
                 <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }}</option>
@@ -26,8 +25,8 @@
               <input type="checkbox" id="gb" >
               <label for="gb">Già acquistato</label>
               <br>
-              <label for="exampleInputEmail1">Valutazione</label>
-              <select class="form-control" name="rating">
+              <label for="rating">Valutazione</label>
+              <select class="form-control" name="rating" id="rating">
                 <option value="0">-</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -36,8 +35,8 @@
                 <option value="5">5</option>
               </select>
 
-              <label for="exampleInputEmail1">Commento</label>
-              <textarea class="form-control" name="comment" rows="3"></textarea>
+              <label for="comment">Commento</label>
+              <textarea class="form-control" name="comment" rows="3" id="comment"></textarea>
             </form>
 
           </div>
@@ -69,7 +68,8 @@ export default {
   },
 
   methods: {
-    getgameslist() {
+    getgameslist: function() {
+      // Ottiene la lista dei giochi e aggiorna games
       axios.get('/videogames')
           .then(response => {
             this.games = response.data.data;
@@ -80,7 +80,7 @@ export default {
     },
 
     addGame() {
-
+      // Aggiunge un gioco alla libreria dell'utente
       let game_id = document.getElementsByName('game_id')[0].value;
 
       axios.post("/libraries/videogames/" + game_id,{
@@ -94,7 +94,7 @@ export default {
           axios.post("/libraries/videogames/" + game_id + "/rating", {
             ranking: document.getElementsByName('rating')[0].value,
             comment: document.getElementsByName('comment')[0].value
-          }).then(response => {
+          }).then(() => {
             // window.location.href = "/";
             this.$parent.showmessage("Gioco aggiunto con successo!", "success");
             this.$parent.updatevideogames();
@@ -105,13 +105,12 @@ export default {
         else {
           axios.post("/libraries/videogames/" + game_id + "/rating", {
             ranking: document.getElementsByName('rating')[0].value
-          }).then(response => {
+          }).then(() => {
             // window.location.href = "/";
             this.$parent.showmessage("Gioco aggiunto con successo!", "success");
             this.$parent.updatevideogames();
           }).catch(error => {
             console.log(error);
-
           });
         }
       }).catch(error => {
@@ -127,6 +126,7 @@ export default {
 
     },
     getgameplatforms: function (){
+      // Dato un gioco, ottiene le piattaforme su cui è disponibile
       let game_id = document.getElementsByName('game_id')[0].value;
       if (game_id === ""){
         document.getElementById("add-game-button").disabled = true;
