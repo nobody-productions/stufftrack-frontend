@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="row text-center d-block">
-                  <img  v-bind:src="gioco.videogame.image" style="width: auto;" alt="">
+                  <img class="game_cover" v-bind:src="gioco.videogame.image" alt="">
                 </div>
               </div>
               <div class="col-sm-8">
@@ -46,7 +46,7 @@
                 </div>
 
                   <h4>Ore di gioco</h4>
-                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control" @change="updatetime" min="0" style="width: 100px;">
+                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control game_playtime" @change="updatetime" min="0">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
@@ -387,6 +387,14 @@ export default {
 
 .star_bar > i:hover ~ i:before {
   color: gray;
+}
+
+.game_cover{
+  width: auto;
+}
+
+.game_playtime{
+  width: 100px;
 }
 
 </style>
