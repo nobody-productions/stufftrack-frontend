@@ -32,7 +32,7 @@
                 </div>
 
                   <h4>Ore di lettura</h4>
-                  <input type="number" v-bind:id="'playtime' + libro.book.id" v-bind:value="libro.hours" class="form-control" @change="updatetime" min="0" style="width: 100px;">
+                  <input type="number" v-bind:id="'playtime' + libro.book.id" v-bind:value="libro.hours" class="form-control book_readtime" @change="updatetime" min="0">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
@@ -354,5 +354,9 @@ export default {
 
 .book_cover{
   width: auto;
+}
+
+.book_readtime{
+  width: 100px;
 }
 </style>
