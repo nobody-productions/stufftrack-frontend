@@ -97,8 +97,11 @@ export default {
       }).then(function (response) {
         console.log(response);
         router.push("/login");
-      }).catch(function (error) {
-        console.log(error);
+      }).catch(async function (error) {
+        if (error.message === "Network Error") {
+          await this.showmessage('Network Error', 'danger', 5000)
+        }
+        await this.showmessage(error.response.data.message, 'danger', 5000);
       });
     }
 
