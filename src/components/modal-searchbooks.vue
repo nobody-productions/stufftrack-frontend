@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div id="book-list">
-            <input list="bk" id="bk-list"  @change="selectBook" style="width: 100%; margin-bottom: 10px;">
+            <input class="bk-list" list="bk" id="bk-list" @change="selectBook">
             <datalist id="bk">
               <option v-for="book in books" :value="book.name" :key="book.id">{{ book.name }}</option>
             </datalist>
@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="row text-center d-block">
-                  <img  v-bind:src="book.image" style="width: auto;" alt="">
+                  <img class="book-cover" v-bind:src="book.image" alt="">
                 </div>
               </div>
               <div class="col-sm-8">
@@ -97,5 +97,14 @@ export default {
 }
 </script>
 <style scoped>
+
+.bk-list {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.book-cover {
+  width: auto;
+}
 
 </style>
