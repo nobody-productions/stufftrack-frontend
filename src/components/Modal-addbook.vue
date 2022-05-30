@@ -10,14 +10,14 @@
           <div class="container-fluid">
           <!-- Form -->
             <form class="pb-2">
-              <label for="exampleInputEmail1">Libro</label>
+              <label for="book_select">Libro</label>
               <select class="form-control" id="book_select" name="book_id" @change="getbookplatforms">
                 <!-- empty default option -->
                 <option value="">Seleziona un libro:</option>
                 <option v-for="book in books" :value="book.id" :key="book.id">{{ book.name }}</option>
               </select>
 
-              <label for="exampleInputEmail1">Piattaforma</label>
+              <label for="platform_id">Piattaforma</label>
               <select class="form-control" name="platform_id" id="platform_id">
                 <option v-for="platform in platforms" :value="platform.id" :key="platform.id">{{ platform.name }}</option>
               </select>
@@ -25,8 +25,8 @@
               <input type="checkbox" id="gb" >
               <label for="gb">Già acquistato</label>
               <br>
-              <label for="exampleInputEmail1">Valutazione</label>
-              <select class="form-control" name="rating">
+              <label for="book_rating">Valutazione</label>
+              <select class="form-control" name="rating" id="book_rating">
                 <option value="0">-</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -35,8 +35,8 @@
                 <option value="5">5</option>
               </select>
 
-              <label for="exampleInputEmail1">Commento</label>
-              <textarea class="form-control" name="comment" rows="3"></textarea>
+              <label for="book_comment">Commento</label>
+              <textarea class="form-control" name="comment" id="book_comment" rows="3"></textarea>
             </form>
 
           </div>
