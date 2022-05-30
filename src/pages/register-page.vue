@@ -11,7 +11,7 @@
       <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-xl-4">
           <div class="card mb-5">
-            <div class="card-body d-flex flex-column align-items-center" style="height: 484px;">
+            <div class="card-body d-flex flex-column align-items-center">
               <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4" style="background: var(--bs-red);">
                 <i class="fa-solid fa-link"></i>
               </div>
