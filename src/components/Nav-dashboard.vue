@@ -78,8 +78,6 @@ export default {
     };
   },
   setup() {
-    let vgSearch = false;
-    let bkSearch = false;
     let router = useRouter();
     return {
       logout: function () {
@@ -101,8 +99,6 @@ export default {
   
   },
   mounted() {
-    // aspetto un millisecondo perché altrimenti non funziona (in pratica lui controlla i booleani, e sono sempre a false
-    // perché la pagina non é renderizzata. Lo faccio aspettare 1ms cosi funge.
     setTimeout(function () { this.enableSearch() }.bind(this), 1)
 }
 
