@@ -61,8 +61,8 @@
 <script>
 import axios from 'axios';
 import { useRouter } from "vue-router";
-import searchModal from "@/components/search-modal";
-import searchBooks from "@/components/modal-searchbooks";
+import searchModal from "@/components/Modal-searchgames";
+import searchBooks from "@/components/Modal-searchbooks";
 
 
 export default {
