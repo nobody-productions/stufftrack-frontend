@@ -81,8 +81,9 @@ export default {
     let router = useRouter();
     return {
       logout: function () {
-        axios.post('/logout/');
-        router.push('/login');
+        axios.post('/logout/').then(()=>{
+          router.push('/');
+        });
       }
     }
   },
