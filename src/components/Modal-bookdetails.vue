@@ -24,15 +24,15 @@
                 </div>
 
                 <div class="col star_bar">
-                  <i class="fa-solid fa-star star1" @click="updaterating(1)" v-bind:style="{color: rank >= 1? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star2" @click="updaterating(2)" v-bind:style="{color: rank >= 2? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star3" @click="updaterating(3)" v-bind:style="{color: rank >= 3? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star4" @click="updaterating(4)" v-bind:style="{color: rank >= 4? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star5" @click="updaterating(5)" v-bind:style="{color: rank >= 5? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star1" @click="updateRating(1)" v-bind:style="{color: rank >= 1? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star2" @click="updateRating(2)" v-bind:style="{color: rank >= 2? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star3" @click="updateRating(3)" v-bind:style="{color: rank >= 3? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star4" @click="updateRating(4)" v-bind:style="{color: rank >= 4? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star5" @click="updateRating(5)" v-bind:style="{color: rank >= 5? 'gold':'gray'}"></i>
                 </div>
 
                   <h4>Ore di lettura</h4>
-                  <input type="number" v-bind:id="'playtime' + libro.book.id" v-bind:value="libro.hours" class="form-control book_readtime" @change="updatetime" min="0">
+                  <input type="number" v-bind:id="'playtime' + libro.book.id" v-bind:value="libro.hours" class="form-control book_readtime" @change="updateTime" min="0">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
@@ -50,11 +50,11 @@
                   <!-- Stato del libro -->
                   <hr>
                   <div class="col pb-2">
-                    <input class="me-2" type="checkbox" v-bind:id="'bought' + libro.book.id" @change="updatebought">
+                    <input class="me-2" type="checkbox" v-bind:id="'bought' + libro.book.id" @change="updateBought">
                     <label :for="'bought' + libro.book.id">libro acquistato</label>
                   </div>
                   <h4>Stato</h4>
-                  <select :id="'book_status' + libro.book.id" class="form-select" @change="updatestatus">
+                  <select :id="'book_status' + libro.book.id" class="form-select" @change="updateStatus">
                     <option :id="'daleggere' + libro.book.id" value="1">Da leggere</option>
                     <option :id="'incorso' + libro.book.id" value="2">In corso</option>
                     <option :id="'completato' + libro.book.id" value="4">Completato</option>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="row mt-3">
                   <h4>Note</h4>
-                  <textarea class="form-control" v-bind:id="'note' + libro.book.id" v-model="this.comment" rows="3" @change="updatecomment"></textarea>
+                  <textarea class="form-control" v-bind:id="'note' + libro.book.id" v-model="this.comment" rows="3" @change="updateComment"></textarea>
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default {
     }
   },
   methods: {
-    bookstatus: function() {
+    bookStatus: function() {
 
       if (this.libro.status === 'Da leggere'){
         document.getElementById('daleggere' + this.libro.book.id).setAttribute('selected', 'selected');
@@ -131,7 +131,7 @@ export default {
       this.date_time_disabled = !(this.libro.status === "Completato" || this.libro.status === "Abbandonato");
     },
 
-    updatetime: function () {
+    updateTime: function () {
       // get time from
       let time = document.getElementById("playtime" + this.libro.book.id);
       let time_value = time.value;
@@ -144,7 +144,7 @@ export default {
       )
     },
 
-    updatestatus: function () {
+    updateStatus: function () {
       // get time from
       let status = document.getElementById("book_status" + this.libro.book.id);
       let status_value_text = status.options[status.selectedIndex].text;
@@ -159,7 +159,7 @@ export default {
       })
     },
 
-    getrating: function () {
+    getRating: function () {
         axios.get("libraries/books/" + this.libro.book.id + "/rating").then(response => {
         let int_rating = response.data.ranking;
         let comment = response.data.comment;
@@ -193,7 +193,7 @@ export default {
 
        */
     },
-    updaterating: function (value){
+    updateRating: function (value){
       if (value > 0){
         // check if rating is already set
         axios.get("libraries/books/" + this.libro.book.id + "/rating").then(response => {
@@ -201,37 +201,37 @@ export default {
             ranking: value,
           }).then(response => {
             console.log(response.data);
-            this.getrating();
+            this.getRating();
           });
         }).catch(() => {
           axios.post("libraries/books/" + this.libro.book.id + "/rating", {
             ranking: value
           }).then(response => {
-            this.getrating();
+            this.getRating();
           });
         })
 
 
       }
     },
-    updatecomment: function(){
+    updateComment: function(){
       axios.get("libraries/books/" + this.libro.book.id + "/rating").then(response => {
         axios.put("libraries/books/" + this.libro.book.id + "/rating", {
           comment: this.comment
         }).then(response => {
           console.log(response.data);
-          this.getrating();
+          this.getRating();
         });
       }).catch(() => {
         axios.post("libraries/books/" + this.libro.book.id + "/rating", {
           comment: this.comment
         }).then(response => {
-          this.getrating();
+          this.getRating();
         });
       })
     },
 
-    updatebought: function (){
+    updateBought: function (){
       axios.put("/libraries/books/" + this.libro.book.id, {
           bought: document.getElementById('bought' + this.libro.book.id).checked,
           platform: this.libro.platform
@@ -295,7 +295,7 @@ export default {
     },
 
 
-    getbookplatforms: function (){
+    getBookPlatforms: function (){
       axios.get('/books/' + this.libro.book.id)
           .then(async response => {
             // console.log(response.data[0].platforms);
@@ -327,10 +327,10 @@ export default {
 
   mounted() {
 
-    this.getrating();
-    this.bookstatus();
+    this.getRating();
+    this.bookStatus();
     this.getbought();
-    this.getbookplatforms();
+    this.getBookPlatforms();
     this.getDateCompleted();
   }
   
