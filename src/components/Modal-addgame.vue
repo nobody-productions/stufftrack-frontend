@@ -11,7 +11,7 @@
           <!-- Form -->
             <form class="pb-2">
               <label for="game_select">Gioco</label>
-              <select class="form-control" id="game_select" name="game_id" @change="getgameplatforms">
+              <select class="form-control" id="game_select" name="game_id" @change="getGamePlatforms">
                 <option value="">Seleziona un gioco:</option>
                 <option v-for="game in games" :value="game.id" :key="game.id">{{ game.name }}</option>
               </select>
@@ -68,7 +68,7 @@ export default {
   },
 
   methods: {
-    getgameslist: function() {
+    getGamesList: function() {
       // Ottiene la lista dei giochi e aggiorna games
       axios.get('/videogames')
           .then(response => {
@@ -125,7 +125,7 @@ export default {
 
 
     },
-    getgameplatforms: function (){
+    getGamePlatforms: function (){
       // Dato un gioco, ottiene le piattaforme su cui è disponibile
       let game_id = document.getElementsByName('game_id')[0].value;
       if (game_id === ""){
@@ -146,7 +146,7 @@ export default {
     }
   },
   mounted() {
-    this.getgameslist();
+    this.getGamesList();
     document.getElementById("add-game-button").disabled = true;
   }
 }
