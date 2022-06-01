@@ -38,15 +38,15 @@
                 </div>
 
                 <div class="col star_bar">
-                  <i class="fa-solid fa-star star1" @click="updaterating(1)" v-bind:style="{color: rank >= 1? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star2" @click="updaterating(2)" v-bind:style="{color: rank >= 2? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star3" @click="updaterating(3)" v-bind:style="{color: rank >= 3? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star4" @click="updaterating(4)" v-bind:style="{color: rank >= 4? 'gold':'gray'}"></i>
-                  <i class="fa-solid fa-star star5" @click="updaterating(5)" v-bind:style="{color: rank >= 5? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star1" @click="updateRating(1)" v-bind:style="{color: rank >= 1? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star2" @click="updateRating(2)" v-bind:style="{color: rank >= 2? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star3" @click="updateRating(3)" v-bind:style="{color: rank >= 3? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star4" @click="updateRating(4)" v-bind:style="{color: rank >= 4? 'gold':'gray'}"></i>
+                  <i class="fa-solid fa-star star5" @click="updateRating(5)" v-bind:style="{color: rank >= 5? 'gold':'gray'}"></i>
                 </div>
 
                   <h4>Ore di gioco</h4>
-                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control game_playtime" @change="updatetime" min="0">
+                  <input type="number" v-bind:id="'playtime' + gioco.videogame.id" v-bind:value="gioco.hours" class="form-control game_playtime" @change="updateTime" min="0">
 
                 <div class="row mt-3">
                   <h4>Descrizione</h4>
@@ -64,11 +64,11 @@
                   <!-- Stato del gioco -->
                   <hr>
                   <div class="col pb-2">
-                    <input class="me-2" type="checkbox" v-bind:id="'bought' + gioco.videogame.id" @change="updatebought">
+                    <input class="me-2" type="checkbox" v-bind:id="'bought' + gioco.videogame.id" @change="updateBought">
                     <label :for="'bought' + gioco.videogame.id">Gioco acquistato</label>
                   </div>
                   <h4>Stato</h4>
-                  <select :id="'game_status' + gioco.videogame.id" class="form-select" @change="updatestatus">
+                  <select :id="'game_status' + gioco.videogame.id" class="form-select" @change="updateStatus">
                     <option :id="'dagiocare' + gioco.videogame.id" value="1">Da giocare</option>
                     <option :id="'incorso' + gioco.videogame.id" value="2">In corso</option>
                     <option :id="'finito' + gioco.videogame.id" value="3">Finito</option>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="row mt-3">
                   <h4>Note</h4>
-                  <textarea class="form-control" v-bind:id="'note' + gioco.videogame.id" v-model="this.comment" rows="3" @change="updatecomment"></textarea>
+                  <textarea class="form-control" v-bind:id="'note' + gioco.videogame.id" v-model="this.comment" rows="3" @change="updateComment"></textarea>
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default {
     }
   },
   methods: {
-    gamestatus: function() {
+    gameStatus: function() {
 
       if (this.gioco.status === 'Da giocare'){
         document.getElementById('dagiocare' + this.gioco.videogame.id).setAttribute('selected', 'selected');
@@ -148,7 +148,7 @@ export default {
       this.date_time_disabled = !(this.gioco.status === "Completato" || this.gioco.status === "Finito" || this.gioco.status === "Abbandonato");
     },
 
-    updatetime: function () {
+    updateTime: function () {
       // get time from
       let time = document.getElementById("playtime" + this.gioco.videogame.id);
       let time_value = time.value;
@@ -161,7 +161,7 @@ export default {
       )
     },
 
-    updatestatus: function () {
+    updateStatus: function () {
       // get time from
       let status = document.getElementById("game_status" + this.gioco.videogame.id);
       let status_value_text = status.options[status.selectedIndex].text;
@@ -176,7 +176,7 @@ export default {
       })
     },
 
-    getrating: function () {
+    getRating: function () {
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
         let int_rating = response.data.ranking;
         let comment = response.data.comment;
@@ -210,7 +210,7 @@ export default {
 
        */
     },
-    updaterating: function (value){
+    updateRating: function (value){
       if (value > 0){
         // check if rating is already set
         axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
@@ -218,37 +218,37 @@ export default {
             ranking: value,
           }).then(response => {
             console.log(response.data);
-            this.getrating();
+            this.getRating();
           });
         }).catch(() => {
           axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
             ranking: value
           }).then(response => {
-            this.getrating();
+            this.getRating();
           });
         })
 
 
       }
     },
-    updatecomment: function(){
+    updateComment: function(){
       axios.get("libraries/videogames/" + this.gioco.videogame.id + "/rating").then(response => {
         axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
           comment: this.comment
         }).then(response => {
           console.log(response.data);
-          this.getrating();
+          this.getRating();
         });
       }).catch(() => {
         axios.post("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
           comment: this.comment
         }).then(response => {
-          this.getrating();
+          this.getRating();
         });
       })
     },
 
-    updatebought: function (){
+    updateBought: function (){
       axios.put("/libraries/videogames/" + this.gioco.videogame.id, {
           bought: document.getElementById('bought' + this.gioco.videogame.id).checked,
           platform: this.gioco.platform
@@ -257,7 +257,7 @@ export default {
       })
     },
 
-    getbought: function (){
+    getBought: function (){
       axios.get("/libraries/videogames/" + this.gioco.videogame.id).then(response => {
         let bought = response.data.bought;
         document.getElementById('bought' + this.gioco.videogame.id).checked = bought === true;
@@ -331,7 +331,7 @@ export default {
         });
     },
 
-    getgameplatforms: function (){
+    getGamePlatforms: function (){
       axios.get('/videogames/' + this.gioco.videogame.id)
           .then(async response => {
             // console.log(response.data[0].platforms);
@@ -363,11 +363,11 @@ export default {
 
   mounted() {
 
-    this.getrating();
-    this.gamestatus();
-    this.getbought();
+    this.getRating();
+    this.gameStatus();
+    this.getBought();
     this.getRemake();
-    this.getgameplatforms();
+    this.getGamePlatforms();
     this.getDateCompleted();
   }
   
