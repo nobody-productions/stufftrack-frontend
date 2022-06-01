@@ -223,7 +223,7 @@ export default {
         // se sono già loggato mi riporta alla dashboard
 
     },
-    data() {
+    setup() {
         let nome = "";
         let cognome = "";
         let email = "";

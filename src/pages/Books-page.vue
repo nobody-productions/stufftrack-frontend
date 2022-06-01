@@ -184,7 +184,7 @@ export default {
 
    */
 
-  data() {
+  setup() {
     const username = ref("");
     let books = ref([]);
     let libri_totali = ref("");

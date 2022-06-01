@@ -183,7 +183,7 @@ export default {
 
    */
 
-  data() {
+  setup() {
     const username = ref("");
     let videogames = ref([]);
     let giochi_totali = ref("");
