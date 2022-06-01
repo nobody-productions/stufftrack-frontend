@@ -11,7 +11,7 @@
           <!-- Form -->
             <form class="pb-2">
               <label for="book_select">Libro</label>
-              <select class="form-control" id="book_select" name="book_id" @change="getbookplatforms">
+              <select class="form-control" id="book_select" name="book_id" @change="getBookPlatforms">
                 <!-- empty default option -->
                 <option value="">Seleziona un libro:</option>
                 <option v-for="book in books" :value="book.id" :key="book.id">{{ book.name }}</option>
@@ -42,7 +42,7 @@
           </div>
           <div class="modal-footer">
             <button id="dismiss-modal-addbook" type="button" class="btn btn-secondary-outline" data-bs-dismiss="modal">Annulla</button>
-            <button id="add-book-button" type="button" class="btn btn-dark" data-bs-dismiss="modal" @click="addbook">Aggiungi</button>
+            <button id="add-book-button" type="button" class="btn btn-dark" data-bs-dismiss="modal" @click="addBook">Aggiungi</button>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ export default {
   },
 
   methods: {
-    getbookslist() {
+    getBooksList() {
       axios.get('/books')
           .then(response => {
             this.books = response.data.data;
@@ -78,7 +78,7 @@ export default {
           })
     },
 
-    addbook() {
+    addBook() {
 
       let book_id = document.getElementsByName('book_id')[0].value;
 
@@ -125,7 +125,7 @@ export default {
 
 
     },
-    getbookplatforms: function (){
+    getBookPlatforms: function (){
       let book_id = document.getElementsByName('book_id')[0].value;
       if (book_id === ""){
         document.getElementById("add-book-button").disabled = true;
@@ -145,7 +145,7 @@ export default {
     }
   },
   mounted() {
-    this.getbookslist();
+    this.getBooksList();
     document.getElementById("add-book-button").disabled = true;
   }
 }
