@@ -156,7 +156,7 @@ export default {
         hours: time_value,
         platform: this.gioco.platform
       }).then(() => {
-        this.$parent.updatehours(this.gioco.videogame.id, parseInt(time_value));
+        this.$parent.updateHours(this.gioco.videogame.id, parseInt(time_value));
           }
       )
     },
@@ -172,7 +172,7 @@ export default {
 
         this.date_time_disabled = !(status_value_text === "Completato" || status_value_text === "Finito" || status_value_text === "Abbandonato");
 
-        this.$parent.updatecompleted(this.gioco.videogame.id, status_value_text);
+        this.$parent.updateCompleted(this.gioco.videogame.id, status_value_text);
       })
     },
 
@@ -253,7 +253,7 @@ export default {
           bought: document.getElementById('bought' + this.gioco.videogame.id).checked,
           platform: this.gioco.platform
       }).then(()=>{
-        this.$parent.updateboughtgames();
+        this.$parent.updateBoughtGames();
       })
     },
 
@@ -302,9 +302,9 @@ export default {
 
          // document.getElementById('game_detail_modal' + this.gioco.videogame.id)
             document.getElementById('closemodal'+this.gioco.videogame.id).click();
-            this.$parent.showmessage("Gioco rimosso con successo!", "success");
-            this.$parent.updatevideogames();
-            this.$parent.updatestats();
+            this.$parent.showMessage("Gioco rimosso con successo!", "success");
+            this.$parent.updateVideogames();
+            this.$parent.updateStats();
           }).catch(error => {
             console.log(error);
         });
@@ -351,8 +351,8 @@ export default {
       axios.put('/libraries/videogames/' + this.gioco.videogame.id, {
         platform: document.getElementById('platform_id' + this.gioco.videogame.id).value
       }).then(()=>{
-        this.$parent.updatevideogames();
-        this.$parent.updatestats();
+        this.$parent.updateVideogames();
+        this.$parent.updateStats();
       })
     },
   

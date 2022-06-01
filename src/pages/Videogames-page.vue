@@ -125,8 +125,8 @@
                 Ordina per <b>{{ ordinamento }}</b>
               </span>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" @click="sortvideogames('name')">Nome</a>
-                <a class="dropdown-item" @click="sortvideogames('created_at')">Data di aggiunta</a>
+                <a class="dropdown-item" @click="sortVideogames('name')">Nome</a>
+                <a class="dropdown-item" @click="sortVideogames('created_at')">Data di aggiunta</a>
               </div>
             </div>
 
@@ -222,63 +222,63 @@ export default {
   },
 
   methods:{
-    updatestats: function () {
-      this.updatetotalhours()
-      this.updatecompletedgames()
-      this.updateboughtgames()
+    updateStats: function () {
+      this.updateTotalHours()
+      this.updateCompletedgames()
+      this.updateBoughtGames()
     },
-    updatetotalhours: function () {
+    updateTotalHours: function () {
       axios.get('libraries/videogames/charts/total-hours').then(response=>{
         let total = response.data.total;
         this.ore_gioco = (response.data.total === null? 0 : total);
       })
     },
-    updatecompletedgames: function () {
+    updateCompletedgames: function () {
       axios.get('/libraries/videogames/charts/completed').then(response=>{
         this.giochi_completati = response.data[0].count;
 
       })
     },
-    updateboughtgames: function () {
+    updateBoughtGames: function () {
       axios.get('/libraries/videogames/charts/total-bought').then(response=>{
         this.giochi_acquistati = response.data[0].count;
       })
     },
-    updatecompleted: function (game_id, status){
+    updateCompleted: function (game_id, status){
       for (let game of this.videogames) {
         if (game.videogame.id === game_id) {
           game.status = status;
           break;
         }
       }
-      // this.updatestats();
-      this.updatestats();
+      // this.updateStats();
+      this.updateStats();
     },
 
-    updatehours: function (game_id, hours){
+    updateHours: function (game_id, hours){
       for (let game of this.videogames) {
         if (game.videogame.id === game_id) {
           game.hours = hours;
           break;
         }
       }
-      // this.updatestats();
-      this.updatestats();
+      // this.updateStats();
+      this.updateStats();
     },
 
-    updatevideogames: function (){
+    updateVideogames: function (){
       axios.get('libraries/videogames').then(response=>{
         this.videogames = response.data.data;
         // sort this.videogames by name
-        this.sortvideogames("name")
+        this.sortVideogames("name")
         // sort by created_at
         // this.videogames.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
         this.giochi_totali = response.data.meta.total;
-        this.updatestats();
+        this.updateStats();
       })
     },
 
-    showmessage: async function (message, type) {
+    showMessage: async function (message, type) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
       const alert = (message, type) => {
@@ -298,7 +298,7 @@ export default {
       alertPlaceholder.innerHTML = ''
     },
 
-    sortvideogames: function (sort) {
+    sortVideogames: function (sort) {
       if (sort === 'name') {
         this.videogames.sort((a, b) => (a.videogame.name > b.videogame.name) ? 1 : -1);
         this.ordinamento = "nome";
@@ -310,7 +310,7 @@ export default {
 
   },
   mounted() {
-    this.updatevideogames();
+    this.updateVideogames();
   },
 
 };

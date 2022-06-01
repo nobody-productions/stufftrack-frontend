@@ -56,7 +56,7 @@ export default {
     };
   },
   methods: {
-    showmessage: async function (message, type, time) {
+    showMessage: async function (message, type, time) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
       const alert = (message, type) => {
@@ -82,9 +82,9 @@ export default {
          password: this.form.password,
        }).then(async () => await router.push("/videogames")).catch(async error => {
          if (error.message === "Network Error") {
-           await this.showmessage('Network Error', 'danger', 5000)
+           await this.showMessage('Network Error', 'danger', 5000)
          }
-         await this.showmessage(error.response.data.message, 'danger', 5000);
+         await this.showMessage(error.response.data.message, 'danger', 5000);
        });
       // dopo il login vai alla pagina principale
     }

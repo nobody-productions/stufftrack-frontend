@@ -139,7 +139,7 @@ export default {
         hours: time_value,
         platform: this.libro.platform
       }).then(() => {
-        this.$parent.updatehours(this.libro.book.id, parseInt(time_value));
+        this.$parent.updateHours(this.libro.book.id, parseInt(time_value));
           }
       )
     },
@@ -155,7 +155,7 @@ export default {
 
         this.date_time_disabled = !(status_value_text === "Completato" || status_value_text === "Abbandonato");
 
-        this.$parent.updatecompleted(this.libro.book.id, status_value_text);
+        this.$parent.updateCompleted(this.libro.book.id, status_value_text);
       })
     },
 
@@ -236,7 +236,7 @@ export default {
           bought: document.getElementById('bought' + this.libro.book.id).checked,
           platform: this.libro.platform
       }).then(()=>{
-        this.$parent.updateboughtbooks();
+        this.$parent.updateBoughtBooks();
       })
     },
 
@@ -285,9 +285,9 @@ export default {
 
          // document.getElementById('book_detail_modal' + this.libro.book.id)
             document.getElementById('closemodal'+this.libro.book.id).click();
-            this.$parent.showmessage("Libro rimosso con successo!", "success");
-            this.$parent.updatebooks();
-            this.$parent.updatestats();
+            this.$parent.showMessage("Libro rimosso con successo!", "success");
+            this.$parent.updateBooks();
+            this.$parent.updateStats();
           }).catch(error => {
             console.log(error);
         });
@@ -315,8 +315,8 @@ export default {
       axios.put('/libraries/books/' + this.libro.book.id, {
         platform: document.getElementById('platform_id' + this.libro.book.id).value
       }).then(()=>{
-        this.$parent.updatebooks();
-        this.$parent.updatestats();
+        this.$parent.updateBooks();
+        this.$parent.updateStats();
       })
     },
   

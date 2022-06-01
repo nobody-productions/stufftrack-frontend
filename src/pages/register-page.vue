@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    showmessage: async function (message, type, time) {
+    showMessage: async function (message, type, time) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
       const alert = (message, type) => {
@@ -80,12 +80,12 @@ export default {
       console.log(this.form.passwordConfirm);
 
       if (this.form.username.length < 3) {
-        this.showmessage('Il nome utente deve essere di almeno 3 caratteri', 'danger', 3000)
+        this.showMessage('Il nome utente deve essere di almeno 3 caratteri', 'danger', 3000)
         return
       }
 
       if (this.form.password !== this.form.passwordConfirm) {
-        this.showmessage('Le password non corrispondono', 'danger', 3000);
+        this.showMessage('Le password non corrispondono', 'danger', 3000);
         return
       }
       axios.post("/register", {
@@ -99,9 +99,9 @@ export default {
         router.push("/login");
       }).catch(async function (error) {
         if (error.message === "Network Error") {
-          await this.showmessage('Network Error', 'danger', 5000)
+          await this.showMessage('Network Error', 'danger', 5000)
         }
-        await this.showmessage(error.response.data.message, 'danger', 5000);
+        await this.showMessage(error.response.data.message, 'danger', 5000);
       });
     }
 

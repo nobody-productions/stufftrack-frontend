@@ -95,8 +95,8 @@ export default {
             comment: document.getElementsByName('comment')[0].value
           }).then(() => {
             // window.location.href = "/";
-            this.$parent.showmessage("Libro aggiunto con successo!", "success");
-            this.$parent.updatebooks();
+            this.$parent.showMessage("Libro aggiunto con successo!", "success");
+            this.$parent.updateBooks();
           }).catch(error => {
             console.log(error);
           });
@@ -106,8 +106,8 @@ export default {
             ranking: document.getElementsByName('rating')[0].value
           }).then(() => {
             // window.location.href = "/";
-            this.$parent.showmessage("Libro aggiunto con successo!", "success");
-            this.$parent.updatebooks();
+            this.$parent.showMessage("Libro aggiunto con successo!", "success");
+            this.$parent.updateBooks();
           }).catch(error => {
             console.log(error);
 
@@ -116,10 +116,10 @@ export default {
       }).catch(error => {
         console.log(error);
         if (error.response.status === 400) {
-          this.$parent.showmessage("Errore: libro già presente nella libreria", "warning");
+          this.$parent.showMessage("Errore: libro già presente nella libreria", "warning");
         }
         else {
-          this.$parent.showmessage("Errore: libro non aggiunto, codice errore: " + error.response.status, "danger");
+          this.$parent.showMessage("Errore: libro non aggiunto, codice errore: " + error.response.status, "danger");
         }
       });
 

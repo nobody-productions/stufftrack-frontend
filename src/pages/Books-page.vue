@@ -126,8 +126,8 @@
                 Ordina per <b>{{ ordinamento }}</b>
               </span>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" @click="sortbooks('name')">Nome</a>
-              <a class="dropdown-item" @click="sortbooks('created_at')">Data di aggiunta</a>
+              <a class="dropdown-item" @click="sortBooks('name')">Nome</a>
+              <a class="dropdown-item" @click="sortBooks('created_at')">Data di aggiunta</a>
             </div>
           </div>
 
@@ -223,65 +223,65 @@ export default {
   },
 
   methods:{
-    updatestats: function () {
-      this.updatetotalhours()
-      this.updatecompletedbooks()
-      this.updateboughtbooks()
+    updateStats: function () {
+      this.updateTotalHours()
+      this.updateCompletedBooks()
+      this.updateBoughtBooks()
     },
-    updatetotalhours: function () {
+    updateTotalHours: function () {
       axios.get('libraries/books/charts/total-hours').then(response=>{
         let total = response.data.total;
         this.ore_libro = (response.data.total === null? 0 : total);
       })
     },
-    updatecompletedbooks: function () {
+    updateCompletedBooks: function () {
       axios.get('/libraries/books/charts/completed').then(response=>{
         this.libri_completati = response.data[0].count;
 
       })
     },
-    updateboughtbooks: function () {
+    updateBoughtBooks: function () {
       axios.get('/libraries/books/charts/total-bought').then(response=>{
         this.libri_acquistati = response.data[0].count;
       })
     },
-    updatecompleted: function (book_id, status){
+    updateCompleted: function (book_id, status){
       for (let book of this.books) {
         if (book.book.id === book_id) {
           book.status = status;
           break;
         }
       }
-      // this.updatestats();
-      this.updatestats();
+      // this.updateStats();
+      this.updateStats();
     },
 
-    updatehours: function (book_id, hours){
+    updateHours: function (book_id, hours){
       for (let book of this.books) {
         if (book.book.id === book_id) {
           book.hours = hours;
           break;
         }
       }
-      // this.updatestats();
-      this.updatestats();
+      // this.updateStats();
+      this.updateStats();
     },
 
-    updatebooks: function (){
+    updateBooks: function (){
       axios.get('libraries/books').then(response=>{
         
         this.books = response.data.data;
         console.log(this.books)
         // sort this.books by name
-        this.sortbooks("name")
+        this.sortBooks("name")
         // sort by created_at
         // this.books.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
         this.libri_totali = response.data.meta.total;
-        this.updatestats();
+        this.updateStats();
       })
     },
 
-    showmessage: async function (message, type) {
+    showMessage: async function (message, type) {
       const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
       const alert = (message, type) => {
@@ -301,7 +301,7 @@ export default {
       alertPlaceholder.innerHTML = ''
     },
 
-    sortbooks: function (sort) {
+    sortBooks: function (sort) {
       if (sort === 'name') {
         this.books.sort((a, b) => (a.book.name > b.book.name) ? 1 : -1);
         this.ordinamento = "nome";
@@ -313,7 +313,7 @@ export default {
 
   },
   mounted() {
-    this.updatebooks();
+    this.updateBooks();
   },
 
 };

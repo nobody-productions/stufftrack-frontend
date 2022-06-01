@@ -96,8 +96,8 @@ export default {
             comment: document.getElementsByName('comment')[0].value
           }).then(() => {
             // window.location.href = "/";
-            this.$parent.showmessage("Gioco aggiunto con successo!", "success");
-            this.$parent.updatevideogames();
+            this.$parent.showMessage("Gioco aggiunto con successo!", "success");
+            this.$parent.updateVideogames();
           }).catch(error => {
             console.log(error);
           });
@@ -107,8 +107,8 @@ export default {
             ranking: document.getElementsByName('rating')[0].value
           }).then(() => {
             // window.location.href = "/";
-            this.$parent.showmessage("Gioco aggiunto con successo!", "success");
-            this.$parent.updatevideogames();
+            this.$parent.showMessage("Gioco aggiunto con successo!", "success");
+            this.$parent.updateVideogames();
           }).catch(error => {
             console.log(error);
           });
@@ -116,10 +116,10 @@ export default {
       }).catch(error => {
         console.log(error);
         if (error.response.status === 400) {
-          this.$parent.showmessage("Errore: gioco già presente nella libreria", "warning");
+          this.$parent.showMessage("Errore: gioco già presente nella libreria", "warning");
         }
         else {
-          this.$parent.showmessage("Errore: gioco non aggiunto, codice errore: " + error.response.status, "danger");
+          this.$parent.showMessage("Errore: gioco non aggiunto, codice errore: " + error.response.status, "danger");
         }
       });
 
