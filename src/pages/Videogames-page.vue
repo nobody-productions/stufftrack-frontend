@@ -206,11 +206,6 @@ export default {
       isLastPage
     }
   },
-  props: {
-    titolo: Object,
-    gioco: Object
-  },
-
   methods:{
     updateStats: function () {
       this.updateTotalHours()

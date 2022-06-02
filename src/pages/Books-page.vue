@@ -206,11 +206,6 @@ export default {
       isLastPage
     }
   },
-  props: {
-    titolo: Object,
-    libro: Object
-  },
-
   methods:{
     updateStats: function () {
       this.updateTotalHours()
