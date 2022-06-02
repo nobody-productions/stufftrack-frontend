@@ -168,8 +168,6 @@ export default {
           int_rating = 0;
         }
 
-        // divide int_rating by 2 and round it
-        // let rating_value = Math.round(int_rating / 2);
         console.log("Setto il valore di rating a " + int_rating + " per il libro " + this.libro.book.name);
         // set rating value
         console.log("star" + int_rating + this.libro.book.id);
@@ -184,14 +182,6 @@ export default {
           }
       });
 
-      /*
-      let int_rating = data.data.ranking;
-      // divide int_rating by 2 and round it
-      let rating_value = Math.round(int_rating / 2);
-      // set rating value
-      document.getElementById("star" + rating_value + this.libro.book.id).setAttribute('checked', 'checked');
-
-       */
     },
     updateRating: function (value){
       if (value > 0){
@@ -274,16 +264,7 @@ export default {
     deleteBook() {
       if (confirm('Sei sicuro di voler rimuovere il libro ' + this.libro.book.name + ' dalla tua libreria?')) {
         axios.delete("libraries/books/" + this.libro.book.id).then(response => {
-          // refresh home page
-          //axios.delete("/libraries/books/" + this.libro.book.id + "/rating").then(response => {
-            //console.log(response.data);
-            // window.location.href = "/";
-            // close this modal
 
-            // document.getElementById('book_detail_modal' + this.libro.book.id).remove();
-            // document.getElementsByClassName('modal-backdrop')[0].remove()
-
-         // document.getElementById('book_detail_modal' + this.libro.book.id)
             document.getElementById('closemodal'+this.libro.book.id).click();
             this.$parent.showMessage("Libro rimosso con successo!", "success");
             this.$parent.updateBooks();
