@@ -38,19 +38,6 @@
         </div>
       </div>
     </div>
-    <!--
-    <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-        <div class="dropdown">
-            <button class="btn btn-secondary-outline dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Carlo Cracco
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Impostazioni account</a></li>
-              <li><a class="dropdown-item" href="#">Log out</a></li>
-            </ul>
-          </div>
-    </div>
-    -->
   </nav>
 
   <searchModal></searchModal>
