@@ -60,6 +60,18 @@ export default {
     getAllBooks: function() {
       axios.get('books').then(response => {
         this.books = response.data.data;
+        let current_page = response.data.meta.page;
+        let last_page = response.data.meta.last_page;
+        while (current_page < last_page) {
+          current_page++;
+          axios.get('/books/?page=' + current_page)
+              .then(response => {
+                this.books = this.books.concat(response.data.data);
+              })
+              .catch(error => {
+                console.log(error);
+              })
+        }
       });
     },
 

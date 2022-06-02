@@ -145,6 +145,11 @@
             </div>
           </div>
         </div>
+        <div v-if="last_page > 1" class="text-end">
+          <i v-if="!isFirstPage" @click="loadPreviousPage" class="fa-solid fa-arrow-left" style="cursor: pointer;"></i>
+          Pagina {{ current_page }} di {{ last_page }}
+          <i v-if="!isLastPage" @click="loadNextPage" class="fa-solid fa-arrow-right" style="cursor: pointer;"></i>
+        </div>
       </main>
     </div>
 
@@ -192,6 +197,10 @@ export default {
     let libri_acquistati = ref("");
     let ore_libro = ref("");
     let ordinamento = ref("");
+    let current_page = ref(1);
+    let last_page = ref(1);
+    let isFirstPage = ref(true);
+    let isLastPage = ref(true);
 
     onMounted(async () => {
       const {data} = await axios.get('profile').catch(() => router.push('/login'))
@@ -214,7 +223,11 @@ export default {
       libri_completati,
       libri_totali,
       libri_acquistati,
-      ordinamento
+      ordinamento,
+      current_page,
+      last_page,
+      isFirstPage,
+      isLastPage
     }
   },
   props: {
@@ -277,6 +290,10 @@ export default {
         // sort by created_at
         // this.books.sort((a, b) => (a.created_at > b.created_at) ? 1 : -1);
         this.libri_totali = response.data.meta.total;
+        this.current_page = response.data.meta.page;
+        this.last_page = response.data.meta.last_page;
+        this.isFirstPage = this.current_page === 1;
+        this.isLastPage = this.current_page === this.last_page;
         this.updateStats();
       })
     },
@@ -309,6 +326,24 @@ export default {
         this.books.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1);
         this.ordinamento = "data";
       }
+    },
+
+    loadNextPage: function () {
+      this.current_page++;
+      axios.get('libraries/books/?page=' + this.current_page).then(response=>{
+        this.books = response.data.data;
+        this.isFirstPage = this.current_page === 1;
+        this.isLastPage = this.current_page === this.last_page;
+      })
+    },
+
+    loadPreviousPage: function () {
+      this.current_page--;
+      axios.get('libraries/books/?page=' + this.current_page).then(response=>{
+        this.books = response.data.data;
+        this.isFirstPage = this.current_page === 1;
+        this.isLastPage = this.current_page === this.last_page;
+      })
     },
 
   },
