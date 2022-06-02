@@ -34,12 +34,6 @@
 
                   </div>
                 </div>
-                <!--
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 2.48%</span>
-                  <span class="text-nowrap"> Dall'ultimo anno</span>
-                </p>
-                -->
               </div>
             </div>
 
@@ -58,12 +52,6 @@
 
                   </div>
                 </div>
-                <!--
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>2</span>
-                  <span class="text-wrap"> Completati nell'ultimo mese</span>
-                </p>
-                -->
               </div>
             </div>
           </div>
@@ -81,12 +69,6 @@
 
                   </div>
                 </div>
-                <!--
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 35%</span>
-                  <span class="text-nowrap"> In più nell'ultimo mese</span>
-                </p>
-                -->
               </div>
             </div>
           </div>
@@ -104,12 +86,6 @@
 
                   </div>
                 </div>
-                <!--
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 35%</span>
-                  <span class="text-nowrap"> In più nell'ultimo mese</span>
-                </p>
-                -->
               </div>
             </div>
           </div>
