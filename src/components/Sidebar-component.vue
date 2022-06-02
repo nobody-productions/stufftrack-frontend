@@ -16,15 +16,6 @@
           </a>
         </li>
 
-        <!--
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color: black;">
-            <i class="fa-solid fa-gear" style="height: 20px; width: 20px;"></i>
-            <span class="mx-2">Impostazioni</span>
-          </a>
-        </li>
-        -->
-
 
         <li class="nav-item">
           <a class="nav-link" href="#" style="color: black;">
