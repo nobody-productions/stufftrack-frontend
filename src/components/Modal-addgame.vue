@@ -73,6 +73,18 @@ export default {
       axios.get('/videogames')
           .then(response => {
             this.games = response.data.data;
+            let current_page = response.data.meta.page;
+            let last_page = response.data.meta.last_page;
+            while (current_page < last_page) {
+              current_page++;
+              axios.get('/videogames/?page=' + current_page)
+                  .then(response => {
+                    this.games = this.games.concat(response.data.data);
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  })
+            }
           })
           .catch(error => {
             console.log(error);

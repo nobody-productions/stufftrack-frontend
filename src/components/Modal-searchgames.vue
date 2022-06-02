@@ -59,8 +59,22 @@ export default {
     getAllGames: function() {
       axios.get('videogames').then(response => {
         this.videogames = response.data.data;
-        console.log(this.videogames);
-      });
+        let current_page = response.data.meta.page;
+        let last_page = response.data.meta.last_page;
+        while (current_page < last_page) {
+          current_page++;
+          axios.get('/videogames/?page=' + current_page)
+              .then(response => {
+                this.videogames = this.videogames.concat(response.data.data);
+              })
+              .catch(error => {
+                console.log(error);
+              })
+        }
+      })
+          .catch(error => {
+            console.log(error);
+          })
     },
 
     selectGame: function() {
