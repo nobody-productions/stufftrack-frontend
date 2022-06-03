@@ -89,7 +89,6 @@ export default {
         password_confirm: this.form.passwordConfirm,
         id: 2
       }).then(function (response) {
-        console.log(response);
         router.push("/login");
       }).catch(async function (error) {
         if (error.message === "Network Error") {
