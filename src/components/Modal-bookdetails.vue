@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" tabindex="-1" id="book_detail_modal" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal" tabindex="-1" id="book_detail_modal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -96,7 +96,7 @@ export default {
     libro: Object,
   },
 
-  data(){
+  setup(){
     let date_time_disabled = true;
 
     let rank = 0;

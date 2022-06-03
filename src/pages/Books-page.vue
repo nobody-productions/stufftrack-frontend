@@ -19,7 +19,6 @@
 
         <div class="text-secondary mt-3">Le mie statistiche:</div>
 
-        <!-- Make this class collapsible -->
         <div class="row my-4">
           <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
             <div class="d-flex card card-stats mb-4 mb-xl-0 card-statistics">
