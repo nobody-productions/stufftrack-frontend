@@ -80,7 +80,7 @@ export default {
           this.parserole();
         })
         .catch(error => {
-          console.log(error);
+          //
         })
     },
     parserole: function () {

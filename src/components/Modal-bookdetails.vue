@@ -168,9 +168,9 @@ export default {
           int_rating = 0;
         }
 
-        console.log("Setto il valore di rating a " + int_rating + " per il libro " + this.libro.book.name);
-        // set rating value
-        console.log("star" + int_rating + this.libro.book.id);
+
+
+
         // document.getElementById('star' + rating_value + this.libro.book.id).setAttribute('checked', 'checked');
           this.rank = int_rating;
           // if comment is not undefined
@@ -190,7 +190,7 @@ export default {
           axios.put("libraries/books/" + this.libro.book.id + "/rating", {
             ranking: value,
           }).then(response => {
-            console.log(response.data);
+
             this.getRating();
           });
         }).catch(() => {
@@ -209,7 +209,7 @@ export default {
         axios.put("libraries/books/" + this.libro.book.id + "/rating", {
           comment: this.comment
         }).then(response => {
-          console.log(response.data);
+
           this.getRating();
         });
       }).catch(() => {
@@ -270,7 +270,7 @@ export default {
             this.$parent.updateBooks();
             this.$parent.updateStats();
           }).catch(error => {
-            console.log(error);
+            //
         });
       }
     },
@@ -287,7 +287,7 @@ export default {
             document.getElementById("platform_id" + this.libro.book.id).value = this.libro.platform
           })
           .catch(error => {
-            console.log(error);
+            //
           })
 
     },

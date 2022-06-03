@@ -254,7 +254,6 @@ export default {
       axios.get('libraries/books').then(response=>{
         
         this.books = response.data.data;
-        console.log(this.books)
         // sort this.books by name
         this.sortBooks("name")
         // sort by created_at

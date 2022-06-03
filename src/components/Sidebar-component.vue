@@ -43,7 +43,6 @@ export default {
   },
 
   mounted() {
-    console.log("Selected: " + this.selected)
     if (this.selected === "Videogiochi") {
       document.getElementById("side-videogiochi").classList.add("invert");
     } else if (this.selected === "Libri") {

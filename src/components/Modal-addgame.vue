@@ -82,12 +82,12 @@ export default {
                     this.games = this.games.concat(response.data.data);
                   })
                   .catch(error => {
-                    console.log(error);
+                    //
                   })
             }
           })
           .catch(error => {
-            console.log(error);
+            //
           })
     },
 
@@ -111,7 +111,7 @@ export default {
             this.$parent.showMessage("Gioco aggiunto con successo!", "success");
             this.$parent.updateVideogames();
           }).catch(error => {
-            console.log(error);
+            //
           });
         }
         else {
@@ -122,11 +122,10 @@ export default {
             this.$parent.showMessage("Gioco aggiunto con successo!", "success");
             this.$parent.updateVideogames();
           }).catch(error => {
-            console.log(error);
+            //
           });
         }
       }).catch(error => {
-        console.log(error);
         if (error.response.status === 400) {
           this.$parent.showMessage("Errore: gioco già presente nella libreria", "warning");
         }
@@ -147,12 +146,11 @@ export default {
       }
       axios.get('/videogames/' + game_id)
           .then(response => {
-            console.log(response.data[0].platforms);
             this.platforms = response.data[0].platforms;
             document.getElementById("add-game-button").disabled = false;
           })
           .catch(error => {
-            console.log(error);
+            //
           })
 
     }

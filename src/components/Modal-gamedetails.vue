@@ -185,9 +185,9 @@ export default {
           int_rating = 0;
         }
 
-        console.log("Setto il valore di rating a " + int_rating + " per il videogame " + this.gioco.videogame.name);
-        // set rating value
-        console.log("star" + int_rating + this.gioco.videogame.id);
+
+
+
         // document.getElementById('star' + rating_value + this.gioco.videogame.id).setAttribute('checked', 'checked');
           this.rank = int_rating;
           // if comment is not undefined
@@ -207,7 +207,7 @@ export default {
           axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
             ranking: value,
           }).then(response => {
-            console.log(response.data);
+
             this.getRating();
           });
         }).catch(() => {
@@ -226,7 +226,7 @@ export default {
         axios.put("libraries/videogames/" + this.gioco.videogame.id + "/rating", {
           comment: this.comment
         }).then(response => {
-          console.log(response.data);
+
           this.getRating();
         });
       }).catch(() => {
@@ -286,7 +286,7 @@ export default {
             this.$parent.updateVideogames();
             this.$parent.updateStats();
           }).catch(error => {
-            console.log(error);
+            //
         });
       }
     },
@@ -301,12 +301,12 @@ export default {
             this.vg = response.data[0].name;
           }).catch(error => {
             if(error.response && error.response.status === 404) {
-              console.log("No vg found");
+              //
             }
           });  
         }).catch(error => {
           if(error.response && error.response.status === 404) {
-            console.log("No remake found");
+            //
           }
         });
     },
@@ -322,7 +322,7 @@ export default {
             document.getElementById("platform_id" + this.gioco.videogame.id).value = this.gioco.platform
           })
           .catch(error => {
-            console.log(error);
+            //
           })
 
     },

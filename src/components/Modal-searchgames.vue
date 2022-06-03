@@ -68,12 +68,12 @@ export default {
                 this.videogames = this.videogames.concat(response.data.data);
               })
               .catch(error => {
-                console.log(error);
+                //
               })
         }
       })
           .catch(error => {
-            console.log(error);
+            //
           })
     },
 

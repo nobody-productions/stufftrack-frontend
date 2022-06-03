@@ -69,14 +69,13 @@ export default {
                 this.books = this.books.concat(response.data.data);
               })
               .catch(error => {
-                console.log(error);
+                //
               })
         }
       });
     },
 
     selectBook: function() {
-      console.log(document.getElementById("bk-list").value)
       this.selectedbook = document.getElementById("bk-list").value;
       this.validBook();
     },

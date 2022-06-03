@@ -73,12 +73,6 @@ export default {
       alertPlaceholder.innerHTML = ''
     },
     submit: function () {
-
-      console.log(this.form.username);
-      console.log(this.form.email);
-      console.log(this.form.password);
-      console.log(this.form.passwordConfirm);
-
       if (this.form.username.length < 3) {
         this.showMessage('Il nome utente deve essere di almeno 3 caratteri', 'danger', 3000)
         return

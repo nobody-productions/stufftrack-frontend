@@ -81,12 +81,12 @@ export default {
                         this.books = this.books.concat(response.data.data);
                       })
                       .catch(error => {
-                        console.log(error);
+                        //
                       })
                 }
           })
           .catch(error => {
-            console.log(error);
+            //
           })
     },
 
@@ -110,7 +110,7 @@ export default {
             this.$parent.showMessage("Libro aggiunto con successo!", "success");
             this.$parent.updateBooks();
           }).catch(error => {
-            console.log(error);
+            //
           });
         }
         else {
@@ -121,12 +121,11 @@ export default {
             this.$parent.showMessage("Libro aggiunto con successo!", "success");
             this.$parent.updateBooks();
           }).catch(error => {
-            console.log(error);
+            //
 
           });
         }
       }).catch(error => {
-        console.log(error);
         if (error.response.status === 400) {
           this.$parent.showMessage("Errore: libro già presente nella libreria", "warning");
         }
@@ -146,12 +145,11 @@ export default {
       }
       axios.get('/books/' + book_id)
           .then(response => {
-            console.log(response.data[0].platforms);
             this.platforms = response.data[0].platforms;
             document.getElementById("add-book-button").disabled = false;
           })
           .catch(error => {
-            console.log(error);
+            //
           })
 
     }
